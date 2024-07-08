@@ -106,7 +106,7 @@ const Header: FC<HeaderProps> = ({ toggleFiltersBar }) => {
   return (
     <Wrapper>
       <TitleArea>
-        <span>{t('Filters')}</span>
+        <span>{t('Filters')} Shadeeka</span>
         <FilterBarSettings />
         <HeaderButton
           {...getFilterBarTestId('collapse-button')}

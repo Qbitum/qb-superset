@@ -45,7 +45,8 @@ RUN --mount=type=bind,target=./package.json,src=./superset-frontend/package.json
 
 COPY ./superset-frontend ./
 # This seems to be the most expensive step
-RUN npm run ${BUILD_CMD}
+RUN echo $(npm -v)
+RUN npm run ${BUILD_CMD} --verbose
 
 ######################################################################
 # Final lean image...

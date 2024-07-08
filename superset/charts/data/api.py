@@ -236,6 +236,8 @@ class ChartDataRestApi(ChartRestApi):
 
         try:
             query_context = self._create_query_context_from_form(json_body)
+            print("---------------- 1")
+            print(query_context.queries)
             command = ChartDataCommand(query_context)
             command.validate()
         except DatasourceNotFound:
@@ -254,7 +256,7 @@ class ChartDataRestApi(ChartRestApi):
             is_feature_enabled("GLOBAL_ASYNC_QUERIES")
             and query_context.result_format == ChartDataResultFormat.JSON
             and query_context.result_type == ChartDataResultType.FULL
-        ):
+        ):  
             return self._run_async(json_body, command)
 
         form_data = json_body.get("form_data")

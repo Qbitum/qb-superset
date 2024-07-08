@@ -110,6 +110,8 @@ class QueryContextFactory:  # pylint: disable=too-few-public-methods
     ) -> QueryObject:
         self._apply_granularity(query_object, form_data, datasource)
         self._apply_filters(query_object)
+        print("query object ===========>")
+        print(query_object)
         return query_object
 
     def _apply_granularity(

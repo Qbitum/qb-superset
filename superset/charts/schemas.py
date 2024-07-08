@@ -1379,6 +1379,7 @@ class ChartDataQueryContextSchema(Schema):
     @post_load
     def make_query_context(self, data: dict[str, Any], **kwargs: Any) -> QueryContext:
         query_context = self.get_query_context_factory().create(**data)
+        print("----load-------")
         return query_context
 
     def get_query_context_factory(self) -> QueryContextFactory:

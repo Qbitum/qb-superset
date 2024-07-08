@@ -88,6 +88,8 @@ def _get_query(
     result = {"language": datasource.query_language}
     try:
         result["query"] = datasource.get_query_str(query_obj.to_dict())
+        print("------------3-----------------")
+        print(result["query"])
     except QueryObjectValidationError as err:
         result["error"] = err.message
     return result
@@ -224,6 +226,8 @@ def get_query_results(
     :return: JSON serializable result payload
     """
     if result_func := _result_type_functions.get(result_type):
+        print("------------ 2---",query_obj)
+        print(result_func)
         return result_func(query_context, query_obj, force_cached)
     raise QueryObjectValidationError(
         _("Invalid result type: %(result_type)s", result_type=result_type)

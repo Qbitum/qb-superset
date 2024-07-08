@@ -908,6 +908,7 @@ class ExploreMixin:  # pylint: disable=too-many-public-methods
         sql = self._apply_cte(sql, sqlaq.cte)
         try:
             sql = SQLStatement(sql, engine=self.db_engine_spec.engine).format()
+            print("SQL ==========>",sql)
         except SupersetParseError:
             logger.warning("Unable to parse SQL to format it, passing it as-is")
 

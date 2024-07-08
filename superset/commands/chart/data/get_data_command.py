@@ -45,6 +45,7 @@ class ChartDataCommand(BaseCommand):
             payload = self._query_context.get_payload(
                 cache_query_context=cache_query_context, force_cached=force_cached
             )
+            print("----------payload ----------")
         except CacheLoadError as ex:
             raise ChartDataCacheLoadError(ex.message) from ex
 
@@ -60,7 +61,7 @@ class ChartDataCommand(BaseCommand):
         }
         if cache_query_context:
             return_value.update(cache_key=payload["cache_key"])
-
+        print("ChartDataCommand",return_value)
         return return_value
 
     def validate(self) -> None:
