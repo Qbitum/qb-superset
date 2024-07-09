@@ -353,6 +353,8 @@ class ExtraCache:
 
         return filters
 
+def myfunction() -> Any:
+    return 'implement me'
 
 def safe_proxy(func: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
     return_value = func(*args, **kwargs)
@@ -556,6 +558,7 @@ class JinjaTemplateProcessor(BaseTemplateProcessor):
                 "get_filters": partial(safe_proxy, extra_cache.get_filters),
                 "dataset": partial(safe_proxy, dataset_macro_with_context),
                 "metric": partial(safe_proxy, metric_macro),
+                "myfunction":partial(safe_proxy,myfunction),
             }
         )
 

@@ -1,0 +1,37 @@
+import time
+from flask_appbuilder.security.manager import AUTH_OAUTH
+
+SECRET_KEY='k9i90xeIKK3feKxmp7g6xvOIqh6q5Cm5PiBi/9eDx03sn4G+okt33Jtv'
+PREVIOUS_SECRET_KEY ="some_random_base64_string"
+FEATURE_FLAGS: dict[str, bool] = {
+    "CHART_PLUGINS_EXPERIMENTAL": False,
+    "ALERT_REPORTS":True,
+    "ENABLE_TEMPLATE_PROCESSING": True
+}
+
+JINJA_CONTEXT_ADDONS = {
+    "nowTime": lambda : "'"+time.strftime("%H:%M:%S", time.localtime())+"'"
+}
+
+# Enable OAuth authentication
+# AUTH_TYPE = AUTH_OAUTH
+# LOGOUT_REDIRECT_URL='https://productionadmindev.makeitmes.com/api/auth/realms/MES/protocol/openid-connect/logout'
+# AUTH_USER_REGISTRATION = True
+# AUTH_USER_REGISTRATION_ROLE = 'Gamma'
+# # OAuth provider configuration for Keycloak
+# OAUTH_PROVIDERS = [
+#     {
+#         'name': 'keycloak',
+#         'icon': 'fa-key',
+#         'token_key': 'access_token',  # Keycloak uses 'access_token' for the access token
+#         'remote_app': {
+#             'client_id': 'oi-application',
+#             'client_secret': 'J8VoNP33pI4IUPUg59MPSs0DbPs1iHHK',
+#             'client_kwargs': {
+#                 'scope': 'openid profile email',
+#             },
+#             'server_metadata_url': 'https://productionadmindev.makeitmes.com/api/auth/realms/MES/.well-known/openid-configuration',
+#             'api_base_url': 'https://productionadmindev.makeitmes.com/api/auth/realms/MES/protocol/',
+#         },
+#     }
+#     ]
