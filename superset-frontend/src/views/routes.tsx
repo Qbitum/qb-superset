@@ -21,6 +21,7 @@ import React, { lazy } from 'react';
 
 // not lazy loaded since this is the home page.
 import Home from 'src/pages/Home';
+import MLanding from 'src/pages/MLanding';
 
 const ChartCreation = lazy(
   () =>
@@ -131,6 +132,10 @@ type Routes = {
 }[];
 
 export const routes: Routes = [
+  {
+    path: '/landing/',
+    Component: MLanding,
+  },
   {
     path: '/superset/welcome/',
     Component: Home,
