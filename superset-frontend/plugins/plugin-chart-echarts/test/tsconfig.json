@@ -3,7 +3,8 @@
     "composite": false,
     "emitDeclarationOnly": false,
     "noEmit": true,
-    "rootDir": "."
+    "rootDir": ".",
+    "ignoreDeprecations": "5.0"
   },
   "extends": "../../../tsconfig.json",
   "include": [
