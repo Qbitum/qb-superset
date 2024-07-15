@@ -88,7 +88,7 @@ export default function PluginChartHelloQbitum(
       width={width}
     >
       <h3>{props.headerText}</h3>
-      <pre>${JSON.stringify(data, null, 2)}</pre>
+      <pre>My dataset hi :${JSON.stringify(data, null, 2)}</pre>
     </Styles>
   );
 }

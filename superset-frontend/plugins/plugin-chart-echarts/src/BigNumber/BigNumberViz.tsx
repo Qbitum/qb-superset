@@ -54,7 +54,7 @@ class BigNumberVis extends React.PureComponent<BigNumberVizProps> {
     startYAxisAtZero: true,
     subheader: '',
     subheaderFontSize: PROPORTION.SUBHEADER,
-    timeRangeFixed: false,
+    timeRangeFixed: false
   };
 
   getClassName() {
@@ -128,8 +128,10 @@ class BigNumberVis extends React.PureComponent<BigNumberVizProps> {
   }
 
   renderHeader(maxHeight: number) {
+    
     const { bigNumber, headerFormatter, width, colorThresholdFormatters } =
       this.props;
+      
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
 
@@ -179,6 +181,7 @@ class BigNumberVis extends React.PureComponent<BigNumberVizProps> {
         }}
         onContextMenu={onContextMenu}
       >
+        jkk
         {text}
       </div>
     );
@@ -187,6 +190,7 @@ class BigNumberVis extends React.PureComponent<BigNumberVizProps> {
   renderSubheader(maxHeight: number) {
     const { bigNumber, subheader, width, bigNumberFallback } = this.props;
     let fontSize = 0;
+// console.log("dddd", subheader);
 
     const NO_DATA_OR_HASNT_LANDED = t(
       'No data after filtering or data is NULL for the latest time record',
@@ -307,6 +311,8 @@ class BigNumberVis extends React.PureComponent<BigNumberVizProps> {
         </div>
       );
     }
+    // console.log("cat", headerFontSize);
+    // console.log("cattttt", headerFontSize * height);
 
     return (
       <div className={className} style={{ height }}>
