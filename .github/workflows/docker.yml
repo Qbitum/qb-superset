@@ -8,7 +8,13 @@ on:
   pull_request:
     branches:
       - "master"
-
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
+    
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: true
@@ -34,9 +40,10 @@ jobs:
         build_preset: ${{fromJson(needs.setup_matrix.outputs.matrix_config)}}
       fail-fast: false
     env:
-      DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
+      PROJECT_ID: makeitmes
+      REGION: asia-southeast1
+      GAR_LOCATION: asia-southeast1-docker.pkg.dev/makeitmes/superset-1/
+      
     steps:
 
       - name: "Checkout ${{ github.ref }} ( ${{ github.sha }} )"
@@ -50,6 +57,22 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Authentication GCP
+        id: "auth"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.SERVICE_ACCOUNT_KEY }}"
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: "Use gcloud CLI"
+        run: "gcloud info"
+
+      - name: "Docker auth"
+        run: |-
+          gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
+      
       - name: Set up QEMU
         if: steps.check.outputs.python || steps.check.outputs.frontend || steps.check.outputs.docker
         uses: docker/setup-qemu-action@v3
@@ -57,14 +80,6 @@ jobs:
       - name: Set up Docker Buildx
         if: steps.check.outputs.python || steps.check.outputs.frontend || steps.check.outputs.docker
         uses: docker/setup-buildx-action@v3
-
-      - name: Try to login to DockerHub
-        if: steps.check.outputs.python || steps.check.outputs.frontend || steps.check.outputs.docker
-        continue-on-error: true
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Setup supersetbot
         if: steps.check.outputs.python || steps.check.outputs.frontend || steps.check.outputs.docker
@@ -78,13 +93,22 @@ jobs:
         run: |
           # Single platform builds in pull_request context to speed things up
           if [ "${{ github.event_name }}" = "push" ]; then
-            PLATFORM_ARG="--platform linux/arm64 --platform linux/amd64"
+            PLATFORM_ARG="--platform linux/arm64"
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             PLATFORM_ARG="--platform linux/amd64"
           fi
 
-          supersetbot docker \
-            --preset ${{ matrix.build_preset }} \
-            --context "$EVENT" \
-            --context-ref "$RELEASE" $FORCE_LATEST \
-            $PLATFORM_ARG
+          docker buildx build \
+          -t asia-southeast1-docker.pkg.dev/makeitmes/superset-1/mes-analytics-web:v1.0.0 \
+          --cache-from=type=registry,ref=apache/superset-cache:3.9-slim-bookworm \
+          --build-arg PY_VER=3.9-slim-bookworm \
+          --platform linux/arm64,linux/amd64 \
+          \
+          --label target= \
+          --label build_trigger=release \
+          --label base=3.9-slim-bookworm \
+          --label build_actor=shadeeka \
+          -f Dockerfile .
+      
+      - name: Push image
+        run: docker push asia-southeast1-docker.pkg.dev/makeitmes/superset-1/mes-analytics-web:v1.0.0
