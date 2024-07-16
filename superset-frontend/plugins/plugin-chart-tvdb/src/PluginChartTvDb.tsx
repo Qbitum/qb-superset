@@ -331,7 +331,7 @@ export default styled(TvDb)`
     font-family: Roboto;
     font-style: normal;
     font-weight: 400;
-    padding: 16px;
+    padding: 16pt;
     align-items: flex-start;
     position: relative;
     display: flex;
@@ -342,8 +342,8 @@ export default styled(TvDb)`
       position: relative;
       line-height: 1em;
       white-space: nowrap;
-      padding-top: 136pt;
-      padding-left: 246pt;
+      padding-top: 50pt;
+      padding-left: 100pt;
       text-edge: cap;
       font-family: Roboto;
       font-size: 200px;

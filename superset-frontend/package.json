@@ -116,6 +116,7 @@
     "@superset-ui/plugin-chart-word-cloud": "file:./plugins/plugin-chart-word-cloud",
     "@superset-ui/switchboard": "file:./packages/superset-ui-switchboard",
     "@superset-ui/plugin-chart-tvdb": "file:./plugins/plugin-chart-tvdb",
+    "@superset-ui/plugin-chart-mes-vertical-numbers": "file:./plugins/plugin-chart-mes-vertical-numbers",
 
     "@types/d3-format": "^3.0.1",
     "@visx/axis": "^3.8.0",
@@ -164,6 +165,7 @@
     "plugin-chart-hello-qbitum": "^0.1.0",
     "plugin-chart-tv-dashboard": "^0.1.0",
     "plugin-chart-tvdb": "^0.1.0",
+    "plugin-chart-mes-vertical-numbers": "^0.1.0",
     "polished": "^4.3.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.7",
