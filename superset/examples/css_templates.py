@@ -98,3 +98,62 @@ def load_css_templates() -> None:
     )
     obj.css = css
     db.session.commit()
+
+    # MES TV dashboard theme
+    obj = db.session.query(CssTemplate).filter_by(template_name="TV Dashboards").first()
+    if not obj:
+        obj = CssTemplate(template_name="TV Dashboards")
+        db.session.add(obj)
+    css = textwrap.dedent(
+        """\
+    #import font type for the dashboard 
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+    /* changing the font as globally as possible */
+    #main-menu + div *{
+        font-family: 'Roboto', sans-serif !important;
+    }
+
+    .dashboard-content-wrapper{
+    
+    }
+    /* changing the main dash background */
+    .dashboard-content{
+        background-color: #191919;
+    }
+
+    /* changing the title bar background and text color */
+    /* note that the title text looks goofy in edit mode */
+    .header-with-actions {
+    background-color: #191919;
+    color: white;
+    }
+
+    .dashboard-header-container{
+    border:1px solid #353B4D;
+    }
+    /* editable title input field*/
+    .dashboard-header-container input{
+    color:#000;
+    }
+    /* messing with the header tabs bar */
+    /* this is a ridiculous selector... more classes or test attributes could help */
+    .dashboard-header-container + div .dashboard-component.dashboard-component-tabs {
+    background: #191919;
+    }
+
+    /* changing the filters bar background */
+    div[data-test=filter-bar] > div {
+    background: Gainsboro;
+    }
+    /* changing the dashboard content colors */
+    .dashboard-content .grid-container{
+    margin: 24px;
+    }
+    
+    .grid-container .grid-row .dashboard-component{
+    background: #1a85a0;
+    }
+    """
+    )
+    obj.css = css
+    db.session.commit()

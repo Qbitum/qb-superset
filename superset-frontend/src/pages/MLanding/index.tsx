@@ -26,7 +26,6 @@ import {
   t,
 } from '@superset-ui/core';
 import rison from 'rison';
-import Collapse from 'src/components/Collapse';
 import { User } from 'src/types/bootstrapTypes';
 import { reject } from 'lodash';
 import {
@@ -49,12 +48,13 @@ import {
 import { AntdSwitch } from 'src/components';
 import getBootstrapData from 'src/utils/getBootstrapData';
 import { TableTab } from 'src/views/CRUD/types';
-import SubMenu, { SubMenuProps } from 'src/features/home/SubMenu';
+import { SubMenuProps } from 'src/features/home/SubMenu';
 import { userHasPermission } from 'src/dashboard/util/permissionUtils';
 import { WelcomePageLastTab } from 'src/features/home/types';
-import DashboardTable from 'src/features/home/DashboardTable';
-
-const extensionsRegistry = getExtensionsRegistry();
+import { Breadcrumb, Layout, Menu } from 'antd';
+import { Content, Footer } from 'antd/lib/layout/layout';
+import Sider from 'antd/lib/layout/Sider';
+import TimeHeader from 'src/features/timeheader/TimeHeader';
 
 interface WelcomeProps {
   user: User;
@@ -74,54 +74,6 @@ interface LoadingProps {
 
 const DEFAULT_TAB_ARR = ['2', '3'];
 
-const WelcomeContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.grayscale.light4};
-  .ant-row.menu {
-    margin-top: -15px;
-    background-color: ${({ theme }) => theme.colors.grayscale.light4};
-    &:after {
-      content: '';
-      display: block;
-      border: 1px solid ${({ theme }) => theme.colors.grayscale.light2};
-      margin: 0px ${({ theme }) => theme.gridUnit * 6}px;
-      position: relative;
-      width: 100%;
-      ${mq[1]} {
-        margin-top: 5px;
-        margin: 0px 2px;
-      }
-    }
-    .ant-menu.ant-menu-light.ant-menu-root.ant-menu-horizontal {
-      padding-left: ${({ theme }) => theme.gridUnit * 8}px;
-    }
-    button {
-      padding: 3px 21px;
-    }
-  }
-  .ant-card-meta-description {
-    margin-top: ${({ theme }) => theme.gridUnit}px;
-  }
-  .ant-card.ant-card-bordered {
-    border: 1px solid ${({ theme }) => theme.colors.grayscale.light2};
-  }
-  .ant-collapse-item .ant-collapse-content {
-    margin-bottom: ${({ theme }) => theme.gridUnit * -6}px;
-  }
-  div.ant-collapse-item:last-child.ant-collapse-item-active
-    .ant-collapse-header {
-    padding-bottom: ${({ theme }) => theme.gridUnit * 3}px;
-  }
-  div.ant-collapse-item:last-child .ant-collapse-header {
-    padding-bottom: ${({ theme }) => theme.gridUnit * 9}px;
-  }
-  .loading-cards {
-    margin-top: ${({ theme }) => theme.gridUnit * 8}px;
-    .ant-card-cover > div {
-      height: 168px;
-    }
-  }
-`;
-
 const WelcomeNav = styled.div`
   ${({ theme }) => `
     .switch {
@@ -135,6 +87,26 @@ const WelcomeNav = styled.div`
       }
     }
   `}
+`;
+
+const LogoContainer = styled.div`
+  ${({ theme }) => `
+.menu-brand {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 50px;
+        padding: ${theme.gridUnit}px
+          ${theme.gridUnit * 2}px
+          ${theme.gridUnit}px
+          ${theme.gridUnit * 4}px;
+        max-width: ${theme.gridUnit * theme.brandIconMaxWidth}px;
+        img {
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+        `}
 `;
 
 const bootstrapData = getBootstrapData();
@@ -179,13 +151,6 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
     setActiveState(state);
     setItem(LocalStorageKeys.HomepageCollapseState, state);
   };
-
-  const SubmenuExtension = extensionsRegistry.get('home.submenu');
-  const WelcomeMessageExtension = extensionsRegistry.get('welcome.message');
-  const WelcomeTopExtension = extensionsRegistry.get('welcome.banner');
-  const WelcomeMainExtension = extensionsRegistry.get(
-    'welcome.main.replacement',
-  );
 
   const [otherTabTitle, otherTabFilters] = useMemo(() => {
     const lastTab = bootstrapData.common?.conf
@@ -311,9 +276,6 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
     }
   }, [activityData]);
 
-  const isRecentActivityLoading =
-    !activityData?.[TableTab.Other] && !activityData?.[TableTab.Viewed];
-
   const menuData: SubMenuProps = {
     activeChild: 'Landing',
     name: t('Landing'),
@@ -336,43 +298,66 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
     ];
   }
 
+  const idOrSlug = '5';
+
   return (
     <>
-      {SubmenuExtension ? (
-        <SubmenuExtension {...menuData} />
-      ) : (
-        <SubMenu {...menuData} />
-      )}
-      <WelcomeContainer>
-        {WelcomeMessageExtension && <WelcomeMessageExtension />}
-        {WelcomeTopExtension && <WelcomeTopExtension />}
-        {WelcomeMainExtension && <WelcomeMainExtension />}
-        {(!WelcomeTopExtension || !WelcomeMainExtension) && (
-          <>
-            <Collapse
-              activeKey={activeState}
-              onChange={handleCollapse}
-              ghost
-              bigger
+      <Layout
+        style={{
+          minHeight: '100vh',
+          flexDirection: 'row',
+        }}
+      >
+        <Sider collapsible collapsed={false}>
+          <LogoContainer>
+            <img
+              className="menu-brand"
+              src={bootstrapData.common.menu_data.brand.icon}
+              alt={bootstrapData.common.menu_data.brand.alt}
+            />
+          </LogoContainer>
+          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+            <Menu.Item>item 1</Menu.Item>
+            <Menu.Item>item 2</Menu.Item>
+            <Menu.SubMenu title="sub menu">
+              <Menu.Item>item 3</Menu.Item>
+            </Menu.SubMenu>
+          </Menu>
+        </Sider>
+        <Layout className="site-layout">
+          <TimeHeader />
+          <Content
+            style={{
+              margin: '0 16px',
+            }}
+          >
+            <Breadcrumb
+              style={{
+                margin: '16px 0',
+              }}
             >
-              <Collapse.Panel header={t('Dashboards')} key="2">
-                {!dashboardData || isRecentActivityLoading ? (
-                  <LoadingCards cover={checked} />
-                ) : (
-                  <DashboardTable
-                    user={user}
-                    mine={dashboardData}
-                    showThumbnails={checked}
-                    otherTabData={activityData?.[TableTab.Other]}
-                    otherTabFilters={otherTabFilters}
-                    otherTabTitle={otherTabTitle}
-                  />
-                )}
-              </Collapse.Panel>
-            </Collapse>
-          </>
-        )}
-      </WelcomeContainer>
+              <Breadcrumb.Item>User</Breadcrumb.Item>
+              <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            </Breadcrumb>
+            <div
+              className="site-layout-background"
+              style={{
+                padding: 24,
+                minHeight: 360,
+              }}
+            >
+              Bill is a cat.
+            </div>
+          </Content>
+          <Footer
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            Ant Design ©2018 Created by Ant UED
+          </Footer>
+        </Layout>
+      </Layout>
     </>
   );
 }

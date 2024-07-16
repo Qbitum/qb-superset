@@ -3,6 +3,11 @@ from flask_appbuilder.security.manager import AUTH_OAUTH
 
 SECRET_KEY='k9i90xeIKK3feKxmp7g6xvOIqh6q5Cm5PiBi/9eDx03sn4G+okt33Jtv'
 PREVIOUS_SECRET_KEY ="some_random_base64_string"
+APP_NAME = "QB Analytics"
+
+# Specify the App icon
+APP_ICON = "/static/assets/images/qlogo.jpg"
+
 FEATURE_FLAGS: dict[str, bool] = {
     "CHART_PLUGINS_EXPERIMENTAL": False,
     "ALERT_REPORTS":True,
