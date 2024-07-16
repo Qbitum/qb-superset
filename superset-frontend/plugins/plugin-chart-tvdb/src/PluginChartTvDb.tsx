@@ -66,7 +66,7 @@ class TvDb extends React.PureComponent<PluginChartTvDbStylesProps> {
 
   getClassName() {
     const { className, showTrendLine, bigNumberFallback } = this.props;
-    const names = `superset-legacy-chart-big-number ${className} ${
+    const names = `mes_number_view ${className} ${
       bigNumberFallback ? 'is-fallback-value' : ''
     }`;
     if (showTrendLine) return names;
@@ -297,17 +297,9 @@ class TvDb extends React.PureComponent<PluginChartTvDbStylesProps> {
       const allTextHeight = height - chartHeight;
 
       return (
-        <div className={className}>
+        <div>
           <div className="text-container" style={{ height: allTextHeight }}>
             {this.renderFallbackWarning()}
-            {/* {this.renderKicker(
-              Math.ceil(
-                (kickerFontSize || 0) * (1 - PROPORTION.TRENDLINE) * height,
-              ),
-            )} */}
-            {/* {this.renderHeader(
-              Math.ceil(headerFontSize * (1 - PROPORTION.TRENDLINE) * height),
-            )} */}
             {this.renderNumber(
               Math.ceil(numberFontSize * (1 - PROPORTION.TRENDLINE) * height),
             )}
@@ -317,33 +309,26 @@ class TvDb extends React.PureComponent<PluginChartTvDbStylesProps> {
               ),
             )}
           </div>
-          {/* {this.renderTrendline(chartHeight)} */}
         </div>
       );
     }
-    console.log('hiii', subheaderFontSize * height);
-    // console.log("hiii");
-
     return (
       <>
         <div className={className} style={{ height }}>
           {this.renderFallbackWarning()}
-          {/* {this.renderKicker((kickerFontSize || 0) * height)} */}
+
           {this.renderSubheader(Math.ceil(subheaderFontSize * height))}
-          {/* {this.renderHeader(Math.ceil(headerFontSize * height))} */}
+
           {this.renderNumber(Math.ceil(numberFontSize * height))}
         </div>
       </>
     );
   }
 }
-// background-color: gray;
-// color: white;
 
 export default styled(TvDb)`
   ${({ theme }) => `
     font-family: Roboto;
-    font-size: 20px;
     font-style: normal;
     font-weight: 400;
     padding: 16px;
@@ -351,51 +336,22 @@ export default styled(TvDb)`
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     background-color: #1F1F1F;
-
-   
-
-    .text-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-
-      .alert {
-        font-size: ${theme.typography.sizes.s};
-        margin: -0.5em 0 0.4em;
-        line-height: 1;
-        padding: ${theme.gridUnit}px;
-        border-radius: ${theme.gridUnit}px;
-
-      }
-    }
-
-    .header-line {
-      position: relative;
-      line-height: 1em;
-      white-space: nowrap;
-
-      span {
-        position: absolute;
-        bottom: 0;
-        color: #FFFFFF;
-
-      }
-    }
 
     .number-line {
       position: relative;
       line-height: 1em;
       white-space: nowrap;
-      padding-left: 364pt; 
-      padding-top: 164pt; 
-
+      padding-top: 136pt;
+      padding-left: 246pt;
+      text-edge: cap;
+      font-family: Roboto;
+      font-size: 200px;
+      font-style: normal;
+      font-weight: 700;
       span {
         position: absolute;
-        bottom: 0;
-        color: #FFFFFF;
+        bottom: 0; 
 
       }
     }
@@ -404,6 +360,8 @@ export default styled(TvDb)`
       line-height: 1em;
       padding-bottom: 0;
       color: #FFFFFF;
+      font-size: 20px;
+
     }
 
     &.is-fallback-value {
