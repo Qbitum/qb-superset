@@ -100,6 +100,7 @@ jobs:
           export GCP_PROJECT_ID="makeitmes"
           export GCP_MES_REPOSITORY="superset-1"
 
+          echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" | base64 -d >  gcloud_keys
           gcloud auth activate-service-account --key-file gcloud_keys
           gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
 
