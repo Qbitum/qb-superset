@@ -98,7 +98,7 @@ jobs:
             PLATFORM_ARG="--platform linux/amd64"
           fi
 
-          echo $GCP_CREDENCIALS | base64 -d >  gcloud_keys
+          echo "${GCP_CREDENCIALS}" | base64 -d >  gcloud_keys
           gcloud auth activate-service-account --key-file gcloud_keys
           gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
 
