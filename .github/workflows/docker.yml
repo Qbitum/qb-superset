@@ -104,7 +104,7 @@ jobs:
 
           docker buildx build \
           --push \
-          -t asia-southeast1-docker.pkg.dev/makeitmes/superset-1/mes-analytics-web:v1.0.0 \
+          -t asia.gcr.io/asia-southeast1-docker.pkg.dev/makeitmes/superset-1/mes-analytics-web:v1.0.0 \
           --cache-from=type=registry,ref=apache/superset-cache:3.9-slim-bookworm \
           --build-arg PY_VER=3.9-slim-bookworm \
           --platform linux/arm64,linux/amd64 \
