@@ -68,6 +68,7 @@ const defaultTheme = {
       light3: '#D2EDF4',
       light4: '#E9F6F9',
       light5: '#F3F8FA',
+      tvdbBg: '#1F1F1F',
     },
     secondary: {
       base: '#444E7C',

@@ -1,78 +1,47 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 import React, { MouseEvent } from 'react';
 import {
   t,
   getNumberFormatter,
-  smartDateVerboseFormatter,
   computeMaxFontSize,
-  BRAND_COLOR,
   styled,
 } from '@superset-ui/core';
 import { PluginChartMESVerticalNumbersStylesProps } from './types';
 
-// The following Styles component is a <div> element, which has been styled using Emotion
-// For docs, visit https://emotion.sh/docs/styled
-
-// Theming variables are provided for your use via a ThemeProvider
-// imported from @superset-ui/core. For variables available, please visit
-// https://github.com/apache-superset/superset-ui/blob/master/packages/superset-ui-core/src/style/index.ts
-
 const defaultNumberFormatter = getNumberFormatter();
 
 const PROPORTION = {
-  // text size: proportion of the chart container sans trendline
-  KICKER: 0.1,
-  HEADER: 0.3,
   SUBHEADER: 0.3,
   NUMBER: 0.3,
-  // trendline size: proportion of the whole chart container
-  TRENDLINE: 0.3,
   CONTENTTITLE: 0.125,
+  CONTENTTITLE1: 0.125,
+  CONTENTTITLE2: 0.125,
+  CONTENTTITLE3: 0.125,
 };
 
-class MESVerticalNumbersStylesProps extends React.PureComponent<PluginChartMESVerticalNumbersStylesProps> {
+class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbersStylesProps> {
   static defaultProps = {
     className: '',
     headerFormatter: defaultNumberFormatter,
     numberFormatter: defaultNumberFormatter,
-    formatTime: smartDateVerboseFormatter,
-    kickerFontSize: PROPORTION.KICKER,
-    mainColor: BRAND_COLOR,
-    showTimestamp: false,
-    showTrendLine: false,
     startYAxisAtZero: true,
     number: '',
-    header: '',
     subHeader: '',
     subheaderFontSize: PROPORTION.SUBHEADER,
-    timeRangeFixed: false,
     contentTitle: '',
     contentTitleFontSize: PROPORTION.CONTENTTITLE,
+    contentTitle1: '',
+    contentTitle1FontSize: PROPORTION.CONTENTTITLE1,
+    contentTitle2: '',
+    contentTitle2FontSize: PROPORTION.CONTENTTITLE1,
+    contentTitle3: '',
+    contentTitle3FontSize: PROPORTION.CONTENTTITLE1,
   };
 
   getClassName() {
-    const { className, showTrendLine, bigNumberFallback } = this.props;
+    const { className, bigNumberFallback } = this.props;
     const names = `mes_number_view ${className} ${
       bigNumberFallback ? 'is-fallback-value' : ''
     }`;
-    if (showTrendLine) return names;
     return `${names} no-trendline`;
   }
 
@@ -84,126 +53,21 @@ class MESVerticalNumbersStylesProps extends React.PureComponent<PluginChartMESVe
     return container;
   }
 
-  renderFallbackWarning() {
-    const { bigNumberFallback, formatTime, showTimestamp } = this.props;
-    if (!formatTime || !bigNumberFallback || showTimestamp) return null;
-    return (
-      <span
-        className="alert alert-warning"
-        role="alert"
-        title={t(
-          `Last available value seen on %s`,
-          formatTime(bigNumberFallback[0]),
-        )}
-      >
-        {t('Not up to date')}
-      </span>
-    );
-  }
-
-  renderKicker(maxHeight: number) {
-    const { timestamp, showTimestamp, formatTime, width } = this.props;
-    if (
-      !formatTime ||
-      !showTimestamp ||
-      typeof timestamp === 'string' ||
-      typeof timestamp === 'boolean'
-    )
-      return null;
-
-    const text = timestamp === null ? '' : formatTime(timestamp);
-
-    const container = this.createTemporaryContainer();
-    document.body.append(container);
-    const fontSize = computeMaxFontSize({
-      text,
-      maxWidth: width,
-      maxHeight,
-      className: 'kicker',
-      container,
-    });
-    container.remove();
-
-    return (
-      <div
-        className="kicker"
-        style={{
-          fontSize,
-          height: maxHeight,
-        }}
-      >
-        {text}
-      </div>
-    );
-  }
-
-  renderHeader(maxHeight: number) {
-    const { bigNumber, headerFormatter, width, colorThresholdFormatters } =
-      this.props;
-    // @ts-ignore
-    const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
-    const hasThresholdColorFormatter =
-      Array.isArray(colorThresholdFormatters) &&
-      colorThresholdFormatters.length > 0;
-    let numberColor;
-    if (hasThresholdColorFormatter) {
-      colorThresholdFormatters!.forEach(formatter => {
-        const formatterResult = bigNumber
-          ? formatter.getColorFromValue(bigNumber as number)
-          : false;
-        if (formatterResult) {
-          numberColor = formatterResult;
-        }
-      });
-    } else {
-      numberColor = 'white';
-    }
-
-    const container = this.createTemporaryContainer();
-    document.body.append(container);
-    const fontSize = computeMaxFontSize({
-      text,
-      maxWidth: width - 8, // Decrease 8px for more precise font size
-      maxHeight,
-      className: 'header-line',
-      container,
-    });
-    container.remove();
-
-    const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
-      if (this.props.onContextMenu) {
-        e.preventDefault();
-        this.props.onContextMenu(e.nativeEvent.clientX, e.nativeEvent.clientY);
-      }
-    };
-    return (
-      <div
-        className="header-line"
-        style={{
-          fontSize,
-          height: maxHeight,
-          color: numberColor,
-        }}
-        onContextMenu={onContextMenu}
-      >
-        {text}
-      </div>
-    );
-  }
-
   renderNumber(maxHeight: number) {
-    const { bigNumber, headerFormatter, width, colorThresholdFormatters } =
+    const { values, headerFormatter, width, colorThresholdFormatters } =
       this.props;
+
+    console.log('============> this is my dataset:', values);
     // @ts-ignore
-    const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
+    const text = values === null ? t('No data') : headerFormatter(values);
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
     let numberColor;
     if (hasThresholdColorFormatter) {
       colorThresholdFormatters!.forEach(formatter => {
-        const formatterResult = bigNumber
-          ? formatter.getColorFromValue(bigNumber as number)
+        const formatterResult = values
+          ? formatter.getColorFromValue(values as unknown as number)
           : false;
         if (formatterResult) {
           numberColor = formatterResult;
@@ -217,7 +81,7 @@ class MESVerticalNumbersStylesProps extends React.PureComponent<PluginChartMESVe
     document.body.append(container);
     const fontSize = computeMaxFontSize({
       text,
-      maxWidth: width - 8, // Decrease 8px for more precise font size
+      maxWidth: width - 8,
       maxHeight,
       className: 'number-line',
       container,
@@ -272,7 +136,6 @@ class MESVerticalNumbersStylesProps extends React.PureComponent<PluginChartMESVe
         container,
       });
       container.remove();
-      console.log('qaaa', text);
 
       return (
         <div
@@ -288,11 +151,12 @@ class MESVerticalNumbersStylesProps extends React.PureComponent<PluginChartMESVe
     }
     return null;
   }
-  renderContentTitle(maxHeight: number) {
-    const { bigNumber, contentTitle, width, bigNumberFallback } = this.props;
+
+  renderContentTitle1(maxHeight: number) {
+    const { bigNumber, contentTitle1, width, bigNumberFallback } = this.props;
     let fontSize = 0;
     console.log(this.props, 'this.props');
-    console.log(contentTitle, bigNumber, 'git');
+    console.log(contentTitle1, bigNumber, 'git');
 
     const NO_DATA_OR_HASNT_LANDED = t(
       'No data after filtering or data is NULL for the latest time record',
@@ -300,7 +164,95 @@ class MESVerticalNumbersStylesProps extends React.PureComponent<PluginChartMESVe
     const NO_DATA = t(
       'Try applying different filters or ensuring your datasource has data',
     );
-    let text = contentTitle;
+    let text = contentTitle1;
+    if (bigNumber === null) {
+      text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
+    }
+    if (text) {
+      const container = this.createTemporaryContainer();
+      document.body.append(container);
+      fontSize = computeMaxFontSize({
+        text,
+        maxWidth: width,
+        maxHeight,
+        className: 'contentTitle-line',
+        container,
+      });
+      container.remove();
+      console.log('qaaa', text);
+
+      return (
+        <div
+          className="contentTitle-line"
+          style={{
+            fontSize,
+            height: maxHeight,
+          }}
+        >
+          {text}
+        </div>
+      );
+    }
+    return null;
+  }
+
+  renderContentTitle2(maxHeight: number) {
+    const { bigNumber, contentTitle2, width, bigNumberFallback } = this.props;
+    let fontSize = 0;
+    console.log(this.props, 'this.props');
+    console.log(contentTitle2, bigNumber, 'git');
+
+    const NO_DATA_OR_HASNT_LANDED = t(
+      'No data after filtering or data is NULL for the latest time record',
+    );
+    const NO_DATA = t(
+      'Try applying different filters or ensuring your datasource has data',
+    );
+    let text = contentTitle2;
+    if (bigNumber === null) {
+      text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
+    }
+    if (text) {
+      const container = this.createTemporaryContainer();
+      document.body.append(container);
+      fontSize = computeMaxFontSize({
+        text,
+        maxWidth: width,
+        maxHeight,
+        className: 'contentTitle-line',
+        container,
+      });
+      container.remove();
+      // console.log('qaaa', text);
+
+      return (
+        <div
+          className="contentTitle-line"
+          style={{
+            fontSize,
+            height: maxHeight,
+          }}
+        >
+          {text}
+        </div>
+      );
+    }
+    return null;
+  }
+
+  renderContentTitle3(maxHeight: number) {
+    const { bigNumber, contentTitle3, width, bigNumberFallback } = this.props;
+    let fontSize = 0;
+    console.log(this.props, 'this.props');
+    console.log(contentTitle3, bigNumber, 'git');
+
+    const NO_DATA_OR_HASNT_LANDED = t(
+      'No data after filtering or data is NULL for the latest time record',
+    );
+    const NO_DATA = t(
+      'Try applying different filters or ensuring your datasource has data',
+    );
+    let text = contentTitle3;
     if (bigNumber === null) {
       text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
     }
@@ -333,92 +285,88 @@ class MESVerticalNumbersStylesProps extends React.PureComponent<PluginChartMESVe
   }
 
   render() {
-    const { showTrendLine, height, numberFontSize, subheaderFontSize, contentTitleFontSize } =
-      this.props;
+    const {
+      height,
+      numberFontSize,
+      subheaderFontSize,
+      contentTitle2FontSize,
+      contentTitle3FontSize,
+      contentTitle1FontSize,
+    } = this.props;
     const className = this.getClassName();
-    // console.log(subheaderFontSize,"subheaderFontSize");
-
-    if (showTrendLine) {
-      const chartHeight = Math.floor(PROPORTION.TRENDLINE * height);
-      const allTextHeight = height - chartHeight;
-
-      return (
-        <div>
-          <div className="text-container" style={{ height: allTextHeight }}>
-            {this.renderFallbackWarning()}
-            {this.renderNumber(
-              Math.ceil(numberFontSize * (1 - PROPORTION.TRENDLINE) * height),
-            )}
-            {this.renderSubheader(
-              Math.ceil(
-                subheaderFontSize * (1 - PROPORTION.TRENDLINE) * height,
-              ),
-            )}
-            {this.renderContentTitle(
-              Math.ceil(
-                contentTitleFontSize * (1 - PROPORTION.TRENDLINE) * height,
-              ),
-            )}
-          </div>
-        </div>
-      );
-    }
     return (
       <>
         <div className={className} style={{ height }}>
-          {this.renderFallbackWarning()}
-
+          {/* {this.renderFallbackWarning()} */}
           {this.renderSubheader(Math.ceil(subheaderFontSize * height))}
-
-          {this.renderNumber(Math.ceil(numberFontSize * height))}
-          {this.renderContentTitle(Math.ceil(contentTitleFontSize * height))}
-          {this.renderContentTitle(Math.ceil(contentTitleFontSize * height))}
-          {this.renderContentTitle(Math.ceil(contentTitleFontSize * height))}
-
-
+          <div className="content-container">
+            {this.renderContentTitle1(
+              Math.ceil(contentTitle1FontSize * height),
+            )}
+            {this.renderNumber(Math.ceil(numberFontSize * height))}
+          </div>
+          <div className="content-container">
+            {this.renderContentTitle2(
+              Math.ceil(contentTitle2FontSize * height),
+            )}
+            {this.renderNumber(Math.ceil(numberFontSize * height))}
+          </div>
+          <div className="content-container">
+            {this.renderContentTitle3(
+              Math.ceil(contentTitle3FontSize * height),
+            )}
+            {this.renderNumber(Math.ceil(numberFontSize * height))}
+          </div>
+          <data />
         </div>
       </>
     );
   }
 }
 
-export default styled(MESVerticalNumbersStylesProps)`
+export default styled(MESVerticalNumbers)`
   ${({ theme }) => `
     font-family: Roboto;
     font-style: normal;
     font-weight: 400;
     padding: 16px;
-    align-items: flex-start;
-    position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #1F1F1F;
-
-    .number-line {
-      position: relative;
-      line-height: 1em;
-      white-space: nowrap;
-      padding-top: 136pt;
-      padding-left: 246pt;
-      text-edge: cap;
-      font-family: Roboto;
-      font-size: 200px;
-      font-style: normal;
-      font-weight: 700;
-      span {
-        position: absolute;
-        bottom: 0; 
-
-      }
-    }
+    align-items: flex-start;
+    background-color: ${theme.colors.primary.tvdbBg};
 
     .subheader-line {
       line-height: 1em;
       padding-bottom: 0;
       color: #FFFFFF;
       font-size: 20px;
-
     }
+
+    .content-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contentTitle-line {
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+      color: #8A98AB;
+
+}
+
+.number-line {
+  font-family: Roboto;
+  font-size: 200px;
+  font-style: normal;
+  font-weight: 700;
+      color: #8A98AB;
+  text-align: right;
+}
 
     &.is-fallback-value {
       .kicker,

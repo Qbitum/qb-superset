@@ -25,9 +25,7 @@ import {
   BRAND_COLOR,
   styled,
 } from '@superset-ui/core';
-import {
-  PluginChartTvDashboardStylesProps,
-} from './types';
+import { PluginChartTvDashboardStylesProps } from './types';
 
 // The following Styles component is a <div> element, which has been styled using Emotion
 // For docs, visit https://emotion.sh/docs/styled
@@ -135,10 +133,15 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
 
   renderValue(maxHeight: number) {
     // console.log(maxHeight,"bhbhbhbhb");
-    
-    const { bigNumber, headerFormatter, width, colorThresholdFormatters,fontColor } =
-      this.props;
-      // console.log("currny");
+
+    const {
+      bigNumber,
+      headerFormatter,
+      width,
+      colorThresholdFormatters,
+      fontColor,
+    } = this.props;
+    // console.log("currny");
 
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
@@ -168,7 +171,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
       maxWidth: width - 8, // Decrease 8px for more precise font size
       maxHeight,
       className: 'header-line',
-      container
+      container,
     });
     container.remove();
 
@@ -178,10 +181,9 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
         this.props.onContextMenu(e.nativeEvent.clientX, e.nativeEvent.clientY);
       }
     };
-    console.log("ghjgjhgjg", )
+    console.log('ghjgjhgjg');
 
     return (
-      
       <div
         className="header-line"
         style={{
@@ -197,8 +199,8 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   }
 
   renderTitle(maxHeight: number) {
-    
-    const { bigNumber, subHeader, width, bigNumberFallback, fontColor } = this.props;
+    const { bigNumber, subHeader, width, bigNumberFallback, fontColor } =
+      this.props;
     let fontSize = 0;
     // console.log(fontColor,"this.props");
     // console.log(subHeader,bigNumber,"git");
@@ -223,7 +225,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
         className: 'subheader-line',
         container,
       });
-      fontColor
+      fontColor;
       container.remove();
 
       // console.log("font color", fontColor);
@@ -233,8 +235,8 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
           className="subheader-line"
           style={{
             fontSize,
-            height: maxHeight        
-          }}          
+            height: maxHeight,
+          }}
         >
           {/* {fontColor} */}
           {text}
@@ -289,7 +291,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   //     )
   //   );
   // }
-  
+
   render() {
     const {
       showTrendLine,
@@ -299,7 +301,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
       subheaderFontSize,
     } = this.props;
     const className = this.getClassName();
-// console.log(subheaderFontSize,"subheaderFontSize");
+    // console.log(subheaderFontSize,"subheaderFontSize");
 
     if (showTrendLine) {
       const chartHeight = Math.floor(PROPORTION.TRENDLINE * height);
@@ -327,20 +329,20 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
         </div>
       );
     }
-// console.log("hiii", subheaderFontSize * height);
-// console.log("hiii");
+    // console.log("hiii", subheaderFontSize * height);
+    // console.log("hiii");
 
     return (
       <>
-      {/* <div className='kavindya'>
+        {/* <div className='kavindya'>
         kjhkj
         </div> */}
-      <div className={className} style={{ height }}>
-        {this.renderFallbackWarning()}
-        {this.renderKicker((kickerFontSize || 0) * height)}
-        {this.renderTitle(Math.ceil(subheaderFontSize * height))}
-        {this.renderValue(Math.ceil(headerFontSize * height))}
-      </div>
+        <div className={className} style={{ height }}>
+          {this.renderFallbackWarning()}
+          {this.renderKicker((kickerFontSize || 0) * height)}
+          {this.renderTitle(Math.ceil(subheaderFontSize * height))}
+          {this.renderValue(Math.ceil(headerFontSize * height))}
+        </div>
       </>
     );
   }
@@ -408,9 +410,6 @@ export default styled(TvDashboard)`
   `}
 `;
 
-
-
-
 // const Styles = styled.div<PluginChartTvDashboardStylesProps>`
 //   background-color: ${({ theme }) => theme.colors.secondary.light2};
 //   padding: ${({ theme }) => theme.gridUnit * 4}px;
@@ -472,8 +471,7 @@ export default styled(TvDashboard)`
 //       {/* <h3>{props.headerText}{props.fontColor}</h3> */}
 //       {/* <pre>{props.headerText}</pre> */}
 //       <pre>fhgfh{props.headerText}</pre>
-      
+
 //     </Styles>
 //   );
 // }
-

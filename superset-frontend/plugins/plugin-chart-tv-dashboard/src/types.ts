@@ -94,7 +94,7 @@ export type PluginChartTvDashboardStylesProps = {
   refs: Refs;
   colorThresholdFormatters?: ColorFormatters;
   fontColor: string;
-}
+};
 
 interface PluginChartTvDashboardCustomizeProps {
   headerText: string;

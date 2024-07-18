@@ -20,8 +20,9 @@ import { t, ChartMetadata, ChartPlugin } from '@superset-ui/core';
 import buildQuery from './buildQuery';
 import controlPanel from './controlPanel';
 import transformProps from './transformProps';
-import thumbnail from '../images/TVDashboard.png';
-import example1 from '../images/TVDashboard.png'
+import thumbnail from '../images/thumbnail.png';
+import example1 from '../images/TVDashboard.png';
+
 export default class PluginChartTvDashboard extends ChartPlugin {
   /**
    * The constructor is used to pass relevant metadata and callbacks that get
@@ -37,9 +38,7 @@ export default class PluginChartTvDashboard extends ChartPlugin {
     const metadata = new ChartMetadata({
       description: 'this is a TvDashboard',
       name: t('Plugin Chart TvDashboard'),
-      exampleGallery: [
-        { url: example1, caption: t('A Big Number') },
-      ],
+      exampleGallery: [{ url: example1, caption: t('A Big Number') }],
       thumbnail,
     });
 

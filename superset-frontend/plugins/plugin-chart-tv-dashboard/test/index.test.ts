@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { PluginChartHelloQbitum } from '../src';
+import { PluginChartTvDashboard } from '../src';
 
 /**
  * The example tests in this file act as a starting point, and
@@ -28,6 +28,6 @@ import { PluginChartHelloQbitum } from '../src';
  */
 describe('plugin-chart-hello-qbitum', () => {
   it('exists', () => {
-    expect(PluginChartHelloQbitum).toBeDefined();
+    expect(PluginChartTvDashboard).toBeDefined();
   });
 });

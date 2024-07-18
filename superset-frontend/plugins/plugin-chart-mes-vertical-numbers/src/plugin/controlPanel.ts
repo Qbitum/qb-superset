@@ -106,20 +106,54 @@ const config: ControlPanelConfig = {
       ],
     },
     {
-      label: t('Display content'),
+      label: t('Display content1'),
       expanded: true,
       tabOverride: 'data',
       controlSetRows: [
         [
           {
-            name: 'content_title',
+            name: 'content_title1',
             config: {
               type: 'TextControl',
-              label: t('Content_Title'),
+              label: t('Content_Title1'),
               renderTrigger: true,
-              description: t(
-                'Description text ',
-              ),
+              description: t('Description text '),
+            },
+          },
+        ],
+      ],
+    },
+    {
+      label: t('Display content2'),
+      expanded: true,
+      tabOverride: 'data',
+      controlSetRows: [
+        [
+          {
+            name: 'content_title2',
+            config: {
+              type: 'TextControl',
+              label: t('Content_Title2'),
+              renderTrigger: true,
+              description: t('Description text '),
+            },
+          },
+        ],
+      ],
+    },
+    {
+      label: t('Display content3'),
+      expanded: true,
+      tabOverride: 'data',
+      controlSetRows: [
+        [
+          {
+            name: 'content_title3',
+            config: {
+              type: 'TextControl',
+              label: t('Content_Title3'),
+              renderTrigger: true,
+              description: t('Description text '),
             },
           },
         ],
@@ -135,7 +169,7 @@ const config: ControlPanelConfig = {
             config: {
               type: 'SelectControl',
               label: t('Number Font Size'),
-              default: 0.4,
+              default: 0.2,
               choices: [
                 // [value, label]
                 [0.2, 'xx-small'],
@@ -175,10 +209,54 @@ const config: ControlPanelConfig = {
         ],
         [
           {
-            name: 'content_title_font_size',
+            name: 'content_title1_font_size',
             config: {
               type: 'SelectControl',
-              label: t('Content Title Font Size'),
+              label: t('Content Title1 Font Size'),
+              default: 0.1,
+              choices: [
+                // [value, label]
+                [0.1, 'xx-small'],
+                [0.2, 'x-small'],
+                [0.3, 'small'],
+                [0.4, 'medium'],
+                [0.5, 'large'],
+                [0.6, 'x-large'],
+                [0.8, 'xx-large'],
+              ],
+              renderTrigger: true,
+              description: t('The size of your content title font'),
+            },
+          },
+        ],
+        [
+          {
+            name: 'content_title2_font_size',
+            config: {
+              type: 'SelectControl',
+              label: t('Content Title2 Font Size'),
+              default: 0.1,
+              choices: [
+                // [value, label]
+                [0.1, 'xx-small'],
+                [0.2, 'x-small'],
+                [0.3, 'small'],
+                [0.4, 'medium'],
+                [0.5, 'large'],
+                [0.6, 'x-large'],
+                [0.8, 'xx-large'],
+              ],
+              renderTrigger: true,
+              description: t('The size of your content title font'),
+            },
+          },
+        ],
+        [
+          {
+            name: 'content_title3_font_size',
+            config: {
+              type: 'SelectControl',
+              label: t('Content Title3 Font Size'),
               default: 0.1,
               choices: [
                 // [value, label]

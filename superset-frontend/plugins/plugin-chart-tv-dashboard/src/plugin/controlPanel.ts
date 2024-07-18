@@ -96,7 +96,7 @@ const config: ControlPanelConfig = {
    * - validateInteger: must be an integer value
    * - validateNumber: must be an integer or decimal value
    */
-        
+
   // For control input types, see: superset-frontend/src/explore/components/controls/index.js
   controlPanelSections: [
     {
@@ -185,7 +185,7 @@ const config: ControlPanelConfig = {
             },
           },
         ],
-        
+
         // [
         //   {
         //     name: 'bold_text',
@@ -227,7 +227,6 @@ const config: ControlPanelConfig = {
         ],
       ],
     },
-    
   ],
   // formDataOverrides: formData => {
   //   const groupbyColumns = getStandardizedControls().controls.columns.filter(

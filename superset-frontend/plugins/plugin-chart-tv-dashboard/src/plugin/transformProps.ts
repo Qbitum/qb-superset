@@ -16,11 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { ChartProps, getMetricLabel, 
-} from '@superset-ui/core';
-import { parseMetricValue } from '../utils'
-export default function transformProps(chartProps: ChartProps,) {
+import { ChartProps, getMetricLabel } from '@superset-ui/core';
+import { parseMetricValue } from '../utils';
 
+export default function transformProps(chartProps: ChartProps) {
   /**
    * This function is called after a successful response has been
    * received from the chart data endpoint, and is used to transform
@@ -50,34 +49,29 @@ export default function transformProps(chartProps: ChartProps,) {
    * function during development with hot reloading, changes won't
    * be seen until restarting the development server.
    */
-  const { 
-    width, 
-    height, 
-    formData, 
-    queriesData 
-  } = chartProps;
+  const { width, height, formData, queriesData } = chartProps;
 
-  const { 
-    boldText, 
-    headerFontSize, 
-    headerText, 
-    subheader='',
-    subheaderFontSize, 
-    metric='value',
+  const {
+    boldText,
+    headerFontSize,
+    headerText,
+    subheader = '',
+    subheaderFontSize,
+    metric = 'value',
     fontColor,
-    currencyFormat
+    currencyFormat,
   } = formData;
 
   const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
   // console.log(formattedSubheader.toUpperCase(),"lllllll");
-  
-  const { data = []} = queriesData[0];
+
+  const { data = [] } = queriesData[0];
   const bigNumber =
-  data.length === 0 ? null : parseMetricValue(data[0][metricName]);
+    data.length === 0 ? null : parseMetricValue(data[0][metricName]);
 
   // console.log('formData via TransformProps.ts', formData);
-  console.log("currency", currencyFormat);
+  console.log('currency', currencyFormat);
 
   return {
     width,
@@ -90,6 +84,6 @@ export default function transformProps(chartProps: ChartProps,) {
     subHeader: formattedSubheader,
     subheaderFontSize,
     fontColor,
-    currencyFormat
+    currencyFormat,
   };
 }

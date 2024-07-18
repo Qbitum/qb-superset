@@ -27,9 +27,8 @@ import {
   TimeseriesDataRecord,
   ValueFormatter,
 } from '@superset-ui/core';
-import { EChartsCoreOption, ECharts } from 'echarts';
+import { ECharts } from 'echarts';
 import { RefObject } from 'react';
-// import { Refs } from '../types';
 
 export interface BigNumberDatum {
   [key: string]: number | null;
@@ -67,27 +66,23 @@ export type PluginChartMESVerticalNumbersStylesProps = {
   className?: string;
   width: number;
   height: number;
-  bigNumber?: DataRecordValue;
-  // data?: Array<DataRecordValue>
+  bigNumber?: DataRecordValue; // will be removed
+  values?: DataRecordValue[];
   bigNumberFallback?: TimeSeriesDatum;
   headerFormatter: ValueFormatter | TimeFormatter;
   formatTime?: TimeFormatter;
   headerFontSize: number;
   numberFontSize: number;
-  kickerFontSize?: number;
   header: string;
   subHeader: string;
   subheaderFontSize: number;
-  contentTitle:string;
-  contentTitleFontSize:number;
-  showTimestamp?: boolean;
-  showTrendLine?: boolean;
-  startYAxisAtZero?: boolean;
-  timeRangeFixed?: boolean;
-  timestamp?: DataRecordValue;
-  trendLineData?: TimeSeriesDatum[];
+  contentTitle1: string;
+  contentTitle1FontSize: number;
+  contentTitle2: string;
+  contentTitle2FontSize: number;
+  contentTitle3: string;
+  contentTitle3FontSize: number;
   mainColor?: string;
-  echartOptions?: EChartsCoreOption;
   onContextMenu?: (
     clientX: number,
     clientY: number,
@@ -105,7 +100,7 @@ interface PluginChartMESVerticalNumbersStylesPropss {
 }
 
 export type PluginChartMESVerticalNumbersQueryFormData = QueryFormData &
-PluginChartMESVerticalNumbersStylesProps &
+  PluginChartMESVerticalNumbersStylesProps &
   PluginChartMESVerticalNumbersStylesPropss;
 
 export type PluginChartTvDbProps = PluginChartMESVerticalNumbersStylesProps &

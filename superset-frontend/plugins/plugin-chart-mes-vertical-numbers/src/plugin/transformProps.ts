@@ -61,22 +61,31 @@ export default function transformProps(chartProps: ChartProps) {
     subheader = '',
     subheaderFontSize,
     metric = 'value',
-    contentTitle = '',
-    contentTitleFontSize,
+    contentTitle1 = '',
+    contentTitle1FontSize,
+    contentTitle2 = '',
+    contentTitle2FontSize,
+    contentTitle3 = '',
+    contentTitle3FontSize,
   } = formData;
   const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
-  const formattedContentTitle = contentTitle.toUpperCase();
+  const formattedContentTitle1 = contentTitle1.toUpperCase();
+  const formattedContentTitle2 = contentTitle2.toUpperCase();
+  const formattedContentTitle3 = contentTitle3.toUpperCase();
 
   console.log('formData via TransformProps.ts', formData);
   const { data = [] } = queriesData[0];
   const bigNumber =
     data.length === 0 ? null : parseMetricValue(data[0][metricName]);
 
+  const values = [{ target: 1200, efficiency: 80, actual: 800 }]; // TODO: trasform query result to component input
+
   return {
     width,
     height,
     bigNumber,
+    values,
     // and now your control data, manipulated as needed, and passed through as props!
     boldText,
     headerFontSize,
@@ -85,7 +94,11 @@ export default function transformProps(chartProps: ChartProps) {
     numberText,
     subHeader: formattedSubheader,
     subheaderFontSize,
-    contentTitle: formattedContentTitle,
-    contentTitleFontSize,
+    contentTitle1: formattedContentTitle1,
+    contentTitle1FontSize,
+    contentTitle2: formattedContentTitle2,
+    contentTitle2FontSize,
+    contentTitle3: formattedContentTitle3,
+    contentTitle3FontSize,
   };
 }

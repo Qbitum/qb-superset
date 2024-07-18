@@ -37,6 +37,7 @@ import { PluginChartHelloQbitum } from '@superset-ui/plugin-chart-hello-qbitum';
 import { PluginChartTvDashboard } from '@superset-ui/plugin-chart-tv-dashboard';
 import { PluginChartTvDb } from '@superset-ui/plugin-chart-tvdb';
 import { PluginChartMESVerticalNumbers } from '@superset-ui/plugin-chart-mes-vertical-numbers';
+import { PluginChartMESNumber } from '@superset-ui/plugin-chart-mes-number';
 
 import {
   AreaChartPlugin,
@@ -173,7 +174,7 @@ export default class MainPreset extends Preset {
         }),
         new TimeGrainFilterPlugin().configure({
           key: FilterPlugins.TimeGrain,
-        }),    
+        }),
 
         new EchartsTreeChartPlugin().configure({ key: 'tree_chart' }),
         new EchartsSunburstChartPlugin().configure({ key: 'sunburst_v2' }),
@@ -182,8 +183,13 @@ export default class MainPreset extends Preset {
         new PluginChartHelloQbitum().configure({ key: 'qbitum-hello' }),
         new PluginChartTvDashboard().configure({ key: 'chart-tv-dashboard' }),
         new PluginChartTvDb().configure({ key: 'qbitum-tvdb' }),
-        new PluginChartMESVerticalNumbers().configure({ key: 'qbitum-mes-vertical-numbers' }),
-
+        // MES TV DASBOARDS
+        new PluginChartTvDashboard().configure({ key: 'chart-tv-dashboard' }),
+        new PluginChartTvDb().configure({ key: 'qbitum-tvdb' }),
+        new PluginChartMESVerticalNumbers().configure({
+          key: 'mes-vertical-numbers',
+        }),
+        new PluginChartMESNumber().configure({ key: 'mes-number' }),
         ...experimentalPlugins,
       ],
     });
