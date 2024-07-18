@@ -102,9 +102,8 @@ jobs:
           gcloud auth activate-service-account --key-file gcloud_keys
           gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
 
-          docker buildx build \
-          -- load \
-          -t asia.gcr.io/asia-southeast1-docker.pkg.dev/makeitmes/superset-1/mes-analytics-web:v1.0.0 \
+          docker buildx build --load \
+          -t asia-southeast1-docker.pkg.dev/makeitmes/superset-1/mes-analytics-web:v1.0.0 \
           --cache-from=type=registry,ref=apache/superset-cache:3.9-slim-bookworm \
           --build-arg PY_VER=3.9-slim-bookworm \
           --platform linux/arm64,linux/amd64 \
