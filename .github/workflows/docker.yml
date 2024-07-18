@@ -85,9 +85,11 @@ jobs:
         run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
       - name: Build Docker Image
+        id: build-image
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GCP_CREDENCIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         run: |
           # Single platform builds in pull_request context to speed things up
           if [ "${{ github.event_name }}" = "push" ]; then
@@ -96,11 +98,7 @@ jobs:
             PLATFORM_ARG="--platform linux/amd64"
           fi
 
-          export GCP_REGISTRY_PATH="asia-southeast1-docker.pkg.dev"
-          export GCP_PROJECT_ID="makeitmes"
-          export GCP_MES_REPOSITORY="superset-1"
-
-          echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" | base64 -d >  gcloud_keys
+          echo $GCP_CREDENCIALS | base64 -d >  gcloud_keys
           gcloud auth activate-service-account --key-file gcloud_keys
           gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
 
