@@ -113,4 +113,4 @@ jobs:
           --label build_trigger=release \
           --label base=3.9-slim-bookworm \
           --label build_actor=shadeeka \
-          -f Dockerfile .
+          -f dev.Dockerfile .
