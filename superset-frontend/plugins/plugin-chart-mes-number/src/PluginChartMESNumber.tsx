@@ -20,56 +20,36 @@ import React, { MouseEvent } from 'react';
 import {
   t,
   getNumberFormatter,
-  smartDateVerboseFormatter,
   computeMaxFontSize,
   BRAND_COLOR,
   styled,
 } from '@superset-ui/core';
 import { PluginChartMESNumberStylesProps } from './types';
 
-// The following Styles component is a <div> element, which has been styled using Emotion
-// For docs, visit https://emotion.sh/docs/styled
-
-// Theming variables are provided for your use via a ThemeProvider
-// imported from @superset-ui/core. For variables available, please visit
-// https://github.com/apache-superset/superset-ui/blob/master/packages/superset-ui-core/src/style/index.ts
-
 const defaultNumberFormatter = getNumberFormatter();
 
 const PROPORTION = {
-  // text size: proportion of the chart container sans trendline
-  KICKER: 0.1,
-  HEADER: 0.3,
   SUBHEADER: 0.125,
   NUMBER: 0.3,
-  // trendline size: proportion of the whole chart container
-  TRENDLINE: 0.3,
 };
 
-class TvDb extends React.PureComponent<PluginChartMESNumberStylesProps> {
+class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
   static defaultProps = {
     className: '',
     headerFormatter: defaultNumberFormatter,
     numberFormatter: defaultNumberFormatter,
-    formatTime: smartDateVerboseFormatter,
-    kickerFontSize: PROPORTION.KICKER,
     mainColor: BRAND_COLOR,
-    showTimestamp: false,
-    showTrendLine: false,
-    startYAxisAtZero: true,
     number: '',
-    header: '',
+    // header: '',
     subHeader: '',
     subheaderFontSize: PROPORTION.SUBHEADER,
-    timeRangeFixed: false,
   };
 
   getClassName() {
-    const { className, showTrendLine, bigNumberFallback } = this.props;
+    const { className, bigNumberFallback } = this.props;
     const names = `mes_number_view ${className} ${
       bigNumberFallback ? 'is-fallback-value' : ''
     }`;
-    if (showTrendLine) return names;
     return `${names} no-trendline`;
   }
 
@@ -82,8 +62,8 @@ class TvDb extends React.PureComponent<PluginChartMESNumberStylesProps> {
   }
 
   renderFallbackWarning() {
-    const { bigNumberFallback, formatTime, showTimestamp } = this.props;
-    if (!formatTime || !bigNumberFallback || showTimestamp) return null;
+    const { bigNumberFallback, formatTime } = this.props;
+    if (!formatTime || !bigNumberFallback) return null;
     return (
       <span
         className="alert alert-warning"
@@ -95,96 +75,6 @@ class TvDb extends React.PureComponent<PluginChartMESNumberStylesProps> {
       >
         {t('Not up to date')}
       </span>
-    );
-  }
-
-  renderKicker(maxHeight: number) {
-    const { timestamp, showTimestamp, formatTime, width } = this.props;
-    if (
-      !formatTime ||
-      !showTimestamp ||
-      typeof timestamp === 'string' ||
-      typeof timestamp === 'boolean'
-    )
-      return null;
-
-    const text = timestamp === null ? '' : formatTime(timestamp);
-
-    const container = this.createTemporaryContainer();
-    document.body.append(container);
-    const fontSize = computeMaxFontSize({
-      text,
-      maxWidth: width,
-      maxHeight,
-      className: 'kicker',
-      container,
-    });
-    container.remove();
-
-    return (
-      <div
-        className="kicker"
-        style={{
-          fontSize,
-          height: maxHeight,
-        }}
-      >
-        {text}
-      </div>
-    );
-  }
-
-  renderHeader(maxHeight: number) {
-    const { bigNumber, headerFormatter, width, colorThresholdFormatters } =
-      this.props;
-    // @ts-ignore
-    const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
-    const hasThresholdColorFormatter =
-      Array.isArray(colorThresholdFormatters) &&
-      colorThresholdFormatters.length > 0;
-    let numberColor;
-    if (hasThresholdColorFormatter) {
-      colorThresholdFormatters!.forEach(formatter => {
-        const formatterResult = bigNumber
-          ? formatter.getColorFromValue(bigNumber as number)
-          : false;
-        if (formatterResult) {
-          numberColor = formatterResult;
-        }
-      });
-    } else {
-      numberColor = 'white';
-    }
-
-    const container = this.createTemporaryContainer();
-    document.body.append(container);
-    const fontSize = computeMaxFontSize({
-      text,
-      maxWidth: width - 8, // Decrease 8px for more precise font size
-      maxHeight,
-      className: 'header-line',
-      container,
-    });
-    container.remove();
-
-    const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
-      if (this.props.onContextMenu) {
-        e.preventDefault();
-        this.props.onContextMenu(e.nativeEvent.clientX, e.nativeEvent.clientY);
-      }
-    };
-    return (
-      <div
-        className="header-line"
-        style={{
-          fontSize,
-          height: maxHeight,
-          color: numberColor,
-        }}
-        onContextMenu={onContextMenu}
-      >
-        {text}
-      </div>
     );
   }
 
@@ -287,38 +177,13 @@ class TvDb extends React.PureComponent<PluginChartMESNumberStylesProps> {
   }
 
   render() {
-    const { showTrendLine, height, numberFontSize, subheaderFontSize } =
-      this.props;
+    const { height, numberFontSize, subheaderFontSize } = this.props;
     const className = this.getClassName();
-    // console.log(subheaderFontSize,"subheaderFontSize");
-
-    if (showTrendLine) {
-      const chartHeight = Math.floor(PROPORTION.TRENDLINE * height);
-      const allTextHeight = height - chartHeight;
-
-      return (
-        <div>
-          <div className="text-container" style={{ height: allTextHeight }}>
-            {this.renderFallbackWarning()}
-            {this.renderNumber(
-              Math.ceil(numberFontSize * (1 - PROPORTION.TRENDLINE) * height),
-            )}
-            {this.renderSubheader(
-              Math.ceil(
-                subheaderFontSize * (1 - PROPORTION.TRENDLINE) * height,
-              ),
-            )}
-          </div>
-        </div>
-      );
-    }
     return (
       <>
         <div className={className} style={{ height }}>
           {this.renderFallbackWarning()}
-
           {this.renderSubheader(Math.ceil(subheaderFontSize * height))}
-
           {this.renderNumber(Math.ceil(numberFontSize * height))}
         </div>
       </>
@@ -326,11 +191,11 @@ class TvDb extends React.PureComponent<PluginChartMESNumberStylesProps> {
   }
 }
 
-export default styled(TvDb)`
+export default styled(MESNumber)`
   ${({ theme }) => `
     font-family: ${theme.tvDb.font.roboto};
     font-style: ${theme.tvDb.fontStyles.normal};
-    font-weight:${theme.tvDb.fontWeights[400]};
+    font-weight:${theme.tvDb.fontWeights.normal};
     padding: 16pt;
     align-items: flex-start;
     position: relative;
@@ -348,7 +213,7 @@ export default styled(TvDb)`
       font-family: ${theme.tvDb.font.roboto};
       font-size: 200px;
       font-style: ${theme.tvDb.fontStyles.normal};
-      font-weight:${theme.tvDb.fontWeights[700]};
+      font-weight:${theme.tvDb.fontWeights.bold};
       span {
         position: absolute;
         bottom: 0; 
@@ -360,8 +225,7 @@ export default styled(TvDb)`
       line-height: 1em;
       padding-bottom: 0;
       color: ${theme.tvDb.fontColor.white};
-      font-size: 20px;
-
+      font-size: 2em;
     }
 
     &.is-fallback-value {

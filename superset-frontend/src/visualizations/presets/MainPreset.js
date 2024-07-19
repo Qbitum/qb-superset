@@ -37,6 +37,7 @@ import { PluginChartHelloQbitum } from '@superset-ui/plugin-chart-hello-qbitum';
 import { PluginChartTvDashboard } from '@superset-ui/plugin-chart-tv-dashboard';
 import { PluginChartMESVerticalNumbers } from '@superset-ui/plugin-chart-mes-vertical-numbers';
 import { PluginChartMESNumber } from '@superset-ui/plugin-chart-mes-number';
+import { PluginChartMESHeader } from '@superset-ui/plugin-chart-mes-header';
 
 import {
   AreaChartPlugin,
@@ -187,6 +188,8 @@ export default class MainPreset extends Preset {
           key: 'mes-vertical-numbers',
         }),
         new PluginChartMESNumber().configure({ key: 'mes-number' }),
+        new PluginChartMESHeader().configure({ key: 'mes-header' }),
+
         ...experimentalPlugins,
       ],
     });

@@ -144,11 +144,9 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
 
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
-
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
-    /* eslint-disable @typescript-eslint/no-unused-vars */
     let numberColor;
     if (hasThresholdColorFormatter) {
       colorThresholdFormatters!.forEach(formatter => {

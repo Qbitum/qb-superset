@@ -21,15 +21,13 @@ import {
   ContextMenuFilters,
   DataRecordValue,
   QueryFormData,
-  // supersetTheme,
   TimeFormatter,
   QueryFormMetric,
   TimeseriesDataRecord,
   ValueFormatter,
 } from '@superset-ui/core';
-import { EChartsCoreOption, ECharts } from 'echarts';
+import { ECharts } from 'echarts';
 import { RefObject } from 'react';
-// import { Refs } from '../types';
 
 export interface BigNumberDatum {
   [key: string]: number | null;
@@ -39,15 +37,6 @@ export type BigNumberTotalFormData = QueryFormData & {
   metric?: QueryFormMetric;
   yAxisFormat?: string;
   forceTimestampFormatting?: boolean;
-};
-
-export type BigNumberWithTrendlineFormData = BigNumberTotalFormData & {
-  colorPicker: {
-    r: number;
-    g: number;
-    b: number;
-  };
-  compareLag?: string | number;
 };
 
 export type TimeSeriesDatum = [number, number | null];
@@ -68,31 +57,21 @@ export type PluginChartMESNumberStylesProps = {
   width: number;
   height: number;
   bigNumber?: DataRecordValue;
-  // data?: Array<DataRecordValue>
   bigNumberFallback?: TimeSeriesDatum;
   headerFormatter: ValueFormatter | TimeFormatter;
   formatTime?: TimeFormatter;
   headerFontSize: number;
   numberFontSize: number;
-  kickerFontSize?: number;
   header: string;
   subHeader: string;
   subheaderFontSize: number;
-  showTimestamp?: boolean;
-  showTrendLine?: boolean;
-  startYAxisAtZero?: boolean;
-  timeRangeFixed?: boolean;
-  timestamp?: DataRecordValue;
-  trendLineData?: TimeSeriesDatum[];
   mainColor?: string;
-  echartOptions?: EChartsCoreOption;
   onContextMenu?: (
     clientX: number,
     clientY: number,
     filters?: ContextMenuFilters,
   ) => void;
   xValueFormatter?: TimeFormatter;
-  formData?: BigNumberWithTrendlineFormData;
   refs: Refs;
   colorThresholdFormatters?: ColorFormatters;
 };

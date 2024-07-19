@@ -74,8 +74,9 @@ export default function transformProps(chartProps: ChartProps) {
     data = data.slice(0, 3);
   }
   // @ts-ignore
-  values = data.map((row: { [x: string]: string | number | null }) => { return { data: parseMetricValue(row[metricName]) }; });
-
+  values = data.map((row: { [x: string]: string | number | null }) => ({
+    data: parseMetricValue(row[metricName]),
+  }));
   return {
     width,
     height,

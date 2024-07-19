@@ -54,8 +54,6 @@ export default function transformProps(chartProps: ChartProps) {
   const { width, height, formData, queriesData } = chartProps;
   const {
     boldText,
-    headerFontSize,
-    headerText,
     numberText,
     numberFontSize,
     subheader = '',
@@ -64,7 +62,6 @@ export default function transformProps(chartProps: ChartProps) {
   } = formData;
   const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
-  // const formattedHeader = header.toUpperCase();
 
   console.log('formData via TransformProps.ts', formData);
   const { data = [] } = queriesData[0];
@@ -75,10 +72,8 @@ export default function transformProps(chartProps: ChartProps) {
     width,
     height,
     bigNumber,
-    // and now your control data, manipulated as needed, and passed through as props!
     boldText,
-    headerFontSize,
-    headerText,
+    // and now your control data, manipulated as needed, and passed through as props!
     numberFontSize,
     numberText,
     subHeader: formattedSubheader,
