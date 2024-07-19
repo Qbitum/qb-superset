@@ -35,7 +35,6 @@ import { WordCloudChartPlugin } from '@superset-ui/plugin-chart-word-cloud';
 import WorldMapChartPlugin from '@superset-ui/legacy-plugin-chart-world-map';
 import { PluginChartHelloQbitum } from '@superset-ui/plugin-chart-hello-qbitum';
 import { PluginChartTvDashboard } from '@superset-ui/plugin-chart-tv-dashboard';
-import { PluginChartTvDb } from '@superset-ui/plugin-chart-tvdb';
 import { PluginChartMESVerticalNumbers } from '@superset-ui/plugin-chart-mes-vertical-numbers';
 import { PluginChartMESNumber } from '@superset-ui/plugin-chart-mes-number';
 
@@ -182,10 +181,8 @@ export default class MainPreset extends Preset {
         new EchartsBubbleChartPlugin().configure({ key: 'bubble_v2' }),
         new PluginChartHelloQbitum().configure({ key: 'qbitum-hello' }),
         new PluginChartTvDashboard().configure({ key: 'chart-tv-dashboard' }),
-        new PluginChartTvDb().configure({ key: 'qbitum-tvdb' }),
         // MES TV DASBOARDS
         new PluginChartTvDashboard().configure({ key: 'chart-tv-dashboard' }),
-        new PluginChartTvDb().configure({ key: 'qbitum-tvdb' }),
         new PluginChartMESVerticalNumbers().configure({
           key: 'mes-vertical-numbers',
         }),

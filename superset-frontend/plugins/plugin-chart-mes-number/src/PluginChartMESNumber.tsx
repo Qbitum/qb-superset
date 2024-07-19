@@ -328,15 +328,15 @@ class TvDb extends React.PureComponent<PluginChartMESNumberStylesProps> {
 
 export default styled(TvDb)`
   ${({ theme }) => `
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 400;
+    font-family: ${theme.tvDb.font.roboto};
+    font-style: ${theme.tvDb.fontStyles.normal};
+    font-weight:${theme.tvDb.fontWeights[400]};
     padding: 16pt;
     align-items: flex-start;
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #1F1F1F;
+    background-color: ${theme.tvDb.bg.tvDbBg};
 
     .number-line {
       position: relative;
@@ -345,10 +345,10 @@ export default styled(TvDb)`
       padding-top: 50pt;
       padding-left: 100pt;
       text-edge: cap;
-      font-family: Roboto;
+      font-family: ${theme.tvDb.font.roboto};
       font-size: 200px;
-      font-style: normal;
-      font-weight: 700;
+      font-style: ${theme.tvDb.fontStyles.normal};
+      font-weight:${theme.tvDb.fontWeights[700]};
       span {
         position: absolute;
         bottom: 0; 
@@ -359,7 +359,7 @@ export default styled(TvDb)`
     .subheader-line {
       line-height: 1em;
       padding-bottom: 0;
-      color: #FFFFFF;
+      color: ${theme.tvDb.fontColor.white};
       font-size: 20px;
 
     }

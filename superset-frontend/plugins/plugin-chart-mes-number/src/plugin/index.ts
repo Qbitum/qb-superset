@@ -38,7 +38,7 @@ export default class PluginChartMESNumber extends ChartPlugin {
   constructor() {
     const metadata = new ChartMetadata({
       description: 'this is a test plugin for tv dashboard',
-      name: t('Plugin Chart TV DB'),
+      name: t('Plugin Chart MES Number'),
       exampleGallery: [{ url: thumbnail, caption: t('A Big Number') }],
       thumbnail,
     });

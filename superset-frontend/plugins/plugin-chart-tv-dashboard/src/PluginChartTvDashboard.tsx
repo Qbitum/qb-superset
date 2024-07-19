@@ -199,7 +199,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   }
 
   renderTitle(maxHeight: number) {
-    const { bigNumber, subHeader, width, bigNumberFallback, fontColor } =
+    const { bigNumber, subHeader, width, bigNumberFallback } =
       this.props;
     let fontSize = 0;
     // console.log(fontColor,"this.props");
@@ -225,7 +225,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
         className: 'subheader-line',
         container,
       });
-      fontColor;
+      // fontColor;
       container.remove();
 
       // console.log("font color", fontColor);
@@ -353,7 +353,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
 export default styled(TvDashboard)`
   ${({ theme }) => `
     font-family: ${theme.typography.families.sansSerif};
-    background-color: black;
+    background-color: ${theme.tvDb.bg.tvDbBg};
     padding: 4px;
     position: relative;
     display: flex;
@@ -395,7 +395,7 @@ export default styled(TvDashboard)`
     }
 
     .subheader-line {
-      color: white;
+      color: ${theme.tvDb.fontColor.white};
       line-height: 1em;
       padding-bottom: 0;
     }

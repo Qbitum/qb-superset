@@ -163,6 +163,26 @@ const defaultTheme = {
   transitionTiming: 0.3,
   gridUnit: 4,
   brandIconMaxWidth: 37,
+
+  tvDb: {
+    bg: {
+      tvDbBg: '#1F1F1F',
+    },
+    fontColor: {
+      white: '#FFFFFF',
+      gray80: '#8A98AB',
+    },
+    font: {
+      roboto: 'Roboto',
+    },
+    fontWeights: {
+      400: '400',
+      700: '700',
+    },
+    fontStyles: {
+      normal: 'normal',
+    },
+  },
 };
 
 export type SupersetTheme = typeof defaultTheme;

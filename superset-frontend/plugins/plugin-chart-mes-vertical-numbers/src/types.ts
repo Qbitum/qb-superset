@@ -19,7 +19,6 @@
 import { ColorFormatters } from '@superset-ui/chart-controls';
 import {
   ContextMenuFilters,
-  DataRecordValue,
   QueryFormData,
   // supersetTheme,
   TimeFormatter,
@@ -28,10 +27,10 @@ import {
   ValueFormatter,
 } from '@superset-ui/core';
 import { ECharts } from 'echarts';
-import { RefObject } from 'react';
+// import { RefObject } from 'react';
 
-export interface BigNumberDatum {
-  [key: string]: number | null;
+export interface VerticalNumberDatum {
+  data: number;
 }
 
 export type BigNumberTotalFormData = QueryFormData & {
@@ -40,23 +39,10 @@ export type BigNumberTotalFormData = QueryFormData & {
   forceTimestampFormatting?: boolean;
 };
 
-export type BigNumberWithTrendlineFormData = BigNumberTotalFormData & {
-  colorPicker: {
-    r: number;
-    g: number;
-    b: number;
-  };
-  compareLag?: string | number;
-};
 
 export type TimeSeriesDatum = [number, number | null];
 
 export type EventHandlers = Record<string, { (props: any): void }>;
-
-export type Refs = {
-  echartRef?: React.Ref<EchartsHandler>;
-  divRef?: RefObject<HTMLDivElement>;
-};
 
 export interface EchartsHandler {
   getEchartInstance: () => ECharts | undefined;
@@ -66,31 +52,22 @@ export type PluginChartMESVerticalNumbersStylesProps = {
   className?: string;
   width: number;
   height: number;
-  bigNumber?: DataRecordValue; // will be removed
-  values?: DataRecordValue[];
+  values?: VerticalNumberDatum[];
   bigNumberFallback?: TimeSeriesDatum;
   headerFormatter: ValueFormatter | TimeFormatter;
   formatTime?: TimeFormatter;
   headerFontSize: number;
   numberFontSize: number;
-  header: string;
   subHeader: string;
   subheaderFontSize: number;
-  contentTitle1: string;
+  contentTitles: string[];
   contentTitle1FontSize: number;
-  contentTitle2: string;
-  contentTitle2FontSize: number;
-  contentTitle3: string;
-  contentTitle3FontSize: number;
   mainColor?: string;
   onContextMenu?: (
     clientX: number,
     clientY: number,
     filters?: ContextMenuFilters,
   ) => void;
-  xValueFormatter?: TimeFormatter;
-  formData?: BigNumberWithTrendlineFormData;
-  refs: Refs;
   colorThresholdFormatters?: ColorFormatters;
 };
 

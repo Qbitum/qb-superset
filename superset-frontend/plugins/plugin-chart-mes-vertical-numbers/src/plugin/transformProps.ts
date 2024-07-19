@@ -49,6 +49,7 @@
 
 import { ChartProps, getMetricLabel } from '@superset-ui/core';
 import { parseMetricValue } from '../utils';
+// import { title } from 'process';
 
 export default function transformProps(chartProps: ChartProps) {
   const { width, height, formData, queriesData } = chartProps;
@@ -59,32 +60,28 @@ export default function transformProps(chartProps: ChartProps) {
     numberText,
     numberFontSize,
     subheader = '',
-    subheaderFontSize,
+    subheaderFontSize=12,
     metric = 'value',
-    contentTitle1 = '',
-    contentTitle1FontSize,
-    contentTitle2 = '',
-    contentTitle2FontSize,
-    contentTitle3 = '',
-    contentTitle3FontSize,
+    contentTitles = ['Title 1', 'Title 2', 'Title 3'],
+    contentTitle1FontSize
   } = formData;
   const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
-  const formattedContentTitle1 = contentTitle1.toUpperCase();
-  const formattedContentTitle2 = contentTitle2.toUpperCase();
-  const formattedContentTitle3 = contentTitle3.toUpperCase();
 
   console.log('formData via TransformProps.ts', formData);
   const { data = [] } = queriesData[0];
   const bigNumber =
     data.length === 0 ? null : parseMetricValue(data[0][metricName]);
 
-  const values = [{ target: 1200, efficiency: 80, actual: 800 }]; // TODO: trasform query result to component input
-
+  const arrayDefault = [{ data:0},{data:0},{data:0}]; // TODO: trasform query result to component input
+  // const values = data.length === 0 ? null : parseMetricValue(data[0][metricName]);
+  const values = arrayDefault;
+  console.log(data);
+  // const { data = [] } = queriesData[0];
+  // const values = data.map((row: { [x: string]: string | number | null; }) => parseMetricValue(row[metricName]));
   return {
     width,
     height,
-    bigNumber,
     values,
     // and now your control data, manipulated as needed, and passed through as props!
     boldText,
@@ -94,11 +91,7 @@ export default function transformProps(chartProps: ChartProps) {
     numberText,
     subHeader: formattedSubheader,
     subheaderFontSize,
-    contentTitle1: formattedContentTitle1,
-    contentTitle1FontSize,
-    contentTitle2: formattedContentTitle2,
-    contentTitle2FontSize,
-    contentTitle3: formattedContentTitle3,
-    contentTitle3FontSize,
+    contentTitles,
+    contentTitle1FontSize
   };
 }

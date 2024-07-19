@@ -53,13 +53,13 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     return container;
   }
 
-  renderNumber(maxHeight: number) {
+  renderNumber(maxHeight: number, val: number) {
     const { values, headerFormatter, width, colorThresholdFormatters } =
       this.props;
 
     console.log('============> this is my dataset:', values);
     // @ts-ignore
-    const text = values === null ? t('No data') : headerFormatter(values);
+    const text = values === null ? t('No data') : headerFormatter(val);
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
@@ -110,21 +110,22 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
   }
 
   renderSubheader(maxHeight: number) {
-    const { bigNumber, subHeader, width, bigNumberFallback } = this.props;
+    // , bigNumberFallback
+    const { subHeader, width } = this.props;
     let fontSize = 0;
-    console.log(this.props, 'this.props');
-    console.log(subHeader, bigNumber, 'git');
+    // console.log(this.props, 'this.props');
+    // console.log(subHeader, bigNumber, 'git');
 
-    const NO_DATA_OR_HASNT_LANDED = t(
-      'No data after filtering or data is NULL for the latest time record',
-    );
-    const NO_DATA = t(
-      'Try applying different filters or ensuring your datasource has data',
-    );
-    let text = subHeader;
-    if (bigNumber === null) {
-      text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
-    }
+    // const NO_DATA_OR_HASNT_LANDED = t(
+    //   'No data after filtering or data is NULL for the latest time record',
+    // );
+    // const NO_DATA = t(
+    //   'Try applying different filters or ensuring your datasource has data',
+    // );
+    const text = subHeader;
+    // if (bigNumber === null) {
+    //   text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
+    // }
     if (text) {
       const container = this.createTemporaryContainer();
       document.body.append(container);
@@ -140,10 +141,7 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
       return (
         <div
           className="subheader-line"
-          style={{
-            fontSize,
-            height: maxHeight,
-          }}
+          
         >
           {text}
         </div>
@@ -152,11 +150,11 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     return null;
   }
 
-  renderContentTitle1(maxHeight: number) {
-    const { bigNumber, contentTitle1, width, bigNumberFallback } = this.props;
+  renderContentTitle(maxHeight: number, text:string) {
+    const {  width } = this.props;
     let fontSize = 0;
-    console.log(this.props, 'this.props');
-    console.log(contentTitle1, bigNumber, 'git');
+    // console.log(this.props, 'this.props');
+    // console.log(contentTitle1, bigNumber, 'git');
 
     const NO_DATA_OR_HASNT_LANDED = t(
       'No data after filtering or data is NULL for the latest time record',
@@ -164,10 +162,8 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     const NO_DATA = t(
       'Try applying different filters or ensuring your datasource has data',
     );
-    let text = contentTitle1;
-    if (bigNumber === null) {
-      text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
-    }
+   
+
     if (text) {
       const container = this.createTemporaryContainer();
       document.body.append(container);
@@ -179,95 +175,6 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
         container,
       });
       container.remove();
-      console.log('qaaa', text);
-
-      return (
-        <div
-          className="contentTitle-line"
-          style={{
-            fontSize,
-            height: maxHeight,
-          }}
-        >
-          {text}
-        </div>
-      );
-    }
-    return null;
-  }
-
-  renderContentTitle2(maxHeight: number) {
-    const { bigNumber, contentTitle2, width, bigNumberFallback } = this.props;
-    let fontSize = 0;
-    console.log(this.props, 'this.props');
-    console.log(contentTitle2, bigNumber, 'git');
-
-    const NO_DATA_OR_HASNT_LANDED = t(
-      'No data after filtering or data is NULL for the latest time record',
-    );
-    const NO_DATA = t(
-      'Try applying different filters or ensuring your datasource has data',
-    );
-    let text = contentTitle2;
-    if (bigNumber === null) {
-      text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
-    }
-    if (text) {
-      const container = this.createTemporaryContainer();
-      document.body.append(container);
-      fontSize = computeMaxFontSize({
-        text,
-        maxWidth: width,
-        maxHeight,
-        className: 'contentTitle-line',
-        container,
-      });
-      container.remove();
-      // console.log('qaaa', text);
-
-      return (
-        <div
-          className="contentTitle-line"
-          style={{
-            fontSize,
-            height: maxHeight,
-          }}
-        >
-          {text}
-        </div>
-      );
-    }
-    return null;
-  }
-
-  renderContentTitle3(maxHeight: number) {
-    const { bigNumber, contentTitle3, width, bigNumberFallback } = this.props;
-    let fontSize = 0;
-    console.log(this.props, 'this.props');
-    console.log(contentTitle3, bigNumber, 'git');
-
-    const NO_DATA_OR_HASNT_LANDED = t(
-      'No data after filtering or data is NULL for the latest time record',
-    );
-    const NO_DATA = t(
-      'Try applying different filters or ensuring your datasource has data',
-    );
-    let text = contentTitle3;
-    if (bigNumber === null) {
-      text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
-    }
-    if (text) {
-      const container = this.createTemporaryContainer();
-      document.body.append(container);
-      fontSize = computeMaxFontSize({
-        text,
-        maxWidth: width,
-        maxHeight,
-        className: 'contentTitle-line',
-        container,
-      });
-      container.remove();
-      console.log('qaaa', text);
 
       return (
         <div
@@ -287,36 +194,28 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
   render() {
     const {
       height,
+      values,
       numberFontSize,
       subheaderFontSize,
-      contentTitle2FontSize,
-      contentTitle3FontSize,
+      contentTitles,
       contentTitle1FontSize,
     } = this.props;
     const className = this.getClassName();
+
+    console.log(values)
     return (
       <>
         <div className={className} style={{ height }}>
           {/* {this.renderFallbackWarning()} */}
           {this.renderSubheader(Math.ceil(subheaderFontSize * height))}
-          <div className="content-container">
-            {this.renderContentTitle1(
-              Math.ceil(contentTitle1FontSize * height),
-            )}
-            {this.renderNumber(Math.ceil(numberFontSize * height))}
-          </div>
-          <div className="content-container">
-            {this.renderContentTitle2(
-              Math.ceil(contentTitle2FontSize * height),
-            )}
-            {this.renderNumber(Math.ceil(numberFontSize * height))}
-          </div>
-          <div className="content-container">
-            {this.renderContentTitle3(
-              Math.ceil(contentTitle3FontSize * height),
-            )}
-            {this.renderNumber(Math.ceil(numberFontSize * height))}
-          </div>
+          {values?.map((val, i) => {
+            return <div className="content-container">
+              {this.renderContentTitle(
+                Math.ceil(contentTitle1FontSize * height), contentTitles[i]
+              )}
+              {this.renderNumber(Math.ceil(numberFontSize * height), val.data)}
+            </div>;
+          })}
           <data />
         </div>
       </>
@@ -326,47 +225,46 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
 
 export default styled(MESVerticalNumbers)`
   ${({ theme }) => `
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 400;
+    font-family: ${theme.tvDb.font.roboto};
+    font-style: ${theme.tvDb.fontStyles.normal};
+    font-weight: ${theme.tvDb.fontWeights[400]};
     padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: ${theme.colors.primary.tvdbBg};
+    background-color: ${theme.tvDb.bg.tvDbBg};
 
     .subheader-line {
       line-height: 1em;
       padding-bottom: 0;
-      color: #FFFFFF;
-      font-size: 20px;
+      color: ${theme.tvDb.fontColor.white};
+      font-size: 2em;
     }
 
     .content-container {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.contentTitle-line {
-  text-align: center;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-      color: #8A98AB;
+    .contentTitle-line {
+      text-align: center;
+      font-family: ${theme.tvDb.font.roboto};
+      font-style: ${theme.tvDb.fontStyles.normal};
+      font-weight:${theme.tvDb.fontWeights[400]};
+      line-height: normal;
+      color: ${theme.tvDb.fontColor.gray80};
+    }
 
-}
-
-.number-line {
-  font-family: Roboto;
-  font-size: 200px;
-  font-style: normal;
-  font-weight: 700;
-      color: #8A98AB;
-  text-align: right;
-}
+    .number-line {
+      font-family: ${theme.tvDb.font.roboto};
+      font-size: 200px;
+      font-style: ${theme.tvDb.fontStyles.normal};
+      font-weight: ${theme.tvDb.fontWeights[700]};
+      color: ${theme.tvDb.fontColor.gray80};
+      text-align: right;
+    }
 
     &.is-fallback-value {
       .kicker,

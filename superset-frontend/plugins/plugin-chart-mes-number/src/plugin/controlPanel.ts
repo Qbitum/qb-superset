@@ -159,7 +159,7 @@ const config: ControlPanelConfig = {
             config: {
               type: 'SelectControl',
               label: t('Font Color'),
-              default: 'white',
+              // default: 'white',
               choices: [
                 ['#FFFFFF', 'White'],
                 ['#FF11F1', 'Red'],
