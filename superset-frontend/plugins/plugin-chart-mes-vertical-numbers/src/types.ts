@@ -52,14 +52,13 @@ export type PluginChartMESVerticalNumbersStylesProps = {
   width: number;
   height: number;
   values?: VerticalNumberDatum[];
-  bigNumberFallback?: TimeSeriesDatum;
   headerFormatter: ValueFormatter | TimeFormatter;
   formatTime?: TimeFormatter;
   headerFontSize: number;
   numberFontSize: number;
   subHeader: string;
   subheaderFontSize: number;
-  contentTitles: string[];
+  contentTitles: string;
   contentTitle1FontSize: number;
   mainColor?: string;
   onContextMenu?: (

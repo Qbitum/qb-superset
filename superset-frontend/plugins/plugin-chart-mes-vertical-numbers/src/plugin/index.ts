@@ -38,8 +38,9 @@ export default class PluginChartMESVerticalNumbers extends ChartPlugin {
   constructor() {
     const metadata = new ChartMetadata({
       description: 'this is a test plugin for tv dashboard',
-      name: t('Plugin Chart MES Vertical Numbers'),
-      exampleGallery: [{ url: thumbnail, caption: t('MES Vertical Numbers') }],
+      name: t('MES Vertical Numbers'),
+      exampleGallery: [{ url: thumbnail, caption: t('Vertical Numbers') }],
+      category: t('MES-TV'),
       thumbnail,
     });
 

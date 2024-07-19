@@ -11,12 +11,14 @@ APP_ICON = "/static/assets/images/qlogo.jpg"
 FEATURE_FLAGS: dict[str, bool] = {
     "CHART_PLUGINS_EXPERIMENTAL": False,
     "ALERT_REPORTS":True,
-    "ENABLE_TEMPLATE_PROCESSING": True
+    "ENABLE_TEMPLATE_PROCESSING": True,
+    "HORIZONTAL_FILTER_BAR":True
 }
 
 JINJA_CONTEXT_ADDONS = {
     "nowTime": lambda : "'"+time.strftime("%H:%M:%S", time.localtime())+"'"
 }
+
 
 # Enable OAuth authentication
 # AUTH_TYPE = AUTH_OAUTH

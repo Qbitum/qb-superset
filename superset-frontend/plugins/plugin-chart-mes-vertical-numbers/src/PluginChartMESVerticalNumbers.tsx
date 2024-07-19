@@ -38,10 +38,8 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
   };
 
   getClassName() {
-    const { className, bigNumberFallback } = this.props;
-    const names = `mes_number_view ${className} ${
-      bigNumberFallback ? 'is-fallback-value' : ''
-    }`;
+    const { className } = this.props;
+    const names = `mes_number_view ${className}`;
     return `${names} no-trendline`;
   }
 
@@ -111,27 +109,12 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     );
   }
 
-  renderSubheader(maxHeight: number) {
-    const { subHeader, width } = this.props;
+  renderSubheader() {
+    const { subHeader } = this.props;
     const text = subHeader;
 
     if (text) {
-      const container = this.createTemporaryContainer();
-      document.body.append(container);
-      const fontSize = computeMaxFontSize({
-        text,
-        maxWidth: width,
-        maxHeight,
-        className: 'subheader-line',
-        container,
-      });
-      container.remove();
-
-      return (
-        <div className="subheader-line" style={{ fontSize }}>
-          {text}
-        </div>
-      );
+      return <div className="subheader-line">{text}</div>;
     }
     return null;
   }
@@ -139,9 +122,6 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
   renderContentTitle(maxHeight: number, text: string) {
     const { width } = this.props;
     let fontSize = 0;
-    // console.log(this.props, 'this.props');
-    // console.log(contentTitle1, bigNumber, 'git');
-
     if (text) {
       const container = this.createTemporaryContainer();
       document.body.append(container);
@@ -174,26 +154,29 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
       height,
       values,
       numberFontSize,
-      subheaderFontSize,
       contentTitles,
       contentTitle1FontSize,
     } = this.props;
     const className = this.getClassName();
-
-    console.log(values);
+    const labels = contentTitles.split(','); // TODO: should move this to transform class
     return (
       <>
         <div className={className} style={{ height }}>
-          {this.renderSubheader(Math.ceil(subheaderFontSize * height))}
-          {values?.map((val, i) => (
-            <div className="content-container">
-              {this.renderContentTitle(
-                Math.ceil(contentTitle1FontSize * height),
-                contentTitles[i],
-              )}
-              {this.renderNumber(Math.ceil(numberFontSize * height), val.data)}
-            </div>
-          ))}
+          {this.renderSubheader()}
+          <div className="component-body">
+            {values?.map((val, i) => (
+              <div className="content-container">
+                {this.renderContentTitle(
+                  Math.ceil(contentTitle1FontSize * height),
+                  labels[i],
+                )}
+                {this.renderNumber(
+                  Math.ceil(numberFontSize * height),
+                  val.data,
+                )}
+              </div>
+            ))}
+          </div>
           <data />
         </div>
       </>
@@ -205,7 +188,7 @@ export default styled(MESVerticalNumbers)`
   ${({ theme }) => `
     font-family: ${theme.tvDb.font.roboto};
     font-style: ${theme.tvDb.fontStyles.normal};
-    font-weight: ${theme.tvDb.fontWeights[400]};
+    font-weight: ${theme.tvDb.fontWeights.normal};
     padding: 16px;
     display: flex;
     flex-direction: column;
@@ -218,7 +201,14 @@ export default styled(MESVerticalNumbers)`
       color: ${theme.tvDb.fontColor.white};
       font-size: 2em;
     }
-
+    .component-body {
+      padding:${theme.tvDb.component.padding};
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+    }
     .content-container {
       display: flex;
       width: 100%;
@@ -230,7 +220,7 @@ export default styled(MESVerticalNumbers)`
       text-align: center;
       font-family: ${theme.tvDb.font.roboto};
       font-style: ${theme.tvDb.fontStyles.normal};
-      font-weight:${theme.tvDb.fontWeights[400]};
+      font-weight:${theme.tvDb.fontWeights.normal};
       line-height: normal;
       color: ${theme.tvDb.fontColor.gray80};
     }
@@ -239,17 +229,9 @@ export default styled(MESVerticalNumbers)`
       font-family: ${theme.tvDb.font.roboto};
       font-size: 200px;
       font-style: ${theme.tvDb.fontStyles.normal};
-      font-weight: ${theme.tvDb.fontWeights[700]};
+      font-weight: ${theme.tvDb.fontWeights.bold};
       color: ${theme.tvDb.fontColor.gray80};
       text-align: right;
-    }
-
-    &.is-fallback-value {
-      .kicker,
-      .number-line,
-      .subheader-line {
-        opacity: ${theme.opacity.mediumHeavy};
-      }
     }
   `}
 `;

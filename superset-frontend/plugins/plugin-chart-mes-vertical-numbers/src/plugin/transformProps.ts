@@ -46,10 +46,8 @@
  * function during development with hot reloading, changes won't
  * be seen until restarting the development server.
  */
-// , getMetricLabel
-import { ChartProps } from '@superset-ui/core';
-// import { parseMetricValue } from '../utils';
-// import { title } from 'process';
+import { ChartProps, getMetricLabel } from '@superset-ui/core';
+import { parseMetricValue } from '../utils';
 
 export default function transformProps(chartProps: ChartProps) {
   const { width, height, formData, queriesData } = chartProps;
@@ -59,24 +57,25 @@ export default function transformProps(chartProps: ChartProps) {
     headerText,
     numberText,
     numberFontSize,
-    subheader = '',
+    subheader = 'Title',
     subheaderFontSize = 12,
-    // metric = 'value',
-    contentTitles = ['Title 1', 'Title 2', 'Title 3'],
+    contentTitles = 'Label 1,Label 2,Label 3',
     contentTitle1FontSize,
   } = formData;
-  // const metricName = getMetricLabel(metric);
+  const metricName = getMetricLabel(formData.metrics[0]); // This is how we get the metric name from the query, we can consider only 0th metric
   const formattedSubheader = subheader.toUpperCase();
+  console.log(metricName);
+  let { data = [] } = queriesData[0];
 
-  console.log('formData via TransformProps.ts', formData);
-  const { data = [] } = queriesData[0];
+  let values = [{ data: 0 }, { data: 0 }, { data: 0 }]; // TODO: trasform query result to component input
 
-  const arrayDefault = [{ data: 0 }, { data: 0 }, { data: 0 }]; // TODO: trasform query result to component input
-  // const values = data.length === 0 ? null : parseMetricValue(data[0][metricName]);
-  const values = arrayDefault;
-  console.log(data);
-  // const { data = [] } = queriesData[0];
-  // const values = data.map((row: { [x: string]: string | number | null; }) => parseMetricValue(row[metricName]));
+  // transform query result to the UI friendly data set
+  if (data.length > 3) {
+    data = data.slice(0, 3);
+  }
+  // @ts-ignore
+  values = data.map((row: { [x: string]: string | number | null }) => { return { data: parseMetricValue(row[metricName]) }; });
+
   return {
     width,
     height,

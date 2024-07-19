@@ -173,14 +173,19 @@ const defaultTheme = {
       gray80: '#8A98AB',
     },
     font: {
-      roboto: 'Roboto',
+      roboto: `'Roboto', Helvetica, Arial`,
     },
     fontWeights: {
-      400: '400',
-      700: '700',
+      light: 200,
+      normal: 400,
+      medium: 500,
+      bold: 700,
     },
     fontStyles: {
       normal: 'normal',
+    },
+    component: {
+      padding: '2px',
     },
   },
 };

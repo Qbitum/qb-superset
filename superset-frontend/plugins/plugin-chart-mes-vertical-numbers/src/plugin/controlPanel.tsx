@@ -278,7 +278,7 @@ const config: ControlPanelConfig = {
           {
             name: 'row_limit',
             override: {
-              default: 1000,
+              default: 10,
               visibility: ({ controls }: ControlPanelsContainerProps) =>
                 !controls?.server_pagination?.value,
             },
@@ -342,7 +342,7 @@ const config: ControlPanelConfig = {
               label: t('Subheader'),
               renderTrigger: true,
               description: t(
-                'Description text that shows up above your Big Number',
+                'Description text that shows up above your Number',
               ),
             },
           },
@@ -359,9 +359,9 @@ const config: ControlPanelConfig = {
             name: 'content_titles',
             config: {
               type: 'TextControl',
-              label: t('Content_Titles'),
+              label: t('Content Titles'),
               renderTrigger: true,
-              description: t('Description text '),
+              description: t('Labels comma separated a,b,c'),
             },
           },
         ],

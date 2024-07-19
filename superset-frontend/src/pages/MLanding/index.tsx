@@ -16,45 +16,36 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import {
   isFeatureEnabled,
   FeatureFlag,
-  getExtensionsRegistry,
   JsonObject,
   styled,
   t,
 } from '@superset-ui/core';
-import rison from 'rison';
 import { User } from 'src/types/bootstrapTypes';
-import { reject } from 'lodash';
 import {
   dangerouslyGetItemDoNotUse,
   dangerouslySetItemDoNotUse,
-  getItem,
-  LocalStorageKeys,
-  setItem,
 } from 'src/utils/localStorageHelpers';
 import ListViewCard from 'src/components/ListViewCard';
 import withToasts from 'src/components/MessageToasts/withToasts';
-import {
-  CardContainer,
-  createErrorHandler,
-  getRecentActivityObjs,
-  getUserOwnedObjects,
-  loadingCardCount,
-  mq,
-} from 'src/views/CRUD/utils';
+import { CardContainer, loadingCardCount } from 'src/views/CRUD/utils';
 import { AntdSwitch } from 'src/components';
 import getBootstrapData from 'src/utils/getBootstrapData';
 import { TableTab } from 'src/views/CRUD/types';
 import { SubMenuProps } from 'src/features/home/SubMenu';
-import { userHasPermission } from 'src/dashboard/util/permissionUtils';
-import { WelcomePageLastTab } from 'src/features/home/types';
-import { Breadcrumb, Layout, Menu } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import TimeHeader from 'src/features/timeheader/TimeHeader';
+import {
+  BarChartOutlined,
+  FileSearchOutlined,
+  OrderedListOutlined,
+} from '@ant-design/icons';
+import Title from 'antd/lib/typography/Title';
+import { Layout, Menu } from 'antd';
 
 interface WelcomeProps {
   user: User;
@@ -72,8 +63,6 @@ interface LoadingProps {
   cover?: boolean;
 }
 
-const DEFAULT_TAB_ARR = ['2', '3'];
-
 const WelcomeNav = styled.div`
   ${({ theme }) => `
     .switch {
@@ -90,11 +79,10 @@ const WelcomeNav = styled.div`
 `;
 
 const LogoContainer = styled.div`
+  text-align: left;
+  padding: 0 8px;
   ${({ theme }) => `
 .menu-brand {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
         min-height: 50px;
         padding: ${theme.gridUnit}px
           ${theme.gridUnit * 2}px
@@ -124,12 +112,11 @@ export const LoadingCards = ({ cover }: LoadingProps) => (
   </CardContainer>
 );
 
-function Welcome({ user, addDangerToast }: WelcomeProps) {
-  const canReadSavedQueries = userHasPermission(user, 'SavedQuery', 'can_read');
+function Landing({ user }: WelcomeProps) {
   const userid = user.userId;
   const id = userid!.toString(); // confident that user is not a guest user
-  const params = rison.encode({ page_size: 6 });
-  const recent = `/api/v1/log/recent_activity/?q=${params}`;
+  // const params = rison.encode({ page_size: 6 });
+  // const recent = `/api/v1/log/recent_activity/?q=${params}`;
   const userKey = dangerouslyGetItemDoNotUse(id, null);
   let defaultChecked = false;
   const isThumbnailsEnabled = isFeatureEnabled(FeatureFlag.Thumbnails);
@@ -138,143 +125,11 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
       userKey?.thumbnails === undefined ? true : userKey?.thumbnails;
   }
   const [checked, setChecked] = useState(defaultChecked);
-  const [activityData, setActivityData] = useState<ActivityData | null>(null);
-  const [chartData, setChartData] = useState<Array<object> | null>(null);
-  const [queryData, setQueryData] = useState<Array<object> | null>(null);
-  const [dashboardData, setDashboardData] = useState<Array<object> | null>(
-    null,
-  );
-  const collapseState = getItem(LocalStorageKeys.HomepageCollapseState, []);
-  const [activeState, setActiveState] = useState<Array<string>>(collapseState);
-
-  const handleCollapse = (state: Array<string>) => {
-    setActiveState(state);
-    setItem(LocalStorageKeys.HomepageCollapseState, state);
-  };
-
-  const [otherTabTitle, otherTabFilters] = useMemo(() => {
-    const lastTab = bootstrapData.common?.conf
-      .WELCOME_PAGE_LAST_TAB as WelcomePageLastTab;
-    const [customTitle, customFilter] = Array.isArray(lastTab)
-      ? lastTab
-      : [undefined, undefined];
-    if (customTitle && customFilter) {
-      return [t(customTitle), customFilter];
-    }
-    if (lastTab === 'all') {
-      return [t('All'), []];
-    }
-    return [
-      t('Examples'),
-      [
-        {
-          col: 'created_by',
-          opr: 'rel_o_m',
-          value: 0,
-        },
-      ],
-    ];
-  }, []);
-
-  useEffect(() => {
-    if (!otherTabFilters) {
-      return;
-    }
-    setActiveState(collapseState.length > 0 ? collapseState : DEFAULT_TAB_ARR);
-    getRecentActivityObjs(user.userId!, recent, addDangerToast, otherTabFilters)
-      .then(res => {
-        const data: ActivityData | null = {};
-        data[TableTab.Other] = res.other;
-        if (res.viewed) {
-          const filtered = reject(res.viewed, ['item_url', null]).map(r => r);
-          data[TableTab.Viewed] = filtered;
-        }
-        setActivityData(activityData => ({ ...activityData, ...data }));
-      })
-      .catch(
-        createErrorHandler((errMsg: unknown) => {
-          setActivityData(activityData => ({
-            ...activityData,
-            [TableTab.Viewed]: [],
-          }));
-          addDangerToast(
-            t('There was an issue fetching your recent activity: %s', errMsg),
-          );
-        }),
-      );
-
-    // Sets other activity data in parallel with recents api call
-    const ownSavedQueryFilters = [
-      {
-        col: 'created_by',
-        opr: 'rel_o_m',
-        value: `${id}`,
-      },
-    ];
-    Promise.all([
-      getUserOwnedObjects(id, 'dashboard')
-        .then(r => {
-          setDashboardData(r);
-          return Promise.resolve();
-        })
-        .catch((err: unknown) => {
-          setDashboardData([]);
-          addDangerToast(
-            t('There was an issue fetching your dashboards: %s', err),
-          );
-          return Promise.resolve();
-        }),
-      getUserOwnedObjects(id, 'chart')
-        .then(r => {
-          setChartData(r);
-          return Promise.resolve();
-        })
-        .catch((err: unknown) => {
-          setChartData([]);
-          addDangerToast(t('There was an issue fetching your chart: %s', err));
-          return Promise.resolve();
-        }),
-      canReadSavedQueries
-        ? getUserOwnedObjects(id, 'saved_query', ownSavedQueryFilters)
-            .then(r => {
-              setQueryData(r);
-              return Promise.resolve();
-            })
-            .catch((err: unknown) => {
-              setQueryData([]);
-              addDangerToast(
-                t('There was an issue fetching your saved queries: %s', err),
-              );
-              return Promise.resolve();
-            })
-        : Promise.resolve(),
-    ]);
-  }, [otherTabFilters]);
 
   const handleToggle = () => {
     setChecked(!checked);
     dangerouslySetItemDoNotUse(id, { thumbnails: !checked });
   };
-
-  useEffect(() => {
-    if (!collapseState && queryData?.length) {
-      setActiveState(activeState => [...activeState, '4']);
-    }
-    setActivityData(activityData => ({
-      ...activityData,
-      Created: [
-        ...(chartData?.slice(0, 3) || []),
-        ...(dashboardData?.slice(0, 3) || []),
-        ...(queryData?.slice(0, 3) || []),
-      ],
-    }));
-  }, [chartData, queryData, dashboardData]);
-
-  useEffect(() => {
-    if (!collapseState && activityData?.[TableTab.Viewed]?.length) {
-      setActiveState(activeState => ['1', ...activeState]);
-    }
-  }, [activityData]);
 
   const menuData: SubMenuProps = {
     activeChild: 'Landing',
@@ -298,8 +153,6 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
     ];
   }
 
-  const idOrSlug = '5';
-
   return (
     <>
       <Layout
@@ -315,13 +168,16 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
               src={bootstrapData.common.menu_data.brand.icon}
               alt={bootstrapData.common.menu_data.brand.alt}
             />
+            <Title level={5} type="warning">
+              Operation Inteligance
+            </Title>
           </LogoContainer>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item>item 1</Menu.Item>
-            <Menu.Item>item 2</Menu.Item>
-            <Menu.SubMenu title="sub menu">
-              <Menu.Item>item 3</Menu.Item>
-            </Menu.SubMenu>
+            <Menu.Item isSelected icon={<BarChartOutlined />} key={1}>
+              Operations
+            </Menu.Item>
+            <Menu.Item icon={<OrderedListOutlined />}>Order</Menu.Item>
+            <Menu.Item icon={<FileSearchOutlined />}>Reports</Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
@@ -331,14 +187,6 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
               margin: '0 16px',
             }}
           >
-            <Breadcrumb
-              style={{
-                margin: '16px 0',
-              }}
-            >
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
             <div
               className="site-layout-background"
               style={{
@@ -354,7 +202,7 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
               textAlign: 'center',
             }}
           >
-            Ant Design ©2018 Created by Ant UED
+            Ant Design ©2024 Created by Qbitum
           </Footer>
         </Layout>
       </Layout>
@@ -362,4 +210,4 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
   );
 }
 
-export default withToasts(Welcome);
+export default withToasts(Landing);
