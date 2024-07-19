@@ -141,7 +141,6 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
       colorThresholdFormatters,
       fontColor,
     } = this.props;
-    // console.log("currny");
 
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
@@ -149,7 +148,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
-
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     let numberColor;
     if (hasThresholdColorFormatter) {
       colorThresholdFormatters!.forEach(formatter => {
@@ -181,7 +180,6 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
         this.props.onContextMenu(e.nativeEvent.clientX, e.nativeEvent.clientY);
       }
     };
-    console.log('ghjgjhgjg');
 
     return (
       <div
@@ -199,8 +197,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   }
 
   renderTitle(maxHeight: number) {
-    const { bigNumber, subHeader, width, bigNumberFallback } =
-      this.props;
+    const { bigNumber, subHeader, width, bigNumberFallback } = this.props;
     let fontSize = 0;
     // console.log(fontColor,"this.props");
     // console.log(subHeader,bigNumber,"git");

@@ -39,7 +39,6 @@ export type BigNumberTotalFormData = QueryFormData & {
   forceTimestampFormatting?: boolean;
 };
 
-
 export type TimeSeriesDatum = [number, number | null];
 
 export type EventHandlers = Record<string, { (props: any): void }>;

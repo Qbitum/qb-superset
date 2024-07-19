@@ -46,9 +46,9 @@
  * function during development with hot reloading, changes won't
  * be seen until restarting the development server.
  */
-
-import { ChartProps, getMetricLabel } from '@superset-ui/core';
-import { parseMetricValue } from '../utils';
+// , getMetricLabel
+import { ChartProps } from '@superset-ui/core';
+// import { parseMetricValue } from '../utils';
 // import { title } from 'process';
 
 export default function transformProps(chartProps: ChartProps) {
@@ -60,20 +60,18 @@ export default function transformProps(chartProps: ChartProps) {
     numberText,
     numberFontSize,
     subheader = '',
-    subheaderFontSize=12,
-    metric = 'value',
+    subheaderFontSize = 12,
+    // metric = 'value',
     contentTitles = ['Title 1', 'Title 2', 'Title 3'],
-    contentTitle1FontSize
+    contentTitle1FontSize,
   } = formData;
-  const metricName = getMetricLabel(metric);
+  // const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
 
   console.log('formData via TransformProps.ts', formData);
   const { data = [] } = queriesData[0];
-  const bigNumber =
-    data.length === 0 ? null : parseMetricValue(data[0][metricName]);
 
-  const arrayDefault = [{ data:0},{data:0},{data:0}]; // TODO: trasform query result to component input
+  const arrayDefault = [{ data: 0 }, { data: 0 }, { data: 0 }]; // TODO: trasform query result to component input
   // const values = data.length === 0 ? null : parseMetricValue(data[0][metricName]);
   const values = arrayDefault;
   console.log(data);
@@ -92,6 +90,6 @@ export default function transformProps(chartProps: ChartProps) {
     subHeader: formattedSubheader,
     subheaderFontSize,
     contentTitles,
-    contentTitle1FontSize
+    contentTitle1FontSize,
   };
 }

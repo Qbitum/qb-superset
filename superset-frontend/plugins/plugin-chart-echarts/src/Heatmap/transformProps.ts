@@ -175,9 +175,15 @@ export default function transformProps(
           yAxisLabel,
           metricLabel,
         );
-        const x = params.value[0];
-        const y = params.value[1];
-        const value = params.value[2];
+        let x: any, y: any, value: any;
+        if (Array.isArray(params.value)) {
+          x = params.value[0];
+          y = params.value[1];
+          value = params.value[2];
+        } else {
+          console.error('params.value is not an array');
+          return ''; // Return an empty string or some default tooltip content
+        }
         const formattedX = xAxisFormatter(x);
         const formattedY = yAxisFormatter(y);
         const formattedValue = valueFormatter(value);

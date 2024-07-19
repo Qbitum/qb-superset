@@ -63,6 +63,7 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     let numberColor;
     if (hasThresholdColorFormatter) {
       colorThresholdFormatters!.forEach(formatter => {
@@ -76,6 +77,7 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     } else {
       numberColor = 'white';
     }
+    /* eslint-disable @typescript-eslint/no-unused-vars */
 
     const container = this.createTemporaryContainer();
     document.body.append(container);
@@ -110,26 +112,13 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
   }
 
   renderSubheader(maxHeight: number) {
-    // , bigNumberFallback
     const { subHeader, width } = this.props;
-    let fontSize = 0;
-    // console.log(this.props, 'this.props');
-    // console.log(subHeader, bigNumber, 'git');
-
-    // const NO_DATA_OR_HASNT_LANDED = t(
-    //   'No data after filtering or data is NULL for the latest time record',
-    // );
-    // const NO_DATA = t(
-    //   'Try applying different filters or ensuring your datasource has data',
-    // );
     const text = subHeader;
-    // if (bigNumber === null) {
-    //   text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
-    // }
+
     if (text) {
       const container = this.createTemporaryContainer();
       document.body.append(container);
-      fontSize = computeMaxFontSize({
+      const fontSize = computeMaxFontSize({
         text,
         maxWidth: width,
         maxHeight,
@@ -139,10 +128,7 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
       container.remove();
 
       return (
-        <div
-          className="subheader-line"
-          
-        >
+        <div className="subheader-line" style={{ fontSize }}>
           {text}
         </div>
       );
@@ -150,19 +136,11 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     return null;
   }
 
-  renderContentTitle(maxHeight: number, text:string) {
-    const {  width } = this.props;
+  renderContentTitle(maxHeight: number, text: string) {
+    const { width } = this.props;
     let fontSize = 0;
     // console.log(this.props, 'this.props');
     // console.log(contentTitle1, bigNumber, 'git');
-
-    const NO_DATA_OR_HASNT_LANDED = t(
-      'No data after filtering or data is NULL for the latest time record',
-    );
-    const NO_DATA = t(
-      'Try applying different filters or ensuring your datasource has data',
-    );
-   
 
     if (text) {
       const container = this.createTemporaryContainer();
@@ -202,20 +180,20 @@ class MESVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     } = this.props;
     const className = this.getClassName();
 
-    console.log(values)
+    console.log(values);
     return (
       <>
         <div className={className} style={{ height }}>
-          {/* {this.renderFallbackWarning()} */}
           {this.renderSubheader(Math.ceil(subheaderFontSize * height))}
-          {values?.map((val, i) => {
-            return <div className="content-container">
+          {values?.map((val, i) => (
+            <div className="content-container">
               {this.renderContentTitle(
-                Math.ceil(contentTitle1FontSize * height), contentTitles[i]
+                Math.ceil(contentTitle1FontSize * height),
+                contentTitles[i],
               )}
               {this.renderNumber(Math.ceil(numberFontSize * height), val.data)}
-            </div>;
-          })}
+            </div>
+          ))}
           <data />
         </div>
       </>
