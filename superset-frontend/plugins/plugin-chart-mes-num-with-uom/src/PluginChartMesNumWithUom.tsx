@@ -38,11 +38,8 @@ const defaultNumberFormatter = getNumberFormatter();
 
 const PROPORTION = {
   // text size: proportion of the chart container sans trendline
-  KICKER: 0.1,
   HEADER: 0.3,
   SUBHEADER: 0.125,
-  // trendline size: proportion of the whole chart container
-  TRENDLINE: 0.3,
 };
 
 class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps> {
@@ -51,7 +48,6 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     headerFormatter: defaultNumberFormatter,
     formatTime: smartDateVerboseFormatter,
     headerFontSize: PROPORTION.HEADER,
-    kickerFontSize: PROPORTION.KICKER,
     mainColor: BRAND_COLOR,
     showTimestamp: false,
     showTrendLine: false,
@@ -78,70 +74,19 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     return container;
   }
 
-  renderFallbackWarning() {
-    const { bigNumberFallback, formatTime, showTimestamp } = this.props;
-    if (!formatTime || !bigNumberFallback || showTimestamp) return null;
-    return (
-      <span
-        className="alert alert-warning"
-        role="alert"
-        title={t(
-          `Last available value seen on %s`,
-          formatTime(bigNumberFallback[0]),
-        )}
-      >
-        {t('Not up to date')}
-      </span>
-    );
-  }
-
-  renderKicker(maxHeight: number) {
-    const { timestamp, showTimestamp, formatTime, width } = this.props;
-    if (
-      !formatTime ||
-      !showTimestamp ||
-      typeof timestamp === 'string' ||
-      typeof timestamp === 'boolean'
-    )
-      return null;
-
-    const text = timestamp === null ? '' : formatTime(timestamp);
-
-    const container = this.createTemporaryContainer();
-    document.body.append(container);
-    const fontSize = computeMaxFontSize({
-      text,
-      maxWidth: width,
-      maxHeight,
-      className: 'kicker',
-      container,
-    });
-    container.remove();
-
-    return (
-      <div
-        className="kicker"
-        style={{
-          fontSize,
-          height: maxHeight,
-        }}
-      >
-        {text}
-      </div>
-    );
-  }
-
   renderValue(maxHeight: number) {
-    // console.log(maxHeight,"bhbhbhbhb");
     
     const { bigNumber, headerFormatter, width, colorThresholdFormatters,fontColor,symbolSelect } =
       this.props;
       
-
     // @ts-ignore
-    const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber)+symbolSelect;
-    // console.log("y",symbolSelect);
+    const text = bigNumber === null ? t('No data') : (symbolSelect!=undefined ?headerFormatter (bigNumber)+symbolSelect : headerFormatter (bigNumber));
+
+    console.log("sybnj", text);
+    console.log("s", bigNumber);
+    console.log("bnj", symbolSelect);
     
+
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
@@ -195,8 +140,6 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   renderTitle(maxHeight: number) {
     const { bigNumber, subHeader, width, bigNumberFallback } = this.props;
     let fontSize = 0;
-    // console.log(fontColor,"this.props");
-    // console.log(subHeader,bigNumber,"git");
 
     const NO_DATA_OR_HASNT_LANDED = t(
       'No data after filtering or data is NULL for the latest time record',
@@ -218,10 +161,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
         className: 'subheader-line',
         container,
       });
-      // fontColor;
       container.remove();
-
-      // console.log("font color", fontColor);
 
       return (
         <div
@@ -231,7 +171,6 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
             height: maxHeight,
           }}
         >
-          {/* {fontColor} */}
           {text}
         </div>
       );
@@ -239,100 +178,17 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     return null;
   }
 
-  // renderTrendline(maxHeight: number) {
-  //   const { width, trendLineData, echartOptions, refs } = this.props;
-
-  //   // if can't find any non-null values, no point rendering the trendline
-  //   if (!trendLineData?.some(d => d[1] !== null)) {
-  //     return null;
-  //   }
-
-  //   const eventHandlers: EventHandlers = {
-  //     contextmenu: eventParams => {
-  //       if (this.props.onContextMenu) {
-  //         eventParams.event.stop();
-  //         const { data } = eventParams;
-  //         if (data) {
-  //           const pointerEvent = eventParams.event.event;
-  //           const drillToDetailFilters: BinaryQueryObjectFilterClause[] = [];
-  //           drillToDetailFilters.push({
-  //             col: this.props.formData?.granularitySqla,
-  //             grain: this.props.formData?.timeGrainSqla,
-  //             op: '==',
-  //             val: data[0],
-  //             formattedVal: this.props.xValueFormatter?.(data[0]),
-  //           });
-  //           this.props.onContextMenu(
-  //             pointerEvent.clientX,
-  //             pointerEvent.clientY,
-  //             { drillToDetail: drillToDetailFilters },
-  //           );
-  //         }
-  //       }
-  //     },
-  //   };
-
-  //   return (
-  //     echartOptions && (
-  //       <Echart
-  //         refs={refs}
-  //         width={Math.floor(width)}
-  //         height={maxHeight}
-  //         echartOptions={echartOptions}
-  //         eventHandlers={eventHandlers}
-  //       />
-  //     )
-  //   );
-  // }
-
   render() {
     const {
-      showTrendLine,
       height,
-      kickerFontSize,
       headerFontSize,
       subheaderFontSize,
     } = this.props;
     const className = this.getClassName();
-    // console.log(subheaderFontSize,"subheaderFontSize");
-
-    if (showTrendLine) {
-      const chartHeight = Math.floor(PROPORTION.TRENDLINE * height);
-      const allTextHeight = height - chartHeight;
-
-      return (
-        <div className={className}>
-          <div className="text-container" style={{ height: allTextHeight }}>
-            {this.renderFallbackWarning()}
-            {this.renderKicker(
-              Math.ceil(
-                (kickerFontSize || 0) * (1 - PROPORTION.TRENDLINE) * height,
-              ),
-            )}
-            {this.renderValue(
-              Math.ceil(headerFontSize * (1 - PROPORTION.TRENDLINE) * height),
-            )}
-            {this.renderTitle(
-              Math.ceil(
-                subheaderFontSize * (1 - PROPORTION.TRENDLINE) * height,
-              ),
-            )}
-          </div>
-          {/* {this.renderTrendline(chartHeight)} */}
-        </div>
-      );
-    }
-    // console.log("hiii", subheaderFontSize * height);
-    // console.log("hiii");
 
     return (
       <>
-        {/* <div className='kavindya'>
-        kjhkj
-        </div> */}
         <div className={className} style={{ height }}>
-          {this.renderFallbackWarning()}
-          {this.renderKicker((kickerFontSize || 0) * height)}
           {this.renderTitle(Math.ceil(subheaderFontSize * height))}
           {this.renderValue(Math.ceil(headerFontSize * height))}
         </div>
@@ -340,8 +196,6 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     );
   }
 }
-// background-color: gray;
-// color: white;
 
 export default styled(TvDashboard)`
   ${({ theme }) => `
@@ -388,9 +242,10 @@ export default styled(TvDashboard)`
     }
 
     .subheader-line {
-      color: ${theme.tvDb.fontColor.white};
       line-height: 1em;
       padding-bottom: 0;
+      color: ${theme.tvDb.fontColor.white};
+      font-size: 2em;
     }
 
     &.is-fallback-value {

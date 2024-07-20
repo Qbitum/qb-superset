@@ -19,9 +19,7 @@
 import { Behavior, ChartMetadata, ChartPlugin, t } from '@superset-ui/core';
 import transformProps from './transformProps';
 import thumbnail from './images/mes-table.png';
-import example1 from './images/Table.jpg';
-import example2 from './images/Table2.jpg';
-import example3 from './images/Table3.jpg';
+import example1 from './images/mes-table.png';
 import controlPanel from './controlPanel';
 import buildQuery from './buildQuery';
 import { TableChartFormData, TableChartProps } from './types';
@@ -38,18 +36,11 @@ const metadata = new ChartMetadata({
   ],
   canBeAnnotationTypes: ['EVENT', 'INTERVAL'],
   description: t(
-    'Classic row-by-column spreadsheet like view of a dataset. Use tables to showcase a view into the underlying data or to show aggregated metrics.',
+    'This is the MES table component',
   ),
-  exampleGallery: [{ url: example1 }, { url: example2 }, { url: example3 }],
   name: t('MES Table'),
-  tags: [
-    t('Additive'),
-    t('Business'),
-    t('Pattern'),
-    t('Popular'),
-    t('Report'),
-    t('Sequential'),
-    t('Tabular'),
+  exampleGallery: [
+    { url: example1,  caption: t('MES Table') }
   ],
   thumbnail,
   category: t('MES-TV'),

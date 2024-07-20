@@ -41,13 +41,10 @@ const defaultNumberFormatter = getNumberFormatter();
 
 const PROPORTION = {
   // text size: proportion of the chart container sans trendline
-  KICKER: 0.1,
   HEADER: 0.3,
   SUBHEADER: 0.125,
   SUBTITLE: 0.125,
   SUBVALUE: 0.125,
-  // trendline size: proportion of the whole chart container
-  TRENDLINE: 0.3,
 };
 
 class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> {
@@ -56,7 +53,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     headerFormatter: defaultNumberFormatter,
     formatTime: smartDateVerboseFormatter,
     headerFontSize: PROPORTION.HEADER,
-    kickerFontSize: PROPORTION.KICKER,
     mainColor: BRAND_COLOR,
     showTimestamp: false,
     showTrendLine: false,
@@ -88,12 +84,9 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderTitle(maxHeight: number) {
-    // console.log(maxHeight, "title");
     
     const { subHeader, width, fontColor } = this.props;
     let fontSize = 0;
-    // console.log(fontColor,"this.props");
-    // console.log(subHeader,bigNumber,"git");
 
     let text = subHeader;
   
@@ -109,8 +102,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       });
       fontColor
       container.remove();
-
-      // console.log("font color", fontColor);
 
       return (
         <div
@@ -128,15 +119,11 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderNoOfColumns(maxHeight: number) {
-    // console.log(maxHeight,"bhbhbhbhb");
     
     const { bigNumber, headerFormatter, width, colorThresholdFormatters,fontColor } = this.props;
       
-// console.log("noofColums",noOfColumns);
-
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
-    // console.log("y",text);
     
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
@@ -284,11 +271,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     } = this.props;
     
     const className = this.getClassName();
-
-    // console.log(noOfColumns,"subheaderFontSize");
-
-      const chartHeight = Math.floor(PROPORTION.TRENDLINE * height);
-      const allTextHeight = height - chartHeight;
       
       // prepare view model
       let viewModel:HozValue[]=[];
@@ -301,16 +283,14 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
           })
         })
       
-      }
-      console.log(viewModel,"viewModel");
-      
+      }   
 
       return (
         <div className={className}>
             {this.renderTitle(
-              Math.ceil(subheaderFontSize * (1 - PROPORTION.TRENDLINE) * height),
+              Math.ceil(subheaderFontSize * (1 - PROPORTION.HEADER) * height),
             )}
-          <div className="text-container" style={{ height: allTextHeight }}>
+          <div className="text-container">
           
           <div className='container'>
             {viewModel.map((dataItem, i) => (
@@ -376,9 +356,10 @@ export default styled(MesHozNumbers)`
     }
 
     .subheader-line {
-      color: white;
       line-height: 1em;
       padding-bottom: 0;
+      color: ${theme.tvDb.fontColor.white};
+      font-size: 2em;
     }
 
     .subvalue-line {

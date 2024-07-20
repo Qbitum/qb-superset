@@ -36,10 +36,10 @@ export default class PluginMesHozNumbers extends ChartPlugin {
    */
   constructor() {
     const metadata = new ChartMetadata({
-      description: 'this is MES Horizontal numbers display',
+      description: 'This is the MES Horizontal numbers component',
       name: t('MES Hoz Numbers'),
       exampleGallery: [
-        { url: example1, caption: t('A Big Number') },
+        { url: example1, caption: t('Horizontal Numbers') },
       ],
       thumbnail,
       category: t('MES-TV'),

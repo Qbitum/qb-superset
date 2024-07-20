@@ -151,18 +151,18 @@ const config: ControlPanelConfig = {
             },
           },
         ],
-        [
-          {
-            name: 'enteredValue',
-            config: {
-              type: 'TextControl',
-              label: t('Value Array'),
-              renderTrigger: true,
-              description: t('Enter multiple sub values, one per line'),
-              default: [],
-            },
-          },
-        ],
+        // [
+        //   {
+        //     name: 'enteredValue',
+        //     config: {
+        //       type: 'TextControl',
+        //       label: t('Value Array'),
+        //       renderTrigger: true,
+        //       description: t('Enter multiple sub values, one per line'),
+        //       default: [],
+        //     },
+        //   },
+        // ],
         [
           {
             name: 'subtitle',
@@ -182,28 +182,28 @@ const config: ControlPanelConfig = {
       label: t('Chart Options'),
       expanded: true,
       controlSetRows: [
-        [
-          {
-            name: 'subheader_font_size',
-            config: {
-              type: 'SelectControl',
-              label: t('Subheader Font Size'),
-              default: 0.1,
-              choices: [
-                // [value, label]
-                [0.1, 'xx-small'],
-                [0.2, 'x-small'],
-                [0.3, 'small'],
-                [0.4, 'medium'],
-                [0.5, 'large'],
-                [0.6, 'x-large'],
-                [0.8, 'xx-large'],
-              ],
-              renderTrigger: true,
-              description: t('The size of your header font'),
-            },
-          },
-        ],
+        // [
+        //   {
+        //     name: 'subheader_font_size',
+        //     config: {
+        //       type: 'SelectControl',
+        //       label: t('Subheader Font Size'),
+        //       default: 0.1,
+        //       choices: [
+        //         // [value, label]
+        //         [0.1, 'xx-small'],
+        //         [0.2, 'x-small'],
+        //         [0.3, 'small'],
+        //         [0.4, 'medium'],
+        //         [0.5, 'large'],
+        //         [0.6, 'x-large'],
+        //         [0.8, 'xx-large'],
+        //       ],
+        //       renderTrigger: true,
+        //       description: t('The size of your header font'),
+        //     },
+        //   },
+        // ],
         [
           {
             name: 'header_font_size',

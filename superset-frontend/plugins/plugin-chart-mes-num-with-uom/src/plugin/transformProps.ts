@@ -73,16 +73,10 @@ export default function transformProps(chartProps: ChartProps,) {
   } = formData;
 
   const metricName = getMetricLabel(metric);
-  const formattedSubheader = subheader.toUpperCase();
-  // console.log(formattedSubheader.toUpperCase(),"lllllll");
-  
-  // const { data = []} = queriesData[0];
+  const formattedSubheader = subheader.toUpperCase();  
   const { data = [], coltypes = [] } = queriesData[0];
   const bigNumber =
     data.length === 0 ? null : parseMetricValue(data[0][metricName]);
-
-  // console.log('formData via TransformProps.ts', formData);
-  console.log('currency', currencyFormat);
 
   const numberFormatter = getValueFormatter(
     metric,

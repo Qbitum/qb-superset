@@ -21,6 +21,10 @@ import buildQuery from './buildQuery';
 import controlPanel from './controlPanel';
 import transformProps from './transformProps';
 import thumbnail from '../images/mes-num-with-uom.png';
+import example1 from '../images/example1.png'
+import example2 from '../images/example2.png'
+import example3 from '../images/example3.png'
+import example4 from '../images/example4.png'
 
 export default class PluginChartTvDashboard extends ChartPlugin {
   /**
@@ -35,9 +39,14 @@ export default class PluginChartTvDashboard extends ChartPlugin {
    */
   constructor() {
     const metadata = new ChartMetadata({
-      description: 'this is a TvDashboard',
+      description: 'This is the MES numbers with uom component',
       name: t('MES Num With Uom'),
-      exampleGallery: [{ url: thumbnail, caption: t('A Big Number') }],
+      exampleGallery: [
+        { url: example1, caption: t('MES Numbers with Uom') },
+        { url: example2, caption: t('MES Numbers with Uom') },
+        { url: example3, caption: t('MES Numbers with Uom') },
+        { url: example4, caption: t('MES Numbers with Uom') },
+      ],
       thumbnail,
       category: t('MES-TV'),
     });

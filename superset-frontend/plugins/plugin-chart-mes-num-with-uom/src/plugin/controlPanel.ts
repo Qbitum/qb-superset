@@ -135,52 +135,34 @@ const config: ControlPanelConfig = {
             },
           },
         ],
-        [
-          {
-            name: 'symbolSelect',
-            config: {
-              type: 'SelectControl',
-              label: t('Symbol'),
-              default: '',
-              choices: [
-                // [value, label]
-                ['', ''],
-                ['%', 'Percentage'],
-                ['X', 'X'],
-              ],
-              renderTrigger: true,
-              description: t('Select symbol'),
-            },
-          },
-        ],
       ],
     },
     {
       label: t('Chart Options'),
       expanded: true,
       controlSetRows: [
-        [
-          {
-            name: 'subheader_font_size',
-            config: {
-              type: 'SelectControl',
-              label: t('Subheader Font Size'),
-              default: 0.4,
-              choices: [
-                // [value, label]
-                [0.1, 'xx-small'],
-                [0.2, 'x-small'],
-                [0.3, 'small'],
-                [0.4, 'medium'],
-                [0.5, 'large'],
-                [0.6, 'x-large'],
-                [0.8, 'xx-large'],
-              ],
-              renderTrigger: true,
-              description: t('The size of your header font'),
-            },
-          },
-        ],
+        // [
+        //   {
+        //     name: 'subheader_font_size',
+        //     config: {
+        //       type: 'SelectControl',
+        //       label: t('Subheader Font Size'),
+        //       default: 0.4,
+        //       choices: [
+        //         // [value, label]
+        //         [0.1, 'xx-small'],
+        //         [0.2, 'x-small'],
+        //         [0.3, 'small'],
+        //         [0.4, 'medium'],
+        //         [0.5, 'large'],
+        //         [0.6, 'x-large'],
+        //         [0.8, 'xx-large'],
+        //       ],
+        //       renderTrigger: true,
+        //       description: t('The size of your header font'),
+        //     },
+        //   },
+        // ],
         [
           {
             name: 'header_font_size',
@@ -217,6 +199,24 @@ const config: ControlPanelConfig = {
         //   },
         // ],
         ['currency_format'],
+        [
+          {
+            name: 'symbolSelect',
+            config: {
+              type: 'SelectControl',
+              label: t('Symbol'),
+              // default: '',
+              choices: [
+                // [value, label]
+                ['', ''],
+                ['%', 'Percentage'],
+                ['X', 'X'],
+              ],
+              renderTrigger: true,
+              description: t('Select symbol'),
+            },
+          },
+        ],
         // [
         //   {
         //     name: 'row_limit',
