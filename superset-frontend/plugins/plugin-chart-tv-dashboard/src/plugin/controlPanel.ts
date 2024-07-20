@@ -135,6 +135,24 @@ const config: ControlPanelConfig = {
             },
           },
         ],
+        [
+          {
+            name: 'symbolSelect',
+            config: {
+              type: 'SelectControl',
+              label: t('Symbol'),
+              default: '',
+              choices: [
+                // [value, label]
+                ['', ''],
+                ['%', 'Percentage'],
+                ['X', 'X'],
+              ],
+              renderTrigger: true,
+              description: t('Select symbol'),
+            },
+          },
+        ],
       ],
     },
     {

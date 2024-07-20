@@ -172,6 +172,7 @@ export type InternalControlType =
   | 'Select'
   | 'Slider'
   | 'Input'
+  | 'SymbolControl'
   | keyof SharedControlComponents; // expanded in `expandControlConfig`
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -561,5 +562,11 @@ export type ControlFormItemSpec<T extends ControlType = ControlType> = {
                 controlType: 'CurrencyControl';
                 value?: Currency;
                 defaultValue?: Currency;
+              }
+            : T extends 'SymbolControl'
+            ? {
+                controlType: 'SymbolControl';
+                value?: Symbol;
+                defaultValue?: Symbol;
               }
             : {});

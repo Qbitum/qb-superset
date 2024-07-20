@@ -39,6 +39,8 @@ import { PluginChartMESVerticalNumbers } from '@superset-ui/plugin-chart-mes-ver
 import { PluginChartMESNumber } from '@superset-ui/plugin-chart-mes-number';
 import { PluginChartMESHeader } from '@superset-ui/plugin-chart-mes-header';
 
+import { PluginMesHozNumbers } from '@superset-ui/plugin-mes-hoz-numbers';
+import TableMesPlugin from '@superset-ui/plugin-mes-table';
 import {
   AreaChartPlugin,
   BarChartPlugin,
@@ -137,6 +139,7 @@ export default class MainPreset extends Preset {
         new RoseChartPlugin().configure({ key: 'rose' }),
         new SankeyChartPlugin().configure({ key: 'sankey' }),
         new TableChartPlugin().configure({ key: 'table' }),
+        new TableMesPlugin().configure({ key: 'table' }),
         new TimePivotChartPlugin().configure({ key: 'time_pivot' }),
         new TimeTableChartPlugin().configure({ key: 'time_table' }),
         new WordCloudChartPlugin().configure({ key: 'word_cloud' }),
@@ -190,6 +193,8 @@ export default class MainPreset extends Preset {
         new PluginChartMESNumber().configure({ key: 'mes-number' }),
         new PluginChartMESHeader().configure({ key: 'mes-header' }),
 
+        new PluginMesHozNumbers().configure({ key: 'mes-hoz-numbers' }),
+        // new PluginMesTable().configure({ key: 'mes-table' }),
         ...experimentalPlugins,
       ],
     });

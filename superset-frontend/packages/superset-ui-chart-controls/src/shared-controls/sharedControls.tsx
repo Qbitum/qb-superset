@@ -310,6 +310,12 @@ const currency_format: SharedControlConfig<'CurrencyControl'> = {
   renderTrigger: true,
 };
 
+const symbols : SharedControlConfig<'SymbolControl'>={
+  type: 'SymbolControl',
+  label: t('Currency format'),
+  renderTrigger: true,
+}
+
 const x_axis_time_format: SharedControlConfig<
   'SelectControl',
   SelectDefaultOption
@@ -400,4 +406,6 @@ export default {
   show_empty_columns,
   temporal_columns_lookup,
   currency_format,
+  symbols,
+  // percentage: '%'
 };

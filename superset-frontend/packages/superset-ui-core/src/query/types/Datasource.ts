@@ -32,6 +32,11 @@ export interface Currency {
   symbolPosition: string;
 }
 
+export interface Symbol {
+  symbol: string;
+  symbolPosition: string;
+}
+
 /**
  * Datasource metadata.
  */
@@ -47,6 +52,9 @@ export interface Datasource {
     [key: string]: string;
   };
   currencyFormats?: {
+    [key: string]: Currency;
+  };
+  symbolFormats?: {
     [key: string]: Currency;
   };
   verboseMap?: {

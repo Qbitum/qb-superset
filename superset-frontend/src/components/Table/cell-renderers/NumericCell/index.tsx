@@ -355,6 +355,10 @@ export enum CurrencyCode {
   ZWL = 'ZWL',
 }
 
+export enum Symbols {
+  PER = '%'
+}
+
 interface NumberOptions {
   /**
    * Style of number to display

@@ -16,10 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { ChartProps, getMetricLabel } from '@superset-ui/core';
-import { parseMetricValue } from '../utils';
+import { ChartProps, formatTime, GenericDataType, getMetricLabel, getValueFormatter, 
+} from '@superset-ui/core';
+import { parseMetricValue } from '../utils'
+export default function transformProps(chartProps: ChartProps,) {
 
-export default function transformProps(chartProps: ChartProps) {
   /**
    * This function is called after a successful response has been
    * received from the chart data endpoint, and is used to transform
@@ -49,7 +50,13 @@ export default function transformProps(chartProps: ChartProps) {
    * function during development with hot reloading, changes won't
    * be seen until restarting the development server.
    */
-  const { width, height, formData, queriesData } = chartProps;
+  const { 
+    width, 
+    height, 
+    formData, 
+    queriesData ,
+    datasource: { currencyFormats = {}, columnFormats = {} },
+  } = chartProps;
 
   const {
     boldText,
@@ -60,18 +67,37 @@ export default function transformProps(chartProps: ChartProps) {
     metric = 'value',
     fontColor,
     currencyFormat,
+    forceTimestampFormatting,
+    yAxisFormat,
+    symbolSelect
   } = formData;
 
   const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
   // console.log(formattedSubheader.toUpperCase(),"lllllll");
-
-  const { data = [] } = queriesData[0];
+  
+  // const { data = []} = queriesData[0];
+  const { data = [], coltypes = [] } = queriesData[0];
   const bigNumber =
     data.length === 0 ? null : parseMetricValue(data[0][metricName]);
 
   // console.log('formData via TransformProps.ts', formData);
   console.log('currency', currencyFormat);
+
+  const numberFormatter = getValueFormatter(
+    metric,
+    currencyFormats,
+    columnFormats,
+    yAxisFormat,
+    currencyFormat,
+  );
+  
+  const headerFormatter =
+    coltypes[0] === GenericDataType.Temporal ||
+    coltypes[0] === GenericDataType.String ||
+    forceTimestampFormatting
+      ? formatTime
+      : numberFormatter;
 
   return {
     width,
@@ -80,10 +106,12 @@ export default function transformProps(chartProps: ChartProps) {
     // and now your control data, manipulated as needed, and passed through as props!
     boldText,
     headerFontSize,
+    headerFormatter,
     headerText,
     subHeader: formattedSubheader,
     subheaderFontSize,
     fontColor,
     currencyFormat,
+    symbolSelect
   };
 }
