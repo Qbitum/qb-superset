@@ -84,7 +84,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderTitle(maxHeight: number) {
-    
     const { subHeader, width, fontColor } = this.props;
     let fontSize = 0;
 
@@ -188,7 +187,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     document.body.append(container);
     const fontSize = computeMaxFontSize({
       text,
-      maxWidth: width - 8, // Decrease 8px for more precise font size
+      maxWidth: width, 
       maxHeight,
       className: 'subvalue-line',
       container
@@ -232,8 +231,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       document.body.append(container);
       fontSize = computeMaxFontSize({
         text,
-        maxWidth: width,
-        maxHeight,
+        maxWidth: width - 12, // Decrease 8px for more precise font size
+        maxHeight:maxHeight - 12,
         className: 'subtitle-line', 
         container,
       });
@@ -271,7 +270,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     } = this.props;
     
     const className = this.getClassName();
-      
+    
       // prepare view model
       let viewModel:HozValue[]=[];
 
@@ -290,16 +289,16 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
             {this.renderTitle(
               Math.ceil(subheaderFontSize * (1 - PROPORTION.HEADER) * height),
             )}
-          <div className="text-container">
-          
-          <div className='container'>
+          <div className="component-body">
+            <div className='block-wrapper'>
             {viewModel.map((dataItem, i) => (
-              <div key={i} style={{ paddingRight: '3em' }}>
+              <div className='num-block' key={i} style={{ paddingRight: '3em' }}>
                 {this.renderSubValue(Math.ceil(subValueFontSize * height),dataItem.data)}
                 {this.renderSubTitle(Math.ceil(subTitleFontSize * height), dataItem.title)}
               </div>
             ))}
             </div>
+          
           </div>
         </div>
       );
@@ -308,82 +307,50 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
 
 export default styled(MesHozNumbers)`
    ${({ theme }) => `
-    font-family: ${theme.typography.families.sansSerif};
-    background-color: black;
-    padding: 4px;
+    font-family: ${theme.tvDb.font.roboto};
+    background-color: ${theme.tvDb.bg.tvDbBg};
+    padding: 16px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-
-    &.no-trendline .subheader-line {
-      padding-bottom: 0.3em;
-    }
-
-    .text-container {
-      display: flex;
-      flex-wrap: wrap; /* Allow wrapping */
-      justify-content: center;
-      align-items: flex-start;
-      
-      .alert {
-        font-size: ${theme.typography.sizes.s};
-        margin: -0.5em 0 0.4em;
-        line-height: 1;
-        padding: ${theme.gridUnit}px;
-        border-radius: ${theme.gridUnit}px;
-      }
-    }
-
-    .container {
-    display: flex;
-    }
-
-    .kicker {
-      line-height: 1em;
-      padding-bottom: 2em;
-    }
-
-    .header-line {
-      position: relative;
-      line-height: 1em;
-      white-space: nowrap;
-      span {
-        position: absolute;
-        bottom: 0;
-      }
-    }
-
+    
     .subheader-line {
       line-height: 1em;
       padding-bottom: 0;
       color: ${theme.tvDb.fontColor.white};
       font-size: 2em;
     }
+    .component-body {
+      padding:${theme.tvDb.component.padding};
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+    }
+    
+    .block-wrapper{
+    display:flex;
+    justify-content: space-around;
+    }
+    .num-block{
+    display: flex;
+    flex-direction:column;
+    }
 
     .subvalue-line {
       position: relative;
       line-height: 1em;
+      font-weight:${theme.tvDb.fontWeights.bold};
       white-space: nowrap;
-      span {
-        position: absolute;
-        bottom: 0;
-      }
     }
 
     .subtitle-line {
       color: white;
       line-height: 1em;
       padding-bottom: 0;
-    }
-
-    &.is-fallback-value {
-      .kicker,
-      .header-line,
-      .subheader-line {
-        opacity: ${theme.opacity.mediumHeavy};
-      }
     }
   `}
 `;

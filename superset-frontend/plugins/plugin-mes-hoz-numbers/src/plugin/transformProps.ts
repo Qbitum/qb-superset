@@ -127,9 +127,6 @@ export default function transformProps(chartProps: ChartProps,) {
     values.push({title:subtitle[0], data:data[0][metricName]});
   }
 
-  console.log("jhjkk", data[0][metricName]);
-  console.log("iotuo", data[1][metricName]);
-
   return {
     width,
     height,
