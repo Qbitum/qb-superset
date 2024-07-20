@@ -34,7 +34,7 @@ import TableChartPlugin from '@superset-ui/plugin-chart-table';
 import { WordCloudChartPlugin } from '@superset-ui/plugin-chart-word-cloud';
 import WorldMapChartPlugin from '@superset-ui/legacy-plugin-chart-world-map';
 import { PluginChartHelloQbitum } from '@superset-ui/plugin-chart-hello-qbitum';
-import { PluginChartTvDashboard } from '@superset-ui/plugin-chart-tv-dashboard';
+import { PluginChartMesNumWithUom } from '@superset-ui/plugin-chart-mes-num-with-uom';
 import { PluginChartMESVerticalNumbers } from '@superset-ui/plugin-chart-mes-vertical-numbers';
 import { PluginChartMESNumber } from '@superset-ui/plugin-chart-mes-number';
 import { PluginChartMESHeader } from '@superset-ui/plugin-chart-mes-header';
@@ -184,9 +184,9 @@ export default class MainPreset extends Preset {
         new HandlebarsChartPlugin().configure({ key: 'handlebars' }),
         new EchartsBubbleChartPlugin().configure({ key: 'bubble_v2' }),
         new PluginChartHelloQbitum().configure({ key: 'qbitum-hello' }),
-        new PluginChartTvDashboard().configure({ key: 'chart-tv-dashboard' }),
+        // new PluginChartTvDashboard().configure({ key: 'chart-tv-dashboard' }),
         // MES TV DASBOARDS
-        new PluginChartTvDashboard().configure({ key: 'chart-tv-dashboard' }),
+        new PluginChartMesNumWithUom().configure({ key: 'chart-tv-dashboard' }),
         new PluginChartMESVerticalNumbers().configure({
           key: 'mes-vertical-numbers',
         }),

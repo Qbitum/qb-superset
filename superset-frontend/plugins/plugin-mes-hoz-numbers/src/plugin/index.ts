@@ -20,8 +20,8 @@ import { t, ChartMetadata, ChartPlugin } from '@superset-ui/core';
 import buildQuery from './buildQuery';
 import controlPanel from './controlPanel';
 import transformProps from './transformProps';
-import thumbnail from '../images/TVDashboard.png';
-import example1 from '../images/TVDashboard.png'
+import thumbnail from '../images/mes-hoz-numbers.png';
+import example1 from '../images/mes-hoz-numbers-example.png'
 
 export default class PluginMesHozNumbers extends ChartPlugin {
   /**
@@ -37,11 +37,12 @@ export default class PluginMesHozNumbers extends ChartPlugin {
   constructor() {
     const metadata = new ChartMetadata({
       description: 'this is MES Horizontal numbers display',
-      name: t('Plugin Mes Hoz Numbers'),
+      name: t('MES Hoz Numbers'),
       exampleGallery: [
         { url: example1, caption: t('A Big Number') },
       ],
       thumbnail,
+      category: t('MES-TV'),
     });
 
     super({

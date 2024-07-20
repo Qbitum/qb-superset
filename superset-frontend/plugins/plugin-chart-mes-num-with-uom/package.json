@@ -1,5 +1,5 @@
 {
-  "name": "plugin-chart-tv-dashboard",
+  "name": "plugin-chart-mes-num-with-uom",
   "version": "0.1.0",
   "description": "this is the very first viz plugin from qbitum",
   "sideEffects": false,

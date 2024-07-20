@@ -20,7 +20,7 @@ import { t, ChartMetadata, ChartPlugin } from '@superset-ui/core';
 import buildQuery from './buildQuery';
 import controlPanel from './controlPanel';
 import transformProps from './transformProps';
-import thumbnail from '../images/TVDashboard.png';
+import thumbnail from '../images/mes-num-with-uom.png';
 
 export default class PluginChartTvDashboard extends ChartPlugin {
   /**
@@ -36,15 +36,16 @@ export default class PluginChartTvDashboard extends ChartPlugin {
   constructor() {
     const metadata = new ChartMetadata({
       description: 'this is a TvDashboard',
-      name: t('Plugin Chart TvDashboard'),
+      name: t('MES Num With Uom'),
       exampleGallery: [{ url: thumbnail, caption: t('A Big Number') }],
       thumbnail,
+      category: t('MES-TV'),
     });
 
     super({
       buildQuery,
       controlPanel,
-      loadChart: () => import('../PluginChartTvDashboard'),
+      loadChart: () => import('../PluginChartMesNumWithUom'),
       metadata,
       transformProps,
     });

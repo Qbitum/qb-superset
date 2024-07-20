@@ -18,7 +18,7 @@
  */
 import { Behavior, ChartMetadata, ChartPlugin, t } from '@superset-ui/core';
 import transformProps from './transformProps';
-import thumbnail from './images/thumbnail.png';
+import thumbnail from './images/mes-table.png';
 import example1 from './images/Table.jpg';
 import example2 from './images/Table2.jpg';
 import example3 from './images/Table3.jpg';
@@ -36,13 +36,12 @@ const metadata = new ChartMetadata({
     Behavior.DrillToDetail,
     Behavior.DrillBy,
   ],
-  category: t('Table kjhkjhkhk'),
   canBeAnnotationTypes: ['EVENT', 'INTERVAL'],
   description: t(
     'Classic row-by-column spreadsheet like view of a dataset. Use tables to showcase a view into the underlying data or to show aggregated metrics.',
   ),
   exampleGallery: [{ url: example1 }, { url: example2 }, { url: example3 }],
-  name: t('Table'),
+  name: t('MES Table'),
   tags: [
     t('Additive'),
     t('Business'),
@@ -53,6 +52,7 @@ const metadata = new ChartMetadata({
     t('Tabular'),
   ],
   thumbnail,
+  category: t('MES-TV'),
 });
 
 export default class TableChartPlugin extends ChartPlugin<
