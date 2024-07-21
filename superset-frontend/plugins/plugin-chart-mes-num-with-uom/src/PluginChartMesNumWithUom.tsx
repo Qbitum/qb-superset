@@ -80,12 +80,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
       this.props;
       
     // @ts-ignore
-    const text = bigNumber === null ? t('No data') : (symbolSelect!=undefined ?headerFormatter (bigNumber)+symbolSelect : headerFormatter (bigNumber));
-
-    console.log("sybnj", text);
-    console.log("s", bigNumber);
-    console.log("bnj", symbolSelect);
-    
+    const text = bigNumber === null ? t('No data') : (symbolSelect!=undefined ?headerFormatter (bigNumber)+symbolSelect : headerFormatter (bigNumber));  
 
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
@@ -199,45 +194,31 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
 
 export default styled(TvDashboard)`
   ${({ theme }) => `
-    font-family: ${theme.typography.families.sansSerif};
-    background-color: ${theme.tvDb.bg.tvDbBg};
-    padding: 4px;
+    font-family: ${theme.tvDb.font.roboto};
+    font-style: ${theme.tvDb.fontStyles.normal};
+    font-weight:${theme.tvDb.fontWeights.normal};
+    padding: 16pt;
+    align-items: flex-start;
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-
-    &.no-trendline .subheader-line {
-      padding-bottom: 0.3em;
-    }
-
-    .text-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      .alert {
-        font-size: ${theme.typography.sizes.s};
-        margin: -0.5em 0 0.4em;
-        line-height: 1;
-        padding: ${theme.gridUnit}px;
-        border-radius: ${theme.gridUnit}px;
-      }
-    }
-
-    .kicker {
-      line-height: 1em;
-      padding-bottom: 2em;
-    }
+    background-color: ${theme.tvDb.bg.tvDbBg};
 
     .header-line {
       position: relative;
       line-height: 1em;
       white-space: nowrap;
+      padding-top: 50pt;
+      padding-left: 100pt;
+      text-edge: cap;
+      font-family: ${theme.tvDb.font.roboto};
+      font-size: 200px;
+      font-style: ${theme.tvDb.fontStyles.normal};
+      font-weight:${theme.tvDb.fontWeights.bold};
       span {
         position: absolute;
-        bottom: 0;
+        bottom: 0; 
+
       }
     }
 

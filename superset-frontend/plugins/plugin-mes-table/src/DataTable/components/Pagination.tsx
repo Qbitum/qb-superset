@@ -88,34 +88,35 @@ export default React.memo(
       maxPageItemCount,
     );
     return (
-      <div ref={ref} className="dt-pagination" style={style}>
-        <ul className="pagination pagination-sm">
-          {pageItems.map(item =>
-            typeof item === 'number' ? (
-              // actual page number
-              <li
-                key={item}
-                className={currentPage === item ? 'active' : undefined}
-              >
-                <a
-                  href={`#page-${item}`}
-                  role="button"
-                  onClick={e => {
-                    e.preventDefault();
-                    onPageChange(item);
-                  }}
-                >
-                  {item + 1}
-                </a>
-              </li>
-            ) : (
-              <li key={item} className="dt-pagination-ellipsis">
-                <span>…</span>
-              </li>
-            ),
-          )}
-        </ul>
-      </div>
+      <div></div>
+      // <div ref={ref} className="dt-pagination" style={style}>
+      //   <ul className="pagination pagination-sm">
+      //     {pageItems.map(item =>
+      //       typeof item === 'number' ? (
+      //         // actual page number
+      //         <li
+      //           key={item}
+      //           className={currentPage === item ? 'active' : undefined}
+      //         >
+      //           <a
+      //             href={`#page-${item}`}
+      //             role="button"
+      //             onClick={e => {
+      //               e.preventDefault();
+      //               onPageChange(item);
+      //             }}
+      //           >
+      //             {item + 1}
+      //           </a>
+      //         </li>
+      //       ) : (
+      //         <li key={item} className="dt-pagination-ellipsis">
+      //           <span>…</span>
+      //         </li>
+      //       ),
+      //     )}
+      //   </ul>
+      // </div>
     );
   }),
 );

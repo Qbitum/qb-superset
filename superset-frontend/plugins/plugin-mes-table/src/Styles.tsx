@@ -26,26 +26,29 @@ export default styled.div`
       min-width: auto;
       max-width: none;
       margin: 0;
+      background: ${theme.tvDb.bg.tvDbBg};
     }
 
     th,
     td {
       min-width: 4.3em;
+      color: white;
+      background: ${theme.tvDb.bg.tvDbBg};
+      text-align: right;
     }
 
     thead > tr > th {
       padding-right: 0;
       position: relative;
-      background: ${theme.colors.grayscale.light5};
-      text-align: left;
+      // text-align: left;
     }
     th svg {
-      color: ${theme.colors.grayscale.light2};
+      // color: white;
       margin: ${theme.gridUnit / 2}px;
     }
-    th.is-sorted svg {
-      color: ${theme.colors.grayscale.base};
-    }
+    // th.is-sorted svg {
+    //   color: ${theme.colors.grayscale.base};
+    // }
     .table > tbody > tr:first-of-type > td,
     .table > tbody > tr:first-of-type > th {
       border-top: 0;
@@ -64,19 +67,19 @@ export default styled.div`
     .dt-totals {
       font-weight: ${theme.typography.weights.bold};
     }
-    .dt-is-null {
-      color: ${theme.colors.grayscale.light1};
-    }
+    // .dt-is-null {
+    //   color: ${theme.colors.grayscale.light1};
+    // }
     td.dt-is-filter {
       cursor: pointer;
     }
-    td.dt-is-filter:hover {
-      background-color: ${theme.colors.secondary.light4};
-    }
-    td.dt-is-active-filter,
-    td.dt-is-active-filter:hover {
-      background-color: ${theme.colors.secondary.light3};
-    }
+    // td.dt-is-filter:hover {
+    //   background-color: ${theme.colors.secondary.light4};
+    // }
+    // td.dt-is-active-filter,
+    // td.dt-is-active-filter:hover {
+    //   background-color: ${theme.colors.secondary.light3};
+    // }
 
     .dt-global-filter {
       float: right;

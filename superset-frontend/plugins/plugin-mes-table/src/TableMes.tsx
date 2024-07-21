@@ -182,8 +182,8 @@ function SelectPageSize({
 }: SelectPageSizeRendererProps) {
   return (
     <span className="dt-select-page-size form-inline">
-      {t('page_size.show')}{' '}
-      <select
+      {/* {t('page_size.show')}{' '} */}
+      {/* <select
         className="form-control input-sm"
         value={current}
         onBlur={() => {}}
@@ -201,8 +201,8 @@ function SelectPageSize({
             </option>
           );
         })}
-      </select>{' '}
-      {t('page_size.entries')}
+      </select>{' '} */}
+      {/* {t('page_size.entries')} */}
     </span>
   );
 }
@@ -597,13 +597,13 @@ export default function TableChart<D extends DataRecord = DataRecord>(
         },
         Header: ({ column: col, onClick, style, onDragStart, onDrop }) => (
           <th
-            id={`header-${column.key}`}
-            title={t('Shift + Click to sort by multiple columns')}
-            className={[className, col.isSorted ? 'is-sorted' : ''].join(' ')}
-            style={{
-              ...sharedStyle,
-              ...style,
-            }}
+            // id={`header-${column.key}`}
+            // title={t('Shift + Click to sort by multiple columns')}
+            // className={[className, col.isSorted ? 'is-sorted' : ''].join(' ')}
+            // style={{
+            //   ...sharedStyle,
+            //   ...style,
+            // }}
             onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
               // programatically sort column on keypress
               if (Object.values(ACTION_KEYS).includes(e.key)) {
@@ -611,7 +611,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
               }
             }}
             role="columnheader button"
-            onClick={onClick}
+            // onClick={onClick}
             data-column-name={col.id}
             {...(allowRearrangeColumns && {
               draggable: 'true',
@@ -640,7 +640,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
               }}
             >
               <span data-column-name={col.id}>{label}</span>
-              <SortIcon column={col} />
+              {/* <SortIcon column={col} /> */}
             </div>
           </th>
         ),
