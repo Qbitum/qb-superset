@@ -171,6 +171,7 @@ const defaultTheme = {
     fontColor: {
       white: '#FFFFFF',
       gray80: '#8A98AB',
+      black: '#000000',
     },
     font: {
       roboto: `'Roboto', Helvetica, Arial`,
@@ -187,6 +188,14 @@ const defaultTheme = {
 
     component: {
       padding: '2px',
+    },
+    headerColors: {
+      darkPurplebg: '#6C1069',
+      lightPurplebg: '#D1D3FA',
+      lightOrangebg: '#FFE0BC',
+      darkGraybg: '#30384C',
+      lightGraybg: '#8A98AB',
+      greenbg: '#47BC00',
     },
   },
 };
