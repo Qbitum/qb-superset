@@ -154,6 +154,7 @@ export default function transformProps(
       label: {
         show: showValues,
         formatter: (params: CallbackDataParams) =>
+          // @ts-ignore
           valueFormatter(params.value[2]),
       },
     },

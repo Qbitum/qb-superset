@@ -184,7 +184,7 @@ const defaultTheme = {
     fontStyles: {
       normal: 'normal',
     },
-    
+
     component: {
       padding: '2px',
     },

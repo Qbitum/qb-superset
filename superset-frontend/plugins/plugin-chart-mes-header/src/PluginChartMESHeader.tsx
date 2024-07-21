@@ -43,7 +43,6 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
 
   // Extract values from the data
   const values = data.length > 0 ? Object.values(data[0]) : [];
-
   return (
     <Styles
       ref={rootElem}

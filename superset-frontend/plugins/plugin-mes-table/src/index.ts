@@ -18,8 +18,7 @@
  */
 import { Behavior, ChartMetadata, ChartPlugin, t } from '@superset-ui/core';
 import transformProps from './transformProps';
-import thumbnail from './images/mes-table.png';
-import example1 from './images/mes-table.png';
+import { thumbnail, example1 } from './images/mes-table.png';
 import controlPanel from './controlPanel';
 import buildQuery from './buildQuery';
 import { TableChartFormData, TableChartProps } from './types';
@@ -35,13 +34,9 @@ const metadata = new ChartMetadata({
     Behavior.DrillBy,
   ],
   canBeAnnotationTypes: ['EVENT', 'INTERVAL'],
-  description: t(
-    'This is the MES table component',
-  ),
+  description: t('This is the MES table component'),
   name: t('MES Table'),
-  exampleGallery: [
-    { url: example1,  caption: t('MES Table') }
-  ],
+  exampleGallery: [{ url: example1, caption: t('MES Table') }],
   thumbnail,
   category: t('MES-TV'),
 });

@@ -60,10 +60,12 @@ export function generatePageItems(
     items[i] = i + left;
   }
   // replace non-ending items with placeholders
+  // @ts-ignore
   if (items[0] > 0) {
     items[0] = 0;
     items[1] = 'prev-more';
   }
+  // @ts-ignore
   if (items[items.length - 1] < total - 1) {
     items[items.length - 1] = total - 1;
     items[items.length - 2] = 'next-more';

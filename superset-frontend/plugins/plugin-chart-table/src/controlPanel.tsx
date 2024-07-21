@@ -517,6 +517,7 @@ const config: ControlPanelConfig = {
                         )
                         .map(colname => ({
                           value: colname,
+                          // @ts-ignore
                           label: verboseMap[colname] ?? colname,
                         }))
                     : [];

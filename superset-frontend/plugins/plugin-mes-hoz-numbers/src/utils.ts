@@ -19,7 +19,6 @@
 
 import moment from 'moment';
 
-
 export const parseMetricValue = (metricValue: number | string | null) => {
   if (typeof metricValue === 'string') {
     const dateObject = moment.utc(metricValue, moment.ISO_8601, true);

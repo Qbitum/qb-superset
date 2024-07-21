@@ -564,9 +564,9 @@ export type ControlFormItemSpec<T extends ControlType = ControlType> = {
                 defaultValue?: Currency;
               }
             : T extends 'SymbolControl'
-            ? {
-                controlType: 'SymbolControl';
-                value?: Symbol;
-                defaultValue?: Symbol;
-              }
-            : {});
+              ? {
+                  controlType: 'SymbolControl';
+                  value?: Symbol;
+                  defaultValue?: Symbol;
+                }
+              : {});

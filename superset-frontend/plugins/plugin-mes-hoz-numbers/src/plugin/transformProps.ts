@@ -17,13 +17,16 @@
  * under the License.
  */
 import {
-  ChartProps, formatTime, GenericDataType, getMetricLabel, getValueFormatter,
+  ChartProps,
+  formatTime,
+  GenericDataType,
+  getMetricLabel,
+  getValueFormatter,
 } from '@superset-ui/core';
-import { parseMetricValue } from '../utils'
+import { parseMetricValue } from '../utils';
 import { HozValue } from '../types';
 // import { title } from 'process';
-export default function transformProps(chartProps: ChartProps,) {
-
+export default function transformProps(chartProps: ChartProps) {
   /**
    * This function is called after a successful response has been
    * received from the chart data endpoint, and is used to transform
@@ -61,7 +64,7 @@ export default function transformProps(chartProps: ChartProps,) {
     datasource: {
       // currencyFormats = {},
       columnFormats = {},
-      symbolFormats = {}
+      symbolFormats = {},
     },
   } = chartProps;
 
@@ -86,7 +89,13 @@ export default function transformProps(chartProps: ChartProps,) {
 
   const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
-  const formattedSubTitle = subtitle != "" ? subtitle.toUpperCase().split(',').filter((value: string) => value != "") : [];
+  const formattedSubTitle =
+    subtitle !== ''
+      ? subtitle
+          .toUpperCase()
+          .split(',')
+          .filter((value: string) => value !== '')
+      : [];
 
   // console.log(formattedSubTitle,"lllllll");
 
@@ -103,28 +112,28 @@ export default function transformProps(chartProps: ChartProps,) {
     columnFormats,
     yAxisFormat,
     currencyFormat,
-    selectedSymbol
+    selectedSymbol,
   );
 
   const headerFormatter =
     coltypes[0] === GenericDataType.Temporal ||
-      coltypes[0] === GenericDataType.String ||
-      forceTimestampFormatting
+    coltypes[0] === GenericDataType.String ||
+    forceTimestampFormatting
       ? formatTime
       : numberFormatter;
 
-  let values: HozValue[] = []; // transform query result to component model
-  console.log(data.length, "esdftgyuh");
+  const values: HozValue[] = []; // transform query result to component model
+  console.log(data.length, 'esdftgyuh');
 
-  if(noOfColumns <= data.length){
-    console.log("columns", noOfColumns);
+  if (noOfColumns <= data.length) {
+    console.log('columns', noOfColumns);
 
-  for (let i = 0; i < noOfColumns; i++) {
-    values.push({ title: subtitle[i], data: data[i][metricName] });
-    console.log("jh", data[i][metricName]);
-  }
-  }else {
-    values.push({title:subtitle[0], data:data[0][metricName]});
+    for (let i = 0; i < noOfColumns; i++) {
+      values.push({ title: subtitle[i], data: data[i][metricName] });
+      console.log('jh', data[i][metricName]);
+    }
+  } else {
+    values.push({ title: subtitle[0], data: data[0][metricName] });
   }
 
   return {
@@ -144,6 +153,6 @@ export default function transformProps(chartProps: ChartProps,) {
     subTitleFontSize,
     subValue,
     subValueFontSize,
-    noOfColumns
+    noOfColumns,
   };
 }

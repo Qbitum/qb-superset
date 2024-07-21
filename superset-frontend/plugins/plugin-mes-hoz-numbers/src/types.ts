@@ -31,7 +31,6 @@ import { EChartsCoreOption, ECharts } from 'echarts';
 import { RefObject } from 'react';
 // import { Refs } from '../types';
 
-
 export interface HozValue {
   title: string;
   data: number;
@@ -70,7 +69,7 @@ export type PluginMesHozNumbersStylesProps = {
   width: number;
   height: number;
   bigNumber?: DataRecordValue;
-  values?: HozValue[]
+  values?: HozValue[];
   bigNumberFallback?: TimeSeriesDatum;
   headerFormatter: ValueFormatter | TimeFormatter;
   formatTime?: TimeFormatter;
@@ -101,9 +100,9 @@ export type PluginMesHozNumbersStylesProps = {
   subValueFontSize: number;
   subTitleFontSize: number;
   noOfColumns: number;
-  enteredValue:Array<number>;
+  enteredValue: Array<number>;
   enteredValueString: Array<string>;
-}
+};
 
 interface PluginMesHozNumbersCustomizeProps {
   headerText: string;

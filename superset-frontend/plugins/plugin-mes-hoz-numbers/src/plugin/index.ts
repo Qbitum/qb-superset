@@ -21,7 +21,7 @@ import buildQuery from './buildQuery';
 import controlPanel from './controlPanel';
 import transformProps from './transformProps';
 import thumbnail from '../images/mes-hoz-numbers.png';
-import example1 from '../images/mes-hoz-numbers-example.png'
+import example1 from '../images/mes-hoz-numbers-example.png';
 
 export default class PluginMesHozNumbers extends ChartPlugin {
   /**
@@ -38,9 +38,7 @@ export default class PluginMesHozNumbers extends ChartPlugin {
     const metadata = new ChartMetadata({
       description: 'This is the MES Horizontal numbers component',
       name: t('MES Hoz Numbers'),
-      exampleGallery: [
-        { url: example1, caption: t('Horizontal Numbers') },
-      ],
+      exampleGallery: [{ url: example1, caption: t('Horizontal Numbers') }],
       thumbnail,
       category: t('MES-TV'),
     });

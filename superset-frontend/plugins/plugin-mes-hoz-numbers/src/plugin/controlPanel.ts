@@ -97,7 +97,7 @@ const config: ControlPanelConfig = {
    * - validateInteger: must be an integer value
    * - validateNumber: must be an integer or decimal value
    */
-        
+
   // For control input types, see: superset-frontend/src/explore/components/controls/index.js
   controlPanelSections: [
     {
@@ -144,9 +144,7 @@ const config: ControlPanelConfig = {
               type: 'TextControl',
               label: t('No Of Columns'),
               renderTrigger: true,
-              description: t(
-                'No Of Columns',
-              ),
+              description: t('No Of Columns'),
               default: 0,
             },
           },
@@ -242,7 +240,7 @@ const config: ControlPanelConfig = {
         //     },
         //   },
         // ],
-        
+
         // [
         //   {
         //     name: 'bold_text',
@@ -266,7 +264,7 @@ const config: ControlPanelConfig = {
         // ],
 
         // ['currency_format'],
-        
+
         // [
         //   {
         //     name: 'row_limit',
@@ -279,7 +277,7 @@ const config: ControlPanelConfig = {
             config: {
               type: 'SelectControl',
               label: t('Font Color'),
-              default: 'black',
+              // default: 'black',
               choices: [
                 ['#000000', 'Black'],
                 ['#FFFFFF', 'White'],

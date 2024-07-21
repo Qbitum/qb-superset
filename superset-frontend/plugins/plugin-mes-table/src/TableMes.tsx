@@ -25,15 +25,15 @@ import React, {
   MouseEvent,
 } from 'react';
 import {
-  ColumnInstance,
+  // ColumnInstance,
   ColumnWithLooseAccessor,
   DefaultSortTypes,
   Row,
 } from 'react-table';
 import { extent as d3Extent, max as d3Max } from 'd3-array';
-import { FaSort } from '@react-icons/all-files/fa/FaSort';
-import { FaSortDown as FaSortDesc } from '@react-icons/all-files/fa/FaSortDown';
-import { FaSortUp as FaSortAsc } from '@react-icons/all-files/fa/FaSortUp';
+// import { FaSort } from '@react-icons/all-files/fa/FaSort';
+// import { FaSortDown as FaSortDesc } from '@react-icons/all-files/fa/FaSortDown';
+// import { FaSortUp as FaSortAsc } from '@react-icons/all-files/fa/FaSortUp';
 import cx from 'classnames';
 import {
   DataRecord,
@@ -151,14 +151,14 @@ function cellBackground({
   return `rgba(${r},0,0,0.2)`;
 }
 
-function SortIcon<D extends object>({ column }: { column: ColumnInstance<D> }) {
-  const { isSorted, isSortedDesc } = column;
-  let sortIcon = <FaSort />;
-  if (isSorted) {
-    sortIcon = isSortedDesc ? <FaSortDesc /> : <FaSortAsc />;
-  }
-  return sortIcon;
-}
+// function SortIcon<D extends object>({ column }: { column: ColumnInstance<D> }) {
+//   const { isSorted, isSortedDesc } = column;
+//   let sortIcon = <FaSort />;
+//   if (isSorted) {
+//     sortIcon = isSortedDesc ? <FaSortDesc /> : <FaSortAsc />;
+//   }
+//   return sortIcon;
+// }
 
 function SearchInput({ count, value, onChange }: SearchInputProps) {
   return (
@@ -576,7 +576,9 @@ export default function TableChart<D extends DataRecord = DataRecord>(
                   /* The following classes are added to support custom CSS styling */
                   className={cx(
                     'cell-bar',
-                    typeof value === 'number' && value < 0 ? 'negative' : 'positive',
+                    typeof value === 'number' && value < 0
+                      ? 'negative'
+                      : 'positive',
                   )}
                   css={cellBarStyles}
                   role="presentation"

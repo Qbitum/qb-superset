@@ -17,84 +17,83 @@
  * under the License.
  */
 import {
-    Currency,
-    CurrencyFormatter,
-    ensureIsArray,
-    getNumberFormatter,
-    isSavedMetric,
-    QueryFormMetric,
-    ValueFormatter,
-  } from '@superset-ui/core';
-  
-  export const buildCustomFormatters = (
-    metrics: QueryFormMetric | QueryFormMetric[] | undefined,
-    savedCurrencyFormats: Record<string, Currency>,
-    savedColumnFormats: Record<string, string>,
-    d3Format: string | undefined,
-    currencyFormat: Currency | undefined,
-  ) => {
-    const metricsArray = ensureIsArray(metrics);
-    return metricsArray.reduce((acc, metric) => {
-      if (isSavedMetric(metric)) {
-        const actualD3Format = d3Format ?? savedColumnFormats[metric];
-        const actualCurrencyFormat = currencyFormat?.symbol
-          ? currencyFormat
-          : savedCurrencyFormats[metric];
-        return actualCurrencyFormat
-          ? {
-              ...acc,
-              [metric]: new CurrencyFormatter({
-                d3Format: actualD3Format,
-                currency: actualCurrencyFormat,
-              }),
-            }
-          : {
-              ...acc,
-              [metric]: getNumberFormatter(actualD3Format),
-            };
-      }
-      return acc;
-    }, {});
-  };
-  
-  export const getCustomFormatter = (
-    customFormatters: Record<string, ValueFormatter>,
-    metrics: QueryFormMetric | QueryFormMetric[] | undefined,
-    key?: string,
-  ) => {
-    const metricsArray = ensureIsArray(metrics);
-    if (metricsArray.length === 1 && isSavedMetric(metricsArray[0])) {
-      return customFormatters[metricsArray[0]];
+  Currency,
+  CurrencyFormatter,
+  ensureIsArray,
+  getNumberFormatter,
+  isSavedMetric,
+  QueryFormMetric,
+  ValueFormatter,
+} from '@superset-ui/core';
+
+export const buildCustomFormatters = (
+  metrics: QueryFormMetric | QueryFormMetric[] | undefined,
+  savedCurrencyFormats: Record<string, Currency>,
+  savedColumnFormats: Record<string, string>,
+  d3Format: string | undefined,
+  currencyFormat: Currency | undefined,
+) => {
+  const metricsArray = ensureIsArray(metrics);
+  return metricsArray.reduce((acc, metric) => {
+    if (isSavedMetric(metric)) {
+      const actualD3Format = d3Format ?? savedColumnFormats[metric];
+      const actualCurrencyFormat = currencyFormat?.symbol
+        ? currencyFormat
+        : savedCurrencyFormats[metric];
+      return actualCurrencyFormat
+        ? {
+            ...acc,
+            [metric]: new CurrencyFormatter({
+              d3Format: actualD3Format,
+              currency: actualCurrencyFormat,
+            }),
+          }
+        : {
+            ...acc,
+            [metric]: getNumberFormatter(actualD3Format),
+          };
     }
-    return key ? customFormatters[key] : undefined;
-  };
-  
-  export const getValueFormatter = (
-    metrics: QueryFormMetric | QueryFormMetric[] | undefined,
-    savedCurrencyFormats: Record<string, Currency>,
-    savedColumnFormats: Record<string, string>,
-    d3Format: string | undefined,
-    currencyFormat: Currency | undefined,
-    key?: string,
-  ) => {
-    const customFormatter = getCustomFormatter(
-      buildCustomFormatters(
-        metrics,
-        savedCurrencyFormats,
-        savedColumnFormats,
-        d3Format,
-        currencyFormat,
-      ),
+    return acc;
+  }, {});
+};
+
+export const getCustomFormatter = (
+  customFormatters: Record<string, ValueFormatter>,
+  metrics: QueryFormMetric | QueryFormMetric[] | undefined,
+  key?: string,
+) => {
+  const metricsArray = ensureIsArray(metrics);
+  if (metricsArray.length === 1 && isSavedMetric(metricsArray[0])) {
+    return customFormatters[metricsArray[0]];
+  }
+  return key ? customFormatters[key] : undefined;
+};
+
+export const getValueFormatter = (
+  metrics: QueryFormMetric | QueryFormMetric[] | undefined,
+  savedCurrencyFormats: Record<string, Currency>,
+  savedColumnFormats: Record<string, string>,
+  d3Format: string | undefined,
+  currencyFormat: Currency | undefined,
+  key?: string,
+) => {
+  const customFormatter = getCustomFormatter(
+    buildCustomFormatters(
       metrics,
-      key,
-    );
-  
-    if (customFormatter) {
-      return customFormatter;
-    }
-    if (currencyFormat?.symbol) {
-      return new CurrencyFormatter({ currency: currencyFormat, d3Format });
-    }
-    return getNumberFormatter(d3Format);
-  };
-  
+      savedCurrencyFormats,
+      savedColumnFormats,
+      d3Format,
+      currencyFormat,
+    ),
+    metrics,
+    key,
+  );
+
+  if (customFormatter) {
+    return customFormatter;
+  }
+  if (currencyFormat?.symbol) {
+    return new CurrencyFormatter({ currency: currencyFormat, d3Format });
+  }
+  return getNumberFormatter(d3Format);
+};

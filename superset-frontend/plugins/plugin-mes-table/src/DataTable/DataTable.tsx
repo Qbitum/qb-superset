@@ -22,7 +22,7 @@ import React, {
   ReactNode,
   HTMLProps,
   MutableRefObject,
-  CSSProperties,
+  // CSSProperties,
 } from 'react';
 import {
   useTable,
@@ -44,7 +44,7 @@ import SelectPageSize, {
   SelectPageSizeProps,
   SizeOption,
 } from './components/SelectPageSize';
-import SimplePagination from './components/Pagination';
+// import SimplePagination from './components/Pagination';
 import useSticky from './hooks/useSticky';
 import { PAGE_SIZE_OPTIONS } from '../consts';
 import { sortAlphanumericCaseInsensitive } from './utils/sortAlphanumericCaseInsensitive';
@@ -181,7 +181,12 @@ export default typedMemo(function DataTable<D extends object>({
     wrapStickyTable,
     setColumnOrder,
     allColumns,
-    state: { pageIndex, pageSize, globalFilter: filterValue, sticky = {} },
+    state: {
+      pageIndex,
+      pageSize,
+      globalFilter: filterValue,
+      // sticky = {}
+    },
   } = useTable<D>(
     {
       columns,
@@ -322,9 +327,9 @@ export default typedMemo(function DataTable<D extends object>({
     setPageSize(initialPageSize);
   }
 
-  const paginationStyle: CSSProperties = sticky.height
-    ? {}
-    : { visibility: 'hidden' };
+  // const paginationStyle: CSSProperties = sticky.height
+  //   ? {}
+  //   : { visibility: 'hidden' };
 
   let resultPageCount = pageCount;
   let resultCurrentPageSize = pageSize;
@@ -386,16 +391,16 @@ export default typedMemo(function DataTable<D extends object>({
         </div>
       ) : null}
       {wrapStickyTable ? wrapStickyTable(renderTable) : renderTable()}
-      {hasPagination && resultPageCount > 1 ? (
-        <SimplePagination
-          ref={paginationRef}
-          style={paginationStyle}
-          maxPageItemCount={maxPageItemCount}
-          pageCount={resultPageCount}
-          currentPage={resultCurrentPage}
-          onPageChange={resultOnPageChange}
-        />
-      ) : null}
+      {/* {hasPagination && resultPageCount > 1 ? (
+        // <SimplePagination
+        //   ref={paginationRef}
+        //   style={paginationStyle}
+        //   maxPageItemCount={maxPageItemCount}
+        //   pageCount={resultPageCount}
+        //   currentPage={resultCurrentPage}
+        //   onPageChange={resultOnPageChange}
+        // />
+      ) : null} */}
     </div>
   );
 });

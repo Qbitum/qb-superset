@@ -10,6 +10,7 @@ export default class PluginChartMESHeader extends ChartPlugin {
       description: 'this is the header for mes',
       name: t('MES Header'),
       thumbnail,
+      category: t('MES-TV'),
     });
 
     super({

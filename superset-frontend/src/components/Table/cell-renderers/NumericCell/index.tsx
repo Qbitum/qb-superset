@@ -356,7 +356,7 @@ export enum CurrencyCode {
 }
 
 export enum Symbols {
-  PER = '%'
+  PER = '%',
 }
 
 interface NumberOptions {

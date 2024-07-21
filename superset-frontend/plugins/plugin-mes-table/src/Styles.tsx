@@ -32,7 +32,7 @@ export default styled.div`
     th,
     td {
       min-width: 4.3em;
-      color: white;
+      color: ${theme.tvDb.fontColor.white};
       background: ${theme.tvDb.bg.tvDbBg};
       text-align: right;
     }
@@ -43,7 +43,7 @@ export default styled.div`
       // text-align: left;
     }
     th svg {
-      // color: white;
+      // color: ${theme.tvDb.fontColor.white};
       margin: ${theme.gridUnit / 2}px;
     }
     // th.is-sorted svg {

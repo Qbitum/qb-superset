@@ -88,7 +88,9 @@ const sequentialSchemeRegistry = getSequentialSchemeRegistry();
 
 export const PRIMARY_COLOR = { r: 0, g: 122, b: 135, a: 1 };
 
-const ROW_LIMIT_OPTIONS = [10, 50, 100, 250, 500, 1000, 5000, 10000, 50000];
+const ROW_LIMIT_OPTIONS = [
+  1, 2, 3, 4, 5, 10, 50, 100, 250, 500, 1000, 5000, 10000, 50000,
+];
 const SERIES_LIMITS = [5, 10, 25, 50, 100, 500];
 
 const appContainer = document.getElementById('app');
@@ -229,7 +231,7 @@ const row_limit: SharedControlConfig<'SelectControl'> = {
     legacyValidateInteger,
     (v, state) => validateMaxValue(v, state?.maxValue || DEFAULT_MAX_ROW),
   ],
-  default: 10000,
+  default: 1,
   choices: formatSelectOptions(ROW_LIMIT_OPTIONS),
   description: t(
     'Limits the number of the rows that are computed in the query that is the source of the data used for this chart.',
@@ -310,11 +312,11 @@ const currency_format: SharedControlConfig<'CurrencyControl'> = {
   renderTrigger: true,
 };
 
-const symbols : SharedControlConfig<'SymbolControl'>={
+const symbols: SharedControlConfig<'SymbolControl'> = {
   type: 'SymbolControl',
   label: t('Currency format'),
   renderTrigger: true,
-}
+};
 
 const x_axis_time_format: SharedControlConfig<
   'SelectControl',

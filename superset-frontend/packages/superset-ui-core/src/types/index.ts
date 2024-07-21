@@ -28,4 +28,7 @@ export type Optional<T> = T | undefined;
 
 export type ValueOf<T> = T[keyof T];
 
-export type ValueFormatter = NumberFormatter | CurrencyFormatter |SymbolFormatter;
+export type ValueFormatter =
+  | NumberFormatter
+  | CurrencyFormatter
+  | SymbolFormatter;

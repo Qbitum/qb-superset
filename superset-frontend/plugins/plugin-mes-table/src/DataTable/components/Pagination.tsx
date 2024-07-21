@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import React, { CSSProperties, forwardRef } from 'react';
+import { CSSProperties } from 'react';
 
 export interface PaginationProps {
   pageCount: number; // number of pages
@@ -60,10 +60,12 @@ export function generatePageItems(
     items[i] = i + left;
   }
   // replace non-ending items with placeholders
+  // @ts-ignore
   if (items[0] > 0) {
     items[0] = 0;
     items[1] = 'prev-more';
   }
+  // @ts-ignore
   if (items[items.length - 1] < total - 1) {
     items[items.length - 1] = total - 1;
     items[items.length - 2] = 'next-more';
@@ -71,52 +73,51 @@ export function generatePageItems(
   return items;
 }
 
-export default React.memo(
-  forwardRef(function Pagination(
-    {
-      style,
-      pageCount,
-      currentPage = 0,
-      maxPageItemCount = 9,
-      onPageChange,
-    }: PaginationProps,
-    ref: React.Ref<HTMLDivElement>,
-  ) {
-    const pageItems = generatePageItems(
-      pageCount,
-      currentPage,
-      maxPageItemCount,
-    );
-    return (
-      <div></div>
-      // <div ref={ref} className="dt-pagination" style={style}>
-      //   <ul className="pagination pagination-sm">
-      //     {pageItems.map(item =>
-      //       typeof item === 'number' ? (
-      //         // actual page number
-      //         <li
-      //           key={item}
-      //           className={currentPage === item ? 'active' : undefined}
-      //         >
-      //           <a
-      //             href={`#page-${item}`}
-      //             role="button"
-      //             onClick={e => {
-      //               e.preventDefault();
-      //               onPageChange(item);
-      //             }}
-      //           >
-      //             {item + 1}
-      //           </a>
-      //         </li>
-      //       ) : (
-      //         <li key={item} className="dt-pagination-ellipsis">
-      //           <span>…</span>
-      //         </li>
-      //       ),
-      //     )}
-      //   </ul>
-      // </div>
-    );
-  }),
-);
+// export default React.memo(
+// forwardRef(function Pagination(
+//   {
+//     style,
+//     pageCount,
+//     currentPage = 0,
+//     maxPageItemCount = 9,
+//     onPageChange,
+//   }: PaginationProps,
+//   ref: React.Ref<HTMLDivElement>,
+// ) {
+// const pageItems = generatePageItems(
+//   pageCount,
+//   currentPage,
+//   maxPageItemCount,
+// );
+// return (
+// <div ref={ref} className="dt-pagination" style={style}>
+//   <ul className="pagination pagination-sm">
+//     {pageItems.map(item =>
+//       typeof item === 'number' ? (
+//         // actual page number
+//         <li
+//           key={item}
+//           className={currentPage === item ? 'active' : undefined}
+//         >
+//           <a
+//             href={`#page-${item}`}
+//             role="button"
+//             onClick={e => {
+//               e.preventDefault();
+//               onPageChange(item);
+//             }}
+//           >
+//             {item + 1}
+//           </a>
+//         </li>
+//       ) : (
+//         <li key={item} className="dt-pagination-ellipsis">
+//           <span>…</span>
+//         </li>
+//       ),
+//     )}
+//   </ul>
+// </div>
+// );
+// }),
+// );

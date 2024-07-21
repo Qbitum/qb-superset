@@ -576,6 +576,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
                   /* The following classes are added to support custom CSS styling */
                   className={cx(
                     'cell-bar',
+                    // @ts-ignore
                     value && value < 0 ? 'negative' : 'positive',
                   )}
                   css={cellBarStyles}

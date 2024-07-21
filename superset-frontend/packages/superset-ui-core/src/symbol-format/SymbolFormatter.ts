@@ -24,7 +24,7 @@ import { Currency } from '../query';
 interface SymbolFormatterConfig {
   d3Format?: string;
   currency: Currency;
-//   locale?: string;
+  //   locale?: string;
 }
 
 interface SymbolFormatter {

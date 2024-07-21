@@ -25,10 +25,7 @@ import {
   BRAND_COLOR,
   styled,
 } from '@superset-ui/core';
-import {
-  HozValue,
-  PluginMesHozNumbersStylesProps,
-} from './types';
+import { HozValue, PluginMesHozNumbersStylesProps } from './types';
 
 // The following Styles component is a <div> element, which has been styled using Emotion
 // For docs, visit https://emotion.sh/docs/styled
@@ -62,8 +59,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     timeRangeFixed: false,
     subtitle: '',
     subValueFontSize: PROPORTION.SUBVALUE,
-    subTitleFontSize: PROPORTION.SUBTITLE
-    
+    subTitleFontSize: PROPORTION.SUBTITLE,
   };
 
   getClassName() {
@@ -84,11 +80,11 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderTitle(maxHeight: number) {
-    const { subHeader, width, fontColor } = this.props;
+    const { subHeader, width } = this.props;
     let fontSize = 0;
 
-    let text = subHeader;
-  
+    const text = subHeader;
+
     if (text) {
       const container = this.createTemporaryContainer();
       document.body.append(container);
@@ -99,7 +95,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
         className: 'subheader-line',
         container,
       });
-      fontColor
+      // fontColor;
       container.remove();
 
       return (
@@ -107,8 +103,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
           className="subheader-line"
           style={{
             fontSize,
-            height: maxHeight        
-          }}          
+            height: maxHeight,
+          }}
         >
           {text}
         </div>
@@ -118,17 +114,22 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderNoOfColumns(maxHeight: number) {
-    
-    const { bigNumber, headerFormatter, width, colorThresholdFormatters,fontColor } = this.props;
-      
+    const {
+      bigNumber,
+      headerFormatter,
+      width,
+      colorThresholdFormatters,
+      fontColor,
+    } = this.props;
+
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
-    
+    let numberColor;
+
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
 
-    let numberColor;
     if (hasThresholdColorFormatter) {
       colorThresholdFormatters!.forEach(formatter => {
         const formatterResult = bigNumber
@@ -149,7 +150,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       maxWidth: width - 8, // Decrease 8px for more precise font size
       maxHeight,
       className: 'header-line',
-      container
+      container,
     });
     container.remove();
 
@@ -161,7 +162,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     };
 
     return (
-      
       <div
         className="header-line"
         style={{
@@ -176,21 +176,21 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     );
   }
 
-  renderSubValue(maxHeight: number, numberValue=0) {
-    
-    const { width,fontColor } = this.props;
-      
+  renderSubValue(maxHeight: number, numberValue = 0) {
+    const { width, fontColor } = this.props;
+
     // @ts-ignore
-    const text = numberValue === 0 ? t('No data') : numberValue+'';
-  
+    const text = numberValue === 0 ? t('No data') : String(numberValue);
+    // const text = numberValue === 0 ? t('No data') : numberValue + '';
+
     const container = this.createTemporaryContainer();
     document.body.append(container);
     const fontSize = computeMaxFontSize({
       text,
-      maxWidth: width, 
+      maxWidth: width,
       maxHeight,
       className: 'subvalue-line',
-      container
+      container,
     });
     container.remove();
 
@@ -202,7 +202,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     };
 
     return (
-      
       <div
         className="subvalue-line"
         style={{
@@ -217,26 +216,25 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     );
   }
 
-  renderSubTitle(maxHeight: number,title:string) {
-    
-    const { width, fontColor } = this.props;
+  renderSubTitle(maxHeight: number, title: string) {
+    const { width } = this.props;
     let fontSize = 0;
     // console.log(this.props,"this.props");
 
-    let text = title;
+    const text = title;
     // console.log("vvv", text);
-    
+
     if (text) {
       const container = this.createTemporaryContainer();
       document.body.append(container);
       fontSize = computeMaxFontSize({
         text,
         maxWidth: width - 12, // Decrease 8px for more precise font size
-        maxHeight:maxHeight - 12,
-        className: 'subtitle-line', 
+        maxHeight: maxHeight - 12,
+        className: 'subtitle-line',
         container,
       });
-      fontColor
+      // fontColor;
       container.remove();
 
       // console.log("font color", fontColor);
@@ -246,8 +244,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
           className="subtitle-line"
           style={{
             fontSize,
-            height: maxHeight,        
-          }}          
+            height: maxHeight,
+          }}
         >
           {/* {fontColor} */}
           {text}
@@ -268,45 +266,53 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       // subValue
       // noOfColumns
     } = this.props;
-    
+
     const className = this.getClassName();
-    
-      // prepare view model
-      let viewModel:HozValue[]=[];
 
-      if (values) {
-        values.forEach((val,i) =>{
-          viewModel.push({
-            title: subtitle[i],
-            data: val.data || 0
-          })
-        })
-      
-      }   
+    // prepare view model
+    const viewModel: HozValue[] = [];
 
-      return (
-        <div className={className}>
-            {this.renderTitle(
-              Math.ceil(subheaderFontSize * (1 - PROPORTION.HEADER) * height),
-            )}
-          <div className="component-body">
-            <div className='block-wrapper'>
+    if (values) {
+      values.forEach((val, i) => {
+        viewModel.push({
+          title: subtitle[i],
+          data: val.data || 0,
+        });
+      });
+    }
+
+    return (
+      <div className={className}>
+        {this.renderTitle(
+          Math.ceil(subheaderFontSize * (1 - PROPORTION.HEADER) * height),
+        )}
+        <div className="component-body">
+          <div className="block-wrapper">
             {viewModel.map((dataItem, i) => (
-              <div className='num-block' key={i} style={{ paddingRight: '3em' }}>
-                {this.renderSubValue(Math.ceil(subValueFontSize * height),dataItem.data)}
-                {this.renderSubTitle(Math.ceil(subTitleFontSize * height), dataItem.title)}
+              <div
+                className="num-block"
+                key={i}
+                style={{ paddingRight: '3em' }}
+              >
+                {this.renderSubValue(
+                  Math.ceil(subValueFontSize * height),
+                  dataItem.data,
+                )}
+                {this.renderSubTitle(
+                  Math.ceil(subTitleFontSize * height),
+                  dataItem.title,
+                )}
               </div>
             ))}
-            </div>
-          
           </div>
         </div>
-      );
+      </div>
+    );
   }
 }
 
 export default styled(MesHozNumbers)`
-   ${({ theme }) => `
+  ${({ theme }) => `
     font-family: ${theme.tvDb.font.roboto};
     background-color: ${theme.tvDb.bg.tvDbBg};
     padding: 16px;
@@ -348,7 +354,7 @@ export default styled(MesHozNumbers)`
     }
 
     .subtitle-line {
-      color: white;
+      color: ${theme.tvDb.fontColor.white};
       line-height: 1em;
       padding-bottom: 0;
     }
@@ -416,8 +422,7 @@ export default styled(MesHozNumbers)`
 //       {/* <h3>{props.headerText}{props.fontColor}</h3> */}
 //       {/* <pre>{props.headerText}</pre> */}
 //       <pre>fhgfh{props.headerText}</pre>
-      
+
 //     </Styles>
 //   );
 // }
-

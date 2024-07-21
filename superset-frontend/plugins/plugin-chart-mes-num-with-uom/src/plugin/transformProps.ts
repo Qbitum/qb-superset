@@ -16,11 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { ChartProps, formatTime, GenericDataType, getMetricLabel, getValueFormatter, 
+import {
+  ChartProps,
+  formatTime,
+  GenericDataType,
+  getMetricLabel,
+  getValueFormatter,
 } from '@superset-ui/core';
-import { parseMetricValue } from '../utils'
-export default function transformProps(chartProps: ChartProps,) {
+import { parseMetricValue } from '../utils';
 
+export default function transformProps(chartProps: ChartProps) {
   /**
    * This function is called after a successful response has been
    * received from the chart data endpoint, and is used to transform
@@ -50,11 +55,11 @@ export default function transformProps(chartProps: ChartProps,) {
    * function during development with hot reloading, changes won't
    * be seen until restarting the development server.
    */
-  const { 
-    width, 
-    height, 
-    formData, 
-    queriesData ,
+  const {
+    width,
+    height,
+    formData,
+    queriesData,
     datasource: { currencyFormats = {}, columnFormats = {} },
   } = chartProps;
 
@@ -69,11 +74,11 @@ export default function transformProps(chartProps: ChartProps,) {
     currencyFormat,
     forceTimestampFormatting,
     yAxisFormat,
-    symbolSelect
+    symbolSelect,
   } = formData;
 
   const metricName = getMetricLabel(metric);
-  const formattedSubheader = subheader.toUpperCase();  
+  const formattedSubheader = subheader.toUpperCase();
   const { data = [], coltypes = [] } = queriesData[0];
   const bigNumber =
     data.length === 0 ? null : parseMetricValue(data[0][metricName]);
@@ -85,7 +90,7 @@ export default function transformProps(chartProps: ChartProps,) {
     yAxisFormat,
     currencyFormat,
   );
-  
+
   const headerFormatter =
     coltypes[0] === GenericDataType.Temporal ||
     coltypes[0] === GenericDataType.String ||
@@ -106,6 +111,6 @@ export default function transformProps(chartProps: ChartProps,) {
     subheaderFontSize,
     fontColor,
     currencyFormat,
-    symbolSelect
+    symbolSelect,
   };
 }

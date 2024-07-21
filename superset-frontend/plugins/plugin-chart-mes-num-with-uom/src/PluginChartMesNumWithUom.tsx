@@ -75,12 +75,24 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   }
 
   renderValue(maxHeight: number) {
-    
-    const { bigNumber, headerFormatter, width, colorThresholdFormatters,fontColor,symbolSelect } =
-      this.props;
-      
+    const {
+      bigNumber,
+      headerFormatter,
+      width,
+      colorThresholdFormatters,
+      fontColor,
+      symbolSelect,
+    } = this.props;
+
     // @ts-ignore
-    const text = bigNumber === null ? t('No data') : (symbolSelect!=undefined ?headerFormatter (bigNumber)+symbolSelect : headerFormatter (bigNumber));  
+    const text =
+      bigNumber === null
+        ? t('No data')
+        : symbolSelect !== undefined
+          ? // @ts-ignore
+            headerFormatter(bigNumber) + symbolSelect
+          : // @ts-ignore
+            headerFormatter(bigNumber);
 
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
@@ -174,11 +186,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   }
 
   render() {
-    const {
-      height,
-      headerFontSize,
-      subheaderFontSize,
-    } = this.props;
+    const { height, headerFontSize, subheaderFontSize } = this.props;
     const className = this.getClassName();
 
     return (

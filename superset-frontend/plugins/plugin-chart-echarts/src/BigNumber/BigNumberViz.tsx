@@ -131,11 +131,10 @@ class BigNumberVis extends React.PureComponent<BigNumberVizProps> {
     const { bigNumber, headerFormatter, width, colorThresholdFormatters } =
       this.props;
 
-
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
-    console.log("currny", text);
-    
+    console.log('currny', text);
+
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
