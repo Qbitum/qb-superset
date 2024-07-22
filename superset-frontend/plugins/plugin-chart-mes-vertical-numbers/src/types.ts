@@ -1,15 +1,9 @@
-import {
-  QueryFormData,
-  supersetTheme,
-  TimeseriesDataRecord,
-} from '@superset-ui/core';
+import { QueryFormData, TimeseriesDataRecord } from '@superset-ui/core';
 
 export interface PluginChartMESVerticalNumbersStylesProps {
   height: number;
   width: number;
-  headerFontSize: keyof typeof supersetTheme.typography.sizes;
   boldText: boolean;
-  subHeader: string;
 }
 
 interface PluginChartMESVerticalNumbersCustomizeProps {

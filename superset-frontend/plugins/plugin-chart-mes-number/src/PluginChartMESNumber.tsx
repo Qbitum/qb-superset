@@ -28,11 +28,6 @@ import { PluginChartMESNumberStylesProps } from './types';
 
 const defaultNumberFormatter = getNumberFormatter();
 
-const PROPORTION = {
-  SUBHEADER: 0.125,
-  NUMBER: 0.3,
-};
-
 class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
   static defaultProps = {
     className: '',
@@ -40,9 +35,6 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
     numberFormatter: defaultNumberFormatter,
     mainColor: BRAND_COLOR,
     number: '',
-    // header: '',
-    subHeader: '',
-    subheaderFontSize: PROPORTION.SUBHEADER,
   };
 
   getClassName() {
@@ -132,59 +124,16 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
     );
   }
 
-  renderSubheader(maxHeight: number) {
-    const { bigNumber, subHeader, width, bigNumberFallback } = this.props;
-    let fontSize = 0;
-    console.log(this.props, 'this.props');
-    console.log(subHeader, bigNumber, 'git');
-
-    const NO_DATA_OR_HASNT_LANDED = t(
-      'No data after filtering or data is NULL for the latest time record',
-    );
-    const NO_DATA = t(
-      'Try applying different filters or ensuring your datasource has data',
-    );
-    let text = subHeader;
-    if (bigNumber === null) {
-      text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
-    }
-    if (text) {
-      const container = this.createTemporaryContainer();
-      document.body.append(container);
-      fontSize = computeMaxFontSize({
-        text,
-        maxWidth: width,
-        maxHeight,
-        className: 'subheader-line',
-        container,
-      });
-      container.remove();
-      console.log('qaaa', text);
-
-      return (
-        <div
-          className="subheader-line"
-          style={{
-            fontSize,
-            height: maxHeight,
-          }}
-        >
-          {text}
-        </div>
-      );
-    }
-    return null;
-  }
-
   render() {
-    const { height, numberFontSize, subheaderFontSize } = this.props;
+    const { height, numberFontSize } = this.props;
     const className = this.getClassName();
     return (
       <>
         <div className={className} style={{ height }}>
           {this.renderFallbackWarning()}
-          {this.renderSubheader(Math.ceil(subheaderFontSize * height))}
-          {this.renderNumber(Math.ceil(numberFontSize * height))}
+          <div className="container">
+            {this.renderNumber(Math.ceil(numberFontSize * height))}
+          </div>
         </div>
       </>
     );
@@ -202,30 +151,23 @@ export default styled(MESNumber)`
     display: flex;
     flex-direction: column;
     background-color: ${theme.tvDb.bg.tvDbBg};
+    margin: 4pt;
 
     .number-line {
-      position: relative;
       line-height: 1em;
       white-space: nowrap;
-      padding-top: 50pt;
-      padding-left: 100pt;
-      text-edge: cap;
+      text-align: center;
       font-family: ${theme.tvDb.font.roboto};
       font-size: 200px;
       font-style: ${theme.tvDb.fontStyles.normal};
       font-weight:${theme.tvDb.fontWeights.bold};
-      span {
-        position: absolute;
-        bottom: 0; 
-
-      }
     }
-
-    .subheader-line {
-      line-height: 1em;
-      padding-bottom: 0;
-      color: ${theme.tvDb.fontColor.white};
-      font-size: 2em;
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
     }
 
     &.is-fallback-value {

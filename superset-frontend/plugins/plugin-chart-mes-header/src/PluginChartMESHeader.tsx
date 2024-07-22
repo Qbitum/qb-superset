@@ -6,44 +6,18 @@ import {
 } from './types';
 import Logo from './images/makeit-logo.png';
 
-function getBoxStyle(key: any) {
-  switch (key) {
-    case 'year': // module
-      return {
-        classNames: 'darkPurpleBadge',
-      };
-    case 'country_code': // buyer
-      return {
-        classNames: 'lightPurpleBadge',
-      };
-
-    case 'country_name': // po
-      return {
-        classNames: 'lightOrangeBadge',
-      };
-
-    case 'region': // style
-      return {
-        classNames: 'darkGrayBadge',
-      };
-
-    case 'SP_DYN_TO65_FE_ZS': // color
-      return {
-        classNames: 'darkGrayBadge',
-      };
-
-    case 'SP_DYN_TO65_MA_ZS': // online
-      return {
-        classNames: 'greenBadge',
-      };
-    case 'SP_POP_0004_FE': // factory_hour
-      return {
-        classNames: 'lightGrayBadge',
-      };
-
-    default:
-      return {};
-  }
+function getBoxStyle(index: number) {
+  const styles = [
+    'darkPurpleBadge',
+    'lightPurpleBadge',
+    'lightOrangeBadge',
+    'darkGrayBadge',
+    'darkGrayBadge',
+    'greenBadge',
+    'lightGrayBadge',
+    'transparentBadge',
+  ];
+  return { classNames: styles[index % styles.length] };
 }
 
 const Styles = styled.div<PluginChartMESHeaderStylesProps>`
@@ -107,6 +81,13 @@ const GreenBadgeStyled = styled.div`
   padding: 16px 20px;
 `;
 
+const TransparentBadgeStyled = styled.div`
+  background-color: ${({ theme }) => theme.tvDb.headerColors.transparentbg};
+  color: ${({ theme }) => theme.tvDb.fontColor.white};
+  border-radius: 8px;
+  padding: 16px 20px;
+`;
+
 export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
   const { data, height, width, boldText, headerFontSize } = props;
 
@@ -137,7 +118,7 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
         <h3>
           <h2 style={{ marginRight: '15px', alignContent: 'center' }}>KPI</h2>
           {values.map(([key, value], index) => {
-            const boxStyle = getBoxStyle(key);
+            const boxStyle = getBoxStyle(index);
             return (
               <header
                 key={index}
@@ -158,18 +139,30 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
                   <GreenBadgeStyled>{value}</GreenBadgeStyled>
                 ) : boxStyle.classNames === 'lightGrayBadge' ? (
                   <LightGrayBadgeStyled>{value}</LightGrayBadgeStyled>
+                ) : boxStyle.classNames === 'transparentBadge' ? (
+                  <TransparentBadgeStyled>{value}</TransparentBadgeStyled>
                 ) : (
                   value
                 )}
               </header>
             );
           })}
-          |
-          <img
-            src={Logo}
-            alt="Makeit Logo"
-            style={{ height: '30pt', marginLeft: '14pt' }}
-          />
+          <div
+            style={{
+              display: 'flex',
+              height: '30pt',
+              marginLeft: '14pt',
+              alignContent: 'right',
+              alignItems: 'self-end',
+            }}
+          >
+            |
+            <img
+              src={Logo}
+              alt="Makeit Logo"
+              style={{ height: '30pt', marginLeft: '14pt' }}
+            />
+          </div>
         </h3>
       </div>
     </Styles>

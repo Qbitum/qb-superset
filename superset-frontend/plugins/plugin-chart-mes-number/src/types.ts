@@ -62,9 +62,6 @@ export type PluginChartMESNumberStylesProps = {
   formatTime?: TimeFormatter;
   headerFontSize: number;
   numberFontSize: number;
-  header: string;
-  subHeader: string;
-  subheaderFontSize: number;
   mainColor?: string;
   onContextMenu?: (
     clientX: number,

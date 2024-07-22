@@ -45,7 +45,7 @@ const Styles = styled.div<PluginChartMESVerticalNumbersStylesProps>`
 export default function PluginChartMESHeader(
   props: PluginChartMESVerticalNumbersProps,
 ) {
-  const { data, height, width, boldText, subHeader } = props;
+  const { data, height, width, boldText } = props;
 
   const rootElem = createRef<HTMLDivElement>();
 
@@ -58,22 +58,8 @@ export default function PluginChartMESHeader(
   const values = data.length > 0 ? Object.values(data[0]) : [];
   const headers = data.length > 0 ? Object.keys(data[0]) : [];
 
-  const renderSubheader = () => {
-    if (subHeader) {
-      return <div className="subheader-line">{subHeader}</div>;
-    }
-    return null;
-  };
-
   return (
-    <Styles
-      ref={rootElem}
-      boldText={boldText}
-      height={height}
-      width={width}
-      headerFontSize="s"
-      subHeader=""
-    >
+    <Styles ref={rootElem} boldText={boldText} height={height} width={width}>
       <div
         className="flex"
         style={{
@@ -81,8 +67,6 @@ export default function PluginChartMESHeader(
           flexDirection: 'column',
         }}
       >
-        {renderSubheader()}
-
         {headers.map((header, index) => (
           <div
             key={index}
@@ -105,55 +89,3 @@ export default function PluginChartMESHeader(
     </Styles>
   );
 }
-
-// export default styled(MESVerticalNumbers)`
-//   ${({ theme }) => `
-//     font-family: ${theme.tvDb.font.roboto};
-//     font-style: ${theme.tvDb.fontStyles.normal};
-//     font-weight: ${theme.tvDb.fontWeights.normal};
-//     padding: 16px;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-//     background-color: ${theme.tvDb.bg.tvDbBg};
-
-//     .subheader-line {
-//       line-height: 1em;
-//       padding-bottom: 0;
-//       color: ${theme.tvDb.fontColor.white};
-//       font-size: 2em;
-//     }
-//     .component-body {
-//       padding:${theme.tvDb.component.padding};
-//       display: flex;
-//       flex-direction: column;
-//       width: 100%;
-//       height: 100%;
-//       justify-content: center;
-//     }
-//     .content-container {
-//       display: flex;
-//       width: 100%;
-//       justify-content: space-between;
-//       align-items: center;
-//     }
-
-//     .contentTitle-line {
-//       text-align: center;
-//       font-family: ${theme.tvDb.font.roboto};
-//       font-style: ${theme.tvDb.fontStyles.normal};
-//       font-weight:${theme.tvDb.fontWeights.normal};
-//       line-height: normal;
-//       color: ${theme.tvDb.fontColor.gray80};
-//     }
-
-//     .number-line {
-//       font-family: ${theme.tvDb.font.roboto};
-//       font-size: 200px;
-//       font-style: ${theme.tvDb.fontStyles.normal};
-//       font-weight: ${theme.tvDb.fontWeights.bold};
-//       color: ${theme.tvDb.fontColor.gray80};
-//       text-align: right;
-//     }
-//   `}
-// `;

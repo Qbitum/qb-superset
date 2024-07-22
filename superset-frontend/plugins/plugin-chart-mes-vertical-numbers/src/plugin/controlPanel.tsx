@@ -22,19 +22,6 @@ const config: ControlPanelConfig = {
             },
           },
         ],
-        [
-          {
-            name: 'subheader',
-            config: {
-              type: 'TextControl',
-              label: t('Subheader'),
-              renderTrigger: true,
-              description: t(
-                'Description text that shows up above your Number',
-              ),
-            },
-          },
-        ],
         ['adhoc_filters'],
         [
           {
@@ -69,28 +56,6 @@ const config: ControlPanelConfig = {
               renderTrigger: true,
               default: true,
               description: t('A checkbox to make the '),
-            },
-          },
-        ],
-        [
-          {
-            name: 'subheader_font_size',
-            config: {
-              type: 'SelectControl',
-              label: t('Subheader Font Size'),
-              default: 0.1,
-              choices: [
-                // [value, label]
-                [0.1, 'xx-small'],
-                [0.2, 'x-small'],
-                [0.3, 'small'],
-                [0.4, 'medium'],
-                [0.5, 'large'],
-                [0.6, 'x-large'],
-                [0.8, 'xx-large'],
-              ],
-              renderTrigger: true,
-              description: t('The size of your header font'),
             },
           },
         ],
