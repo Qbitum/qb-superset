@@ -79,7 +79,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
       bigNumber,
       headerFormatter,
       width,
-      colorThresholdFormatters,
+      // colorThresholdFormatters,
       fontColor,
       symbolSelect,
     } = this.props;
@@ -94,22 +94,23 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
           : // @ts-ignore
             headerFormatter(bigNumber);
 
-    const hasThresholdColorFormatter =
-      Array.isArray(colorThresholdFormatters) &&
-      colorThresholdFormatters.length > 0;
-    let numberColor;
-    if (hasThresholdColorFormatter) {
-      colorThresholdFormatters!.forEach(formatter => {
-        const formatterResult = bigNumber
-          ? formatter.getColorFromValue(bigNumber as number)
-          : false;
-        if (formatterResult) {
-          numberColor = formatterResult;
-        }
-      });
-    } else {
-      numberColor = 'black';
-    }
+    // const hasThresholdColorFormatter =
+    //   Array.isArray(colorThresholdFormatters) &&
+    //   colorThresholdFormatters.length > 0;
+
+    // let numberColor;
+    // if (hasThresholdColorFormatter) {
+    //   colorThresholdFormatters!.forEach(formatter => {
+    //     const formatterResult = bigNumber
+    //       ? formatter.getColorFromValue(bigNumber as number)
+    //       : false;
+    //     if (formatterResult) {
+    //       numberColor = formatterResult;
+    //     }
+    //   });
+    // } else {
+    //   numberColor = 'black';
+    // }
 
     const container = this.createTemporaryContainer();
     document.body.append(container);

@@ -173,8 +173,8 @@ export default typedMemo(function DataTable<D extends object>({
     headerGroups,
     footerGroups,
     page,
-    pageCount,
-    gotoPage,
+    // pageCount,
+    // gotoPage,
     preGlobalFilteredRows,
     setGlobalFilter,
     setPageSize: setPageSize_,
@@ -182,7 +182,7 @@ export default typedMemo(function DataTable<D extends object>({
     setColumnOrder,
     allColumns,
     state: {
-      pageIndex,
+      // pageIndex,
       pageSize,
       globalFilter: filterValue,
       // sticky = {}
@@ -331,27 +331,28 @@ export default typedMemo(function DataTable<D extends object>({
   //   ? {}
   //   : { visibility: 'hidden' };
 
-  let resultPageCount = pageCount;
+  // let resultPageCount = pageCount;
   let resultCurrentPageSize = pageSize;
-  let resultCurrentPage = pageIndex;
-  let resultOnPageChange: (page: number) => void = gotoPage;
-  if (serverPagination) {
-    const serverPageSize = serverPaginationData?.pageSize ?? initialPageSize;
-    resultPageCount = Math.ceil(rowCount / serverPageSize);
-    if (!Number.isFinite(resultPageCount)) {
-      resultPageCount = 0;
-    }
-    resultCurrentPageSize = serverPageSize;
-    const foundPageSizeIndex = pageSizeOptions.findIndex(
-      ([option]) => option >= resultCurrentPageSize,
-    );
-    if (foundPageSizeIndex === -1) {
-      resultCurrentPageSize = 0;
-    }
-    resultCurrentPage = serverPaginationData?.currentPage ?? 0;
-    resultOnPageChange = (pageNumber: number) =>
-      onServerPaginationChange(pageNumber, serverPageSize);
-  }
+  // let resultCurrentPage = pageIndex;
+  // let resultOnPageChange: (page: number) => void = gotoPage;
+  
+  // if (serverPagination) {
+  //   const serverPageSize = serverPaginationData?.pageSize ?? initialPageSize;
+  //   resultPageCount = Math.ceil(rowCount / serverPageSize);
+  //   if (!Number.isFinite(resultPageCount)) {
+  //     resultPageCount = 0;
+  //   }
+  //   resultCurrentPageSize = serverPageSize;
+  //   const foundPageSizeIndex = pageSizeOptions.findIndex(
+  //     ([option]) => option >= resultCurrentPageSize,
+  //   );
+  //   if (foundPageSizeIndex === -1) {
+  //     resultCurrentPageSize = 0;
+  //   }
+  //   resultCurrentPage = serverPaginationData?.currentPage ?? 0;
+  //   resultOnPageChange = (pageNumber: number) =>
+  //     onServerPaginationChange(pageNumber, serverPageSize);
+  // }
   return (
     <div
       ref={wrapperRef}

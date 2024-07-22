@@ -97,8 +97,6 @@ export default function transformProps(chartProps: ChartProps) {
           .filter((value: string) => value !== '')
       : [];
 
-  // console.log(formattedSubTitle,"lllllll");
-
   // const { data = []} = queriesData[0];
   const { data = [], coltypes = [] } = queriesData[0];
   data.length === 0 ? null : parseMetricValue(data[0][metricName]);
@@ -123,14 +121,10 @@ export default function transformProps(chartProps: ChartProps) {
       : numberFormatter;
 
   const values: HozValue[] = []; // transform query result to component model
-  console.log(data.length, 'esdftgyuh');
 
   if (noOfColumns <= data.length) {
-    console.log('columns', noOfColumns);
-
     for (let i = 0; i < noOfColumns; i++) {
       values.push({ title: subtitle[i], data: data[i][metricName] });
-      console.log('jh', data[i][metricName]);
     }
   } else {
     values.push({ title: subtitle[0], data: data[0][metricName] });

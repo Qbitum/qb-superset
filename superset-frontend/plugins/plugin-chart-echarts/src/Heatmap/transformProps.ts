@@ -176,7 +176,10 @@ export default function transformProps(
           yAxisLabel,
           metricLabel,
         );
-        let x: any, y: any, value: any;
+        let x: any;
+        let y: any; 
+        let value: any;
+
         if (Array.isArray(params.value)) {
           x = params.value[0];
           y = params.value[1];

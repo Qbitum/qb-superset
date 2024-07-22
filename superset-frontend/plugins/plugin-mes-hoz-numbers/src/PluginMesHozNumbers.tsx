@@ -118,30 +118,30 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       bigNumber,
       headerFormatter,
       width,
-      colorThresholdFormatters,
+      // colorThresholdFormatters,
       fontColor,
     } = this.props;
 
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
-    let numberColor;
+    // let numberColor;
 
-    const hasThresholdColorFormatter =
-      Array.isArray(colorThresholdFormatters) &&
-      colorThresholdFormatters.length > 0;
+    // const hasThresholdColorFormatter =
+    //   Array.isArray(colorThresholdFormatters) &&
+    //   colorThresholdFormatters.length > 0;
 
-    if (hasThresholdColorFormatter) {
-      colorThresholdFormatters!.forEach(formatter => {
-        const formatterResult = bigNumber
-          ? formatter.getColorFromValue(bigNumber as number)
-          : false;
-        if (formatterResult) {
-          numberColor = formatterResult;
-        }
-      });
-    } else {
-      numberColor = 'black';
-    }
+    // if (hasThresholdColorFormatter) {
+    //   colorThresholdFormatters!.forEach(formatter => {
+    //     const formatterResult = bigNumber
+    //       ? formatter.getColorFromValue(bigNumber as number)
+    //       : false;
+    //     if (formatterResult) {
+    //       numberColor = formatterResult;
+    //     }
+    //   });
+    // } else {
+    //   numberColor = 'black';
+    // }
 
     const container = this.createTemporaryContainer();
     document.body.append(container);
