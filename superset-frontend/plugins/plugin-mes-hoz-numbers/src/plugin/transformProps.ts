@@ -20,10 +20,8 @@ import {
   ChartProps,
   formatTime,
   GenericDataType,
-  getMetricLabel,
   getValueFormatter,
 } from '@superset-ui/core';
-import { parseMetricValue } from '../utils';
 import { HozValue } from '../types';
 
 export default function transformProps(chartProps: ChartProps) {
@@ -83,7 +81,6 @@ export default function transformProps(chartProps: ChartProps) {
     subValueFontSize,
   } = formData;
 
-  const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
   const formattedSubTitle =
     subtitle !== ''
@@ -93,16 +90,6 @@ export default function transformProps(chartProps: ChartProps) {
           .filter((value: string) => value !== '')
       : [];
   const { data = [], coltypes = [] } = queriesData[0];
-
-  // if (data.length > 0) {
-  //   parseMetricValue(data[0][metricName]);
-  // }
-
-  if (data.length === 0) {
-    null;
-  } else {
-    parseMetricValue(data[0][metricName]);
-  }
 
   // data.length === 0 ? null : parseMetricValue(data[0][metricName]);
 
@@ -125,7 +112,7 @@ export default function transformProps(chartProps: ChartProps) {
   const values: HozValue[] = []; // transform query result to component model
   // Extract values from the data
   const vals = data.length > 0 ? Object.values(data[0]) : [];
-  // create default dataset
+  // create default dataset TODO: fill empty values
   formattedSubTitle.forEach((subt: string) => {
     values.push({ title: subt, data: 0 });
   });
@@ -134,16 +121,6 @@ export default function transformProps(chartProps: ChartProps) {
       Object.assign(values[i], { title: formattedSubTitle[i], data: datum });
     }
   });
-
-  // if (noOfColumns <= data.length) {
-  //   for (let i = 0; i < noOfColumns; i++) {
-  //     values.push({ title: subtitle[i], data: data[i][metricName] });
-  //   }
-  // } else {
-  //   values.push({ title: subtitle[0], data: data[0][metricName] });
-  // }
-
-  // TODO: fill empty values
 
   return {
     width,

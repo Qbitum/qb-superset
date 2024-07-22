@@ -144,7 +144,7 @@ const config: ControlPanelConfig = {
               label: t('Sub Title'),
               renderTrigger: true,
               description: t(
-                'Description text that shows up below your Big Number',
+                'Description text that shows up below your Numbers',
               ),
             },
           },

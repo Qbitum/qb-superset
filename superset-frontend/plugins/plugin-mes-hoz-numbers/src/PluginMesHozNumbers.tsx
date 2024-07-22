@@ -26,6 +26,7 @@ import {
   styled,
 } from '@superset-ui/core';
 import { HozValue, PluginMesHozNumbersStylesProps } from './types';
+import { string } from 'prop-types';
 
 // The following Styles component is a <div> element, which has been styled using Emotion
 // For docs, visit https://emotion.sh/docs/styled
@@ -64,7 +65,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
 
   getClassName() {
     const { className, showTrendLine, bigNumberFallback } = this.props;
-    const names = `superset-legacy-chart-big-number ${className} ${
+    const names = `component-body ${className} ${
       bigNumberFallback ? 'is-fallback-value' : ''
     }`;
     if (showTrendLine) return names;
@@ -152,23 +153,13 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     );
   }
 
-  renderSubValue(maxHeight: number, numberValue = 0) {
-    const { width, fontColor } = this.props;
-
+  renderSubValue(numberValue = 0) {
+    const { fontColor } = this.props;
+    if(typeof numberValue === 'string') {
+      numberValue = (numberValue as any).substring(0,3);
+    }
     // @ts-ignore
     const text = numberValue === 0 ? t('No data') : String(numberValue);
-    // const text = numberValue === 0 ? t('No data') : numberValue + '';
-
-    const container = this.createTemporaryContainer();
-    document.body.append(container);
-    const fontSize = computeMaxFontSize({
-      text,
-      maxWidth: width,
-      maxHeight,
-      className: 'subvalue-line',
-      container,
-    });
-    container.remove();
 
     const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
       if (this.props.onContextMenu) {
@@ -181,8 +172,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       <div
         className="subvalue-line"
         style={{
-          fontSize,
-          height: maxHeight,
           color: fontColor,
         }}
         onContextMenu={onContextMenu}
@@ -234,12 +223,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     const {
       height,
       values,
-      // subheaderFontSize,
-      subValueFontSize,
       subTitleFontSize,
       subtitle,
-      // subValue
-      // noOfColumns
     } = this.props;
 
     const className = this.getClassName();
@@ -258,9 +243,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
 
     return (
       <div className={className}>
-        {/* {this.renderTitle(
-          Math.ceil(subheaderFontSize * (1 - PROPORTION.HEADER) * height),
-        )} */}
         <div className="component-body">
           <div className="block-wrapper">
             {viewModel.map((dataItem, i) => (
@@ -270,7 +252,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
                 // style={{ paddingRight: '3em' }}
               >
                 {this.renderSubValue(
-                  Math.ceil(subValueFontSize * height),
                   dataItem.data,
                 )}
                 {this.renderSubTitle(
@@ -290,8 +271,9 @@ export default styled(MesHozNumbers)`
   ${({ theme }) => `
     font-family: ${theme.tvDb.font.roboto};
     background-color: ${theme.tvDb.bg.tvDbBg};
-    padding: 16px;
-    
+    padding: ${theme.tvDb.gridUnit * 4}px;
+    height:100%;
+
     .subheader-line {
       line-height: 1em;
       padding-bottom: 0;
@@ -316,16 +298,17 @@ export default styled(MesHozNumbers)`
 
     .subvalue-line {
       line-height: 1em;
+      font-size: 8vw;
       font-weight:${theme.tvDb.fontWeights.bold};
       white-space: nowrap;
-      color: #a0b1e3;
+      color: ${theme.tvDb.fontColor.bluePurple};
     }
 
     .subtitle-line {
       color: ${theme.tvDb.fontColor.white};
       line-height: 1em;
       padding-bottom: 0;
-      color: #a0b1e3;
+      color: ${theme.tvDb.fontColor.bluePurple};
     }
   `}
 `;

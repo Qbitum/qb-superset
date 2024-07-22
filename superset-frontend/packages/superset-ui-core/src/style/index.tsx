@@ -165,13 +165,15 @@ const defaultTheme = {
   brandIconMaxWidth: 37,
 
   tvDb: {
+    gridUnit: 2,
     bg: {
-      tvDbBg: '#1F1F1F',
+      tvDbBg: '#242424',
     },
     fontColor: {
       white: '#FFFFFF',
       gray80: '#8A98AB',
       black: '#000000',
+      bluePurple: '#E3D2A0',
     },
     font: {
       roboto: `'Roboto', Helvetica, Arial`,

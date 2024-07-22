@@ -102,31 +102,8 @@ const config: ControlPanelConfig = {
     {
       label: t('Query'),
       expanded: true,
-      controlSetRows: [
-        ['metric'],
-        ['adhoc_filters'],
-      ],
+      controlSetRows: [['metric'], ['adhoc_filters']],
     },
-    // {
-    //   label: t('Display settings'),
-    //   expanded: true,
-    //   tabOverride: 'data',
-    //   controlSetRows: [
-    //     [
-    //       {
-    //         name: 'subheader',
-    //         config: {
-    //           type: 'TextControl',
-    //           label: t('Subheader'),
-    //           renderTrigger: true,
-    //           description: t(
-    //             'Description text that shows up below your Big Number',
-    //           ),
-    //         },
-    //       },
-    //     ],
-    //   ],
-    // },
     {
       label: t('Chart Options'),
       expanded: true,
@@ -190,8 +167,6 @@ const config: ControlPanelConfig = {
                 ['#FFFFFF', 'White'],
                 ['#a9a9a9', 'Gray'],
                 ['#DE3163', 'Bright Pink'],
-                // ['yellow', 'Yellow'],
-                // ['orange', 'Orange'],
               ],
               renderTrigger: true,
               description: t('The color of your header font'),
@@ -201,20 +176,6 @@ const config: ControlPanelConfig = {
       ],
     },
   ],
-  // formDataOverrides: formData => {
-  //   const groupbyColumns = getStandardizedControls().controls.columns.filter(
-  //     col => !ensureIsArray(formData.groupbyRows).includes(col),
-  //   );
-  //   getStandardizedControls().controls.columns =
-  //     getStandardizedControls().controls.columns.filter(
-  //       col => !groupbyColumns.includes(col),
-  //     );
-  //   return {
-  //     ...formData,
-  //     metrics: getStandardizedControls().popAllMetrics(),
-  //     groupbyColumns,
-  //   };
-  // },
 
   formDataOverrides: formData => ({
     ...formData,

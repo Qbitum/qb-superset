@@ -58,10 +58,8 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   };
 
   getClassName() {
-    const { className, showTrendLine, bigNumberFallback } = this.props;
-    const names = `superset-legacy-chart-big-number ${className} ${
-      bigNumberFallback ? 'is-fallback-value' : ''
-    }`;
+    const { className, showTrendLine } = this.props;
+    const names = `component-body ${className}`;
     if (showTrendLine) return names;
     return `${names} no-trendline`;
   }
@@ -121,47 +119,6 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     );
   }
 
-  // renderTitle(maxHeight: number) {
-  //   const { bigNumber, subHeader, width, bigNumberFallback } = this.props;
-  //   let fontSize = 0;
-
-  //   const NO_DATA_OR_HASNT_LANDED = t(
-  //     'No data after filtering or data is NULL for the latest time record',
-  //   );
-  //   const NO_DATA = t(
-  //     'Try applying different filters or ensuring your datasource has data',
-  //   );
-  //   let text = subHeader;
-  //   if (bigNumber === null) {
-  //     text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
-  //   }
-  //   if (text) {
-  //     const container = this.createTemporaryContainer();
-  //     document.body.append(container);
-  //     fontSize = computeMaxFontSize({
-  //       text,
-  //       maxWidth: width,
-  //       maxHeight,
-  //       className: 'subheader-line',
-  //       container,
-  //     });
-  //     container.remove();
-
-  //     return (
-  //       <div
-  //         className="subheader-line"
-  //         style={{
-  //           fontSize,
-  //           height: maxHeight,
-  //         }}
-  //       >
-  //         {text}
-  //       </div>
-  //     );
-  //   }
-  //   return null;
-  // }
-
   render() {
     const { height, headerFontSize } = this.props;
     const className = this.getClassName();
@@ -187,7 +144,11 @@ flex-direction: column;
 align-items: center;
 justify-content: center; 
 background-color: ${theme.tvDb.bg.tvDbBg};
-
+.component-body {
+      padding:${theme.tvDb.component.padding};
+      width: 100%;
+      height: 100%;
+    }
 .header-line {
   line-height: 1em;
   white-space: nowrap;
@@ -208,86 +169,5 @@ background-color: ${theme.tvDb.bg.tvDbBg};
     bottom: 0;
   }
 }
-
-.subheader-line {
-  line-height: 1em;
-  padding-bottom: 0;
-  color: ${theme.tvDb.fontColor.white};
-  font-size: 2em;
-}
-
-&.is-fallback-value {
-  .kicker,
-  .header-line,
-  .subheader-line {
-    opacity: ${theme.opacity.mediumHeavy};
-  }
-}
 `}
 `;
-
-// const Styles = styled.div<PluginChartTvDashboardStylesProps>`
-//   background-color: ${({ theme }) => theme.colors.secondary.light2};
-//   padding: ${({ theme }) => theme.gridUnit * 4}px;
-//   border-radius: ${({ theme }) => theme.gridUnit * 2}px;
-//   height: ${({ height }) => height}px;
-//   width: ${({ width }) => width}px;
-
-//   h3 {
-//     /* You can use your props to control CSS! */
-//     margin-top: 0;
-//     margin-bottom: ${({ theme }) => theme.gridUnit * 3}px;
-//     font-size: ${({ theme, headerFontSize }) =>
-//       theme.typography.sizes[headerFontSize]}px;
-//     font-weight: ${({ theme, boldText }) =>
-//       theme.typography.weights[boldText ? 'bold' : 'normal']};
-//   }
-
-//   pre {
-//     height: ${({ theme, headerFontSize, height }) =>
-//       height - theme.gridUnit * 12 - theme.typography.sizes[headerFontSize]}px;
-//   }
-// `;
-
-/**
- * ******************* WHAT YOU CAN BUILD HERE *******************
- *  In essence, a chart is given a few key ingredients to work with:
- *  * Data: provided via `props.data`
- *  * A DOM element
- *  * FormData (your controls!) provided as props by transformProps.ts
- */
-
-// export default function PluginChartTvDashboard(
-//   props: PluginChartTvDashboardProps,
-// ) {
-//   // height and width are the height and width of the DOM element as it exists in the dashboard.
-//   // There is also a `data` prop, which is, of course, your DATA 🎉
-//   const { data, height, width, fontColor } = props;
-
-//   const rootElem = createRef<HTMLDivElement>();
-
-//   // Often, you just want to access the DOM and do whatever you want.
-//   // Here, you can do that with createRef, and the useEffect hook.
-//   useEffect(() => {
-//     const root = rootElem.current as HTMLElement;
-//     console.log('Plugin element', root);
-//   });
-
-//   console.log('Plugin props', props);
-
-//   return (
-//     <Styles
-//       ref={rootElem}
-//       boldText={props.boldText}
-//       headerFontSize={props.headerFontSize}
-//       height={height}
-//       width={width}
-//       fontColor={fontColor}
-//     >
-//       {/* <h3>{props.headerText}{props.fontColor}</h3> */}
-//       {/* <pre>{props.headerText}</pre> */}
-//       <pre>fhgfh{props.headerText}</pre>
-
-//     </Styles>
-//   );
-// }

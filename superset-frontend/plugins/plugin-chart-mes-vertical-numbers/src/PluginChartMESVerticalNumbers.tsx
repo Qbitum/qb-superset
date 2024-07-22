@@ -7,14 +7,14 @@ import {
 
 const Styles = styled.div<PluginChartMESVerticalNumbersStylesProps>`
   background-color: ${({ theme }) => theme.tvDb.bg.tvDbBg};
-  padding: ${({ theme }) => theme.gridUnit * 4}px;
+  padding: 0 ${({ theme }) => theme.tvDb.gridUnit * 4}px;
   border-radius: ${({ theme }) => theme.gridUnit * 2}px;
   height: ${({ height }) => height}px;
   width: ${({ width }) => width}px;
   ${({ theme }) => `
     .number-line {
       font-family: ${theme.tvDb.font.roboto};
-      font-size: 3em;
+      font-size: 4vw;
       font-style: ${theme.tvDb.fontStyles.normal};
       font-weight: ${theme.tvDb.fontWeights.bold};
       color: ${theme.tvDb.fontColor.white};
@@ -74,7 +74,6 @@ export default function PluginChartMESHeader(
               display: 'flex',
               alignItems: 'center',
               width: '100%',
-              marginBottom: '15px',
             }}
           >
             <div className="contentTitle-line" style={{ flex: '1' }}>
