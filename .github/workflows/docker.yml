@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - "master"
+      - "mes"
   workflow_dispatch:
     inputs:
       tags:
@@ -69,7 +70,7 @@ jobs:
       - name: "Use gcloud CLI"
         run: "gcloud info"
 
-      - name: "Docker auth"
+      - name: "GCP auth"
         run: |-
           gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
       
@@ -78,18 +79,18 @@ jobs:
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
-        if: steps.check.outputs.python || steps.check.outputs.frontend || steps.check.outputs.docker
         uses: docker/setup-buildx-action@v3
 
-      - name: Setup supersetbot
-        if: steps.check.outputs.python || steps.check.outputs.frontend || steps.check.outputs.docker
-        uses: ./.github/actions/setup-supersetbot/
+      - name: Get tag
+        id: get-tag
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
       - name: Build Docker Image
-        if: steps.check.outputs.python || steps.check.outputs.frontend || steps.check.outputs.docker
+        id: build-image
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GCP_CREDENCIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         run: |
           # Single platform builds in pull_request context to speed things up
           if [ "${{ github.event_name }}" = "push" ]; then
@@ -98,8 +99,21 @@ jobs:
             PLATFORM_ARG="--platform linux/amd64"
           fi
 
-          supersetbot docker \
-            --preset ${{ matrix.build_preset }} \
-            --context "$EVENT" \
-            --context-ref "$RELEASE" $FORCE_LATEST \
-            $PLATFORM_ARG
+          echo $GCP_CREDENCIALS | base64 -d >  gcloud_keys
+          gcloud auth activate-service-account --key-file gcloud_keys
+          gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
+
+          docker buildx build --load \
+          -t asia-southeast1-docker.pkg.dev/makeitmes/superset-1/mes-analytics-web:v1.0.0 \
+          --cache-from=type=registry,ref=apache/superset-cache:3.9-slim-bookworm \
+          --build-arg PY_VER=3.9-slim-bookworm \
+          --platform linux/amd64 \
+          \
+          --label target= \
+          --label build_trigger=release \
+          --label base=3.9-slim-bookworm \
+          --label build_actor=shadeeka \
+          -f Dockerfile .
+
+          docker push asia-southeast1-docker.pkg.dev/makeitmes/superset-1/mes-analytics-web:v1.0.0
+
