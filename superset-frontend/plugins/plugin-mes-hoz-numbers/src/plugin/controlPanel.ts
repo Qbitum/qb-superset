@@ -279,11 +279,11 @@ const config: ControlPanelConfig = {
               label: t('Font Color'),
               // default: 'black',
               choices: [
-                ['#000000', 'Black'],
+                // ['#000000', 'Black'],
                 ['#FFFFFF', 'White'],
                 ['#a9a9a9', 'Gray'],
                 ['#DE3163', 'Bright Pink'],
-                // ['yellow', 'Yellow'],
+                ['#a0b1e3', 'Dark Gray'],
                 // ['orange', 'Orange'],
               ],
               renderTrigger: true,

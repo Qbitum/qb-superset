@@ -79,39 +79,39 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     return container;
   }
 
-  renderTitle(maxHeight: number) {
-    const { subHeader, width } = this.props;
-    let fontSize = 0;
+  // renderTitle(maxHeight: number) {
+  //   const { subHeader, width } = this.props;
+  //   let fontSize = 0;
 
-    const text = subHeader;
+  //   const text = subHeader;
 
-    if (text) {
-      const container = this.createTemporaryContainer();
-      document.body.append(container);
-      fontSize = computeMaxFontSize({
-        text,
-        maxWidth: width,
-        maxHeight,
-        className: 'subheader-line',
-        container,
-      });
-      // fontColor;
-      container.remove();
+  //   if (text) {
+  //     const container = this.createTemporaryContainer();
+  //     document.body.append(container);
+  //     fontSize = computeMaxFontSize({
+  //       text,
+  //       maxWidth: width,
+  //       maxHeight,
+  //       className: 'subheader-line',
+  //       container,
+  //     });
+  //     // fontColor;
+  //     container.remove();
 
-      return (
-        <div
-          className="subheader-line"
-          style={{
-            fontSize,
-            height: maxHeight,
-          }}
-        >
-          {text}
-        </div>
-      );
-    }
-    return null;
-  }
+  //     return (
+  //       <div
+  //         className="subheader-line"
+  //         style={{
+  //           fontSize,
+  //           height: maxHeight,
+  //         }}
+  //       >
+  //         {text}
+  //       </div>
+  //     );
+  //   }
+  //   return null;
+  // }
 
   renderNoOfColumns(maxHeight: number) {
     const { bigNumber, headerFormatter, width, fontColor } = this.props;
@@ -223,7 +223,6 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
             height: maxHeight,
           }}
         >
-          {/* {fontColor} */}
           {text}
         </div>
       );
@@ -235,7 +234,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     const {
       height,
       values,
-      subheaderFontSize,
+      // subheaderFontSize,
       subValueFontSize,
       subTitleFontSize,
       subtitle,
@@ -259,16 +258,16 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
 
     return (
       <div className={className}>
-        {this.renderTitle(
+        {/* {this.renderTitle(
           Math.ceil(subheaderFontSize * (1 - PROPORTION.HEADER) * height),
-        )}
+        )} */}
         <div className="component-body">
           <div className="block-wrapper">
             {viewModel.map((dataItem, i) => (
               <div
                 className="num-block"
                 key={i}
-                style={{ paddingRight: '3em' }}
+                // style={{ paddingRight: '3em' }}
               >
                 {this.renderSubValue(
                   Math.ceil(subValueFontSize * height),
@@ -306,33 +305,32 @@ export default styled(MesHozNumbers)`
     }
     .component-body {
       padding:${theme.tvDb.component.padding};
-      display: flex;
-      flex-direction: column;
       width: 100%;
       height: 100%;
-      justify-content: center;
     }
     
     .block-wrapper{
     display:flex;
     justify-content: space-around;
     }
+    
     .num-block{
     display: flex;
     flex-direction:column;
     }
 
     .subvalue-line {
-      position: relative;
       line-height: 1em;
       font-weight:${theme.tvDb.fontWeights.bold};
       white-space: nowrap;
+      color: #a0b1e3;
     }
 
     .subtitle-line {
       color: ${theme.tvDb.fontColor.white};
       line-height: 1em;
       padding-bottom: 0;
+      color: #a0b1e3;
     }
   `}
 `;

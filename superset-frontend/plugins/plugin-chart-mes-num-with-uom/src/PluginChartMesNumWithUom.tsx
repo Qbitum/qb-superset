@@ -121,55 +121,55 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     );
   }
 
-  renderTitle(maxHeight: number) {
-    const { bigNumber, subHeader, width, bigNumberFallback } = this.props;
-    let fontSize = 0;
+  // renderTitle(maxHeight: number) {
+  //   const { bigNumber, subHeader, width, bigNumberFallback } = this.props;
+  //   let fontSize = 0;
 
-    const NO_DATA_OR_HASNT_LANDED = t(
-      'No data after filtering or data is NULL for the latest time record',
-    );
-    const NO_DATA = t(
-      'Try applying different filters or ensuring your datasource has data',
-    );
-    let text = subHeader;
-    if (bigNumber === null) {
-      text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
-    }
-    if (text) {
-      const container = this.createTemporaryContainer();
-      document.body.append(container);
-      fontSize = computeMaxFontSize({
-        text,
-        maxWidth: width,
-        maxHeight,
-        className: 'subheader-line',
-        container,
-      });
-      container.remove();
+  //   const NO_DATA_OR_HASNT_LANDED = t(
+  //     'No data after filtering or data is NULL for the latest time record',
+  //   );
+  //   const NO_DATA = t(
+  //     'Try applying different filters or ensuring your datasource has data',
+  //   );
+  //   let text = subHeader;
+  //   if (bigNumber === null) {
+  //     text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
+  //   }
+  //   if (text) {
+  //     const container = this.createTemporaryContainer();
+  //     document.body.append(container);
+  //     fontSize = computeMaxFontSize({
+  //       text,
+  //       maxWidth: width,
+  //       maxHeight,
+  //       className: 'subheader-line',
+  //       container,
+  //     });
+  //     container.remove();
 
-      return (
-        <div
-          className="subheader-line"
-          style={{
-            fontSize,
-            height: maxHeight,
-          }}
-        >
-          {text}
-        </div>
-      );
-    }
-    return null;
-  }
+  //     return (
+  //       <div
+  //         className="subheader-line"
+  //         style={{
+  //           fontSize,
+  //           height: maxHeight,
+  //         }}
+  //       >
+  //         {text}
+  //       </div>
+  //     );
+  //   }
+  //   return null;
+  // }
 
   render() {
-    const { height, headerFontSize, subheaderFontSize } = this.props;
+    const { height, headerFontSize } = this.props;
     const className = this.getClassName();
 
     return (
       <>
         <div className={className} style={{ height }}>
-          {this.renderTitle(Math.ceil(subheaderFontSize * height))}
+          {/* {this.renderTitle(Math.ceil(subheaderFontSize * height))} */}
           {this.renderValue(Math.ceil(headerFontSize * height))}
         </div>
       </>
