@@ -184,7 +184,7 @@ module.exports = {
         'react/no-unused-class-component-methods': 0,
         'import/no-relative-packages': 0,
         'prefer-exponentiation-operator': 0,
-        "no-param-reassign": ["error", { "props": false}]
+        "no-param-reassign": [2, { "props": false}]
       },
       settings: {
         'import/resolver': {
