@@ -92,11 +92,19 @@ export default function transformProps(chartProps: ChartProps) {
           .split(',')
           .filter((value: string) => value !== '')
       : [];
-
   const { data = [], coltypes = [] } = queriesData[0];
-  if (data.length > 0) {
+
+  // if (data.length > 0) {
+  //   parseMetricValue(data[0][metricName]);
+  // }
+
+  if (data.length === 0) {
+    null;
+  } else {
     parseMetricValue(data[0][metricName]);
   }
+
+  // data.length === 0 ? null : parseMetricValue(data[0][metricName]);
 
   const numberFormatter = getValueFormatter(
     metric,
@@ -115,10 +123,26 @@ export default function transformProps(chartProps: ChartProps) {
       : numberFormatter;
 
   const values: HozValue[] = []; // transform query result to component model
-
-  data.each((datum: any, i: number) => {
-    values.push({ title: subtitle[i], data: datum[metricName] });
+  // Extract values from the data
+  const vals = data.length > 0 ? Object.values(data[0]) : [];
+  // create default dataset
+  formattedSubTitle.forEach((subt: string) => {
+    values.push({ title: subt, data: 0 });
   });
+  vals.forEach((datum: any, i: number) => {
+    if (formattedSubTitle.length > i) {
+      Object.assign(values[i], { title: formattedSubTitle[i], data: datum });
+    }
+  });
+
+  // if (noOfColumns <= data.length) {
+  //   for (let i = 0; i < noOfColumns; i++) {
+  //     values.push({ title: subtitle[i], data: data[i][metricName] });
+  //   }
+  // } else {
+  //   values.push({ title: subtitle[0], data: data[0][metricName] });
+  // }
+
   // TODO: fill empty values
 
   return {

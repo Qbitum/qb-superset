@@ -27,6 +27,7 @@ export default styled.div`
       max-width: none;
       margin: 0;
       background: ${theme.tvDb.bg.tvDbBg};
+      border-color: #999999;
     }
 
     th,
@@ -35,6 +36,7 @@ export default styled.div`
       color: ${theme.tvDb.fontColor.white};
       background: ${theme.tvDb.bg.tvDbBg};
       text-align: right;
+      border-color: #999999;
     }
 
     thead > tr > th {
@@ -70,9 +72,11 @@ export default styled.div`
     // .dt-is-null {
     //   color: ${theme.colors.grayscale.light1};
     // }
-    td.dt-is-filter {
-      cursor: pointer;
-    }
+
+    // td.dt-is-filter {
+    //   cursor: pointer;
+    // }
+
     // td.dt-is-filter:hover {
     //   background-color: ${theme.colors.secondary.light4};
     // }

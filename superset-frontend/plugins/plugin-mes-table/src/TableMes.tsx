@@ -41,7 +41,7 @@ import {
   DTTM_ALIAS,
   ensureIsArray,
   GenericDataType,
-  getSelectedText,
+  // getSelectedText,
   getTimeFormatterForGranularity,
   BinaryQueryObjectFilterClause,
   styled,
@@ -426,6 +426,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
         isPercentMetric,
         config = {},
       } = column;
+
       const columnWidth = Number.isNaN(Number(config.columnWidth))
         ? config.columnWidth
         : Number(config.columnWidth);
@@ -523,15 +524,15 @@ export default function TableChart<D extends DataRecord = DataRecord>(
             role: 'cell',
             // show raw number in title in case of numeric values
             title: typeof value === 'number' ? String(value) : undefined,
-            onClick:
-              emitCrossFilters && !valueRange && !isMetric
-                ? () => {
-                    // allow selecting text in a cell
-                    if (!getSelectedText()) {
-                      toggleFilter(key, value);
-                    }
-                  }
-                : undefined,
+            // onClick:
+            //   emitCrossFilters && !valueRange && !isMetric
+            //     ? () => {
+            //         // allow selecting text in a cell
+            //         if (!getSelectedText()) {
+            //           toggleFilter(key, value);
+            //         }
+            //       }
+            //     : undefined,
             onContextMenu: (e: MouseEvent) => {
               if (handleContextMenu) {
                 e.preventDefault();
@@ -597,7 +598,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
             </StyledCell>
           );
         },
-        Header: ({ column: col, onClick, style, onDragStart, onDrop }) => (
+        Header: ({ column: col, style, onDragStart, onDrop }) => (
           <th
             // id={`header-${column.key}`}
             // title={t('Shift + Click to sort by multiple columns')}
@@ -641,7 +642,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
                 alignItems: 'flex-end',
               }}
             >
-              <span data-column-name={col.id}>{label}</span>
+              <span data-column-name={col.id}>{label.toUpperCase()}</span>
               {/* <SortIcon column={col} /> */}
             </div>
           </th>

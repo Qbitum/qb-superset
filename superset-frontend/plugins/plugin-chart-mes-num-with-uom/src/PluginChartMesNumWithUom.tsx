@@ -179,49 +179,51 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
 
 export default styled(TvDashboard)`
   ${({ theme }) => `
-    font-family: ${theme.tvDb.font.roboto};
-    font-style: ${theme.tvDb.fontStyles.normal};
-    font-weight:${theme.tvDb.fontWeights.normal};
-    padding: 16pt;
-    align-items: flex-start;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background-color: ${theme.tvDb.bg.tvDbBg};
+font-family: ${theme.tvDb.font.roboto};
+font-style: ${theme.tvDb.fontStyles.normal};
+font-weight: ${theme.tvDb.fontWeights.normal};
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center; 
+background-color: ${theme.tvDb.bg.tvDbBg};
 
-    .header-line {
-      position: relative;
-      line-height: 1em;
-      white-space: nowrap;
-      padding-top: 50pt;
-      padding-left: 100pt;
-      text-edge: cap;
-      font-family: ${theme.tvDb.font.roboto};
-      font-size: 200px;
-      font-style: ${theme.tvDb.fontStyles.normal};
-      font-weight:${theme.tvDb.fontWeights.bold};
-      span {
-        position: absolute;
-        bottom: 0; 
+.header-line {
+  line-height: 1em;
+  white-space: nowrap;
+  text-edge: cap;
+  font-family: ${theme.tvDb.font.roboto};
+  font-size: 200px;
+  font-style: ${theme.tvDb.fontStyles.normal};
+  font-weight: ${theme.tvDb.fontWeights.bold};
+  color: ${theme.tvDb.fontColor.white};
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  width: 100%;
+  height: 100%;
+  position: relative; 
+  span {
+    position: absolute;
+    bottom: 0;
+  }
+}
 
-      }
-    }
+.subheader-line {
+  line-height: 1em;
+  padding-bottom: 0;
+  color: ${theme.tvDb.fontColor.white};
+  font-size: 2em;
+}
 
-    .subheader-line {
-      line-height: 1em;
-      padding-bottom: 0;
-      color: ${theme.tvDb.fontColor.white};
-      font-size: 2em;
-    }
-
-    &.is-fallback-value {
-      .kicker,
-      .header-line,
-      .subheader-line {
-        opacity: ${theme.opacity.mediumHeavy};
-      }
-    }
-  `}
+&.is-fallback-value {
+  .kicker,
+  .header-line,
+  .subheader-line {
+    opacity: ${theme.opacity.mediumHeavy};
+  }
+}
+`}
 `;
 
 // const Styles = styled.div<PluginChartTvDashboardStylesProps>`
