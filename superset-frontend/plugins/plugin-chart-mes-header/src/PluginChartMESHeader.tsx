@@ -168,7 +168,7 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
           <img
             src={Logo}
             alt="Makeit Logo"
-            style={{ height: '30pt', marginLeft: '14pt',  }}
+            style={{ height: '30pt', marginLeft: '14pt' }}
           />
         </h3>
       </div>

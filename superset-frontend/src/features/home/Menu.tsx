@@ -59,6 +59,7 @@ const StyledHeader = styled.header`
         justify-content: center;
         /* must be exactly the height of the Antd navbar */
         min-height: 50px;
+        background-color:${theme.colors.grayscale.dark1};
         padding: ${theme.gridUnit}px
           ${theme.gridUnit * 2}px
           ${theme.gridUnit}px
@@ -99,6 +100,7 @@ const StyledHeader = styled.header`
       @media (max-width: 767px) {
         .navbar-brand {
           float: none;
+          background-color:${theme.colors.grayscale.dark1};
         }
       }
       .ant-menu-horizontal .ant-menu-item {

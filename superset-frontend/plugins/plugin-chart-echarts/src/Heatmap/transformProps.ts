@@ -177,7 +177,7 @@ export default function transformProps(
           metricLabel,
         );
         let x: any;
-        let y: any; 
+        let y: any;
         let value: any;
 
         if (Array.isArray(params.value)) {

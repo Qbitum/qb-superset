@@ -6,7 +6,8 @@ PREVIOUS_SECRET_KEY ="some_random_base64_string"
 APP_NAME = "QB Analytics"
 
 # Specify the App icon
-APP_ICON = "/static/assets/images/qlogo.jpg"
+APP_ICON = "/static/assets/images/makeit-logo.png"
+FAVICONS = [{"href": "/static/assets/images/favicon.ico"}]
 
 FEATURE_FLAGS: dict[str, bool] = {
     "CHART_PLUGINS_EXPERIMENTAL": False,

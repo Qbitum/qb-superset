@@ -25,7 +25,7 @@ import {
 } from '@superset-ui/core';
 import { parseMetricValue } from '../utils';
 import { HozValue } from '../types';
-// import { title } from 'process';
+
 export default function transformProps(chartProps: ChartProps) {
   /**
    * This function is called after a successful response has been
@@ -61,11 +61,7 @@ export default function transformProps(chartProps: ChartProps) {
     height,
     formData,
     queriesData,
-    datasource: {
-      // currencyFormats = {},
-      columnFormats = {},
-      symbolFormats = {},
-    },
+    datasource: { columnFormats = {}, symbolFormats = {} },
   } = chartProps;
 
   const {
@@ -97,12 +93,10 @@ export default function transformProps(chartProps: ChartProps) {
           .filter((value: string) => value !== '')
       : [];
 
-  // const { data = []} = queriesData[0];
   const { data = [], coltypes = [] } = queriesData[0];
-  data.length === 0 ? null : parseMetricValue(data[0][metricName]);
-
-  // console.log('formData', formattedSubTitle);
-  // console.log("currency", currencyFormat);
+  if (data.length > 0) {
+    parseMetricValue(data[0][metricName]);
+  }
 
   const numberFormatter = getValueFormatter(
     metric,
@@ -122,13 +116,10 @@ export default function transformProps(chartProps: ChartProps) {
 
   const values: HozValue[] = []; // transform query result to component model
 
-  if (noOfColumns <= data.length) {
-    for (let i = 0; i < noOfColumns; i++) {
-      values.push({ title: subtitle[i], data: data[i][metricName] });
-    }
-  } else {
-    values.push({ title: subtitle[0], data: data[0][metricName] });
-  }
+  data.each((datum: any, i: number) => {
+    values.push({ title: subtitle[i], data: datum[metricName] });
+  });
+  // TODO: fill empty values
 
   return {
     width,

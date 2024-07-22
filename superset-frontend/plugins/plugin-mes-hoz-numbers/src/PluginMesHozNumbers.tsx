@@ -114,34 +114,10 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderNoOfColumns(maxHeight: number) {
-    const {
-      bigNumber,
-      headerFormatter,
-      width,
-      // colorThresholdFormatters,
-      fontColor,
-    } = this.props;
+    const { bigNumber, headerFormatter, width, fontColor } = this.props;
 
     // @ts-ignore
     const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
-    // let numberColor;
-
-    // const hasThresholdColorFormatter =
-    //   Array.isArray(colorThresholdFormatters) &&
-    //   colorThresholdFormatters.length > 0;
-
-    // if (hasThresholdColorFormatter) {
-    //   colorThresholdFormatters!.forEach(formatter => {
-    //     const formatterResult = bigNumber
-    //       ? formatter.getColorFromValue(bigNumber as number)
-    //       : false;
-    //     if (formatterResult) {
-    //       numberColor = formatterResult;
-    //     }
-    //   });
-    // } else {
-    //   numberColor = 'black';
-    // }
 
     const container = this.createTemporaryContainer();
     document.body.append(container);
