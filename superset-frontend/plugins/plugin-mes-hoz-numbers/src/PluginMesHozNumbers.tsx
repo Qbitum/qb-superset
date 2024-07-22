@@ -291,11 +291,6 @@ export default styled(MesHozNumbers)`
     font-family: ${theme.tvDb.font.roboto};
     background-color: ${theme.tvDb.bg.tvDbBg};
     padding: 16px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
     
     .subheader-line {
       line-height: 1em;

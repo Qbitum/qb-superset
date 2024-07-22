@@ -18,7 +18,8 @@
  */
 import { Behavior, ChartMetadata, ChartPlugin, t } from '@superset-ui/core';
 import transformProps from './transformProps';
-import { thumbnail, example1 } from './images/mes-table.png';
+import { thumbnail } from './images/mes-table.png';
+import { example1 } from './images/mes-table.png';
 import controlPanel from './controlPanel';
 import buildQuery from './buildQuery';
 import { TableChartFormData, TableChartProps } from './types';
