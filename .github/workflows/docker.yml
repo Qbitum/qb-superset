@@ -52,12 +52,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Check for file changes
-        id: check
-        uses: ./.github/actions/change-detector/
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Authentication GCP
         id: "auth"
         uses: "google-github-actions/auth@v1"
