@@ -75,7 +75,6 @@ jobs:
           gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
       
       - name: Set up QEMU
-        if: steps.check.outputs.python || steps.check.outputs.frontend || steps.check.outputs.docker
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
