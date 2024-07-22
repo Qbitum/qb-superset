@@ -14,7 +14,7 @@ const Styles = styled.div<PluginChartMESVerticalNumbersStylesProps>`
   ${({ theme }) => `
     .number-line {
       font-family: ${theme.tvDb.font.roboto};
-      font-size: 50pt;
+      font-size: 3em;
       font-style: ${theme.tvDb.fontStyles.normal};
       font-weight: ${theme.tvDb.fontWeights.bold};
       color: ${theme.tvDb.fontColor.white};
@@ -27,7 +27,7 @@ const Styles = styled.div<PluginChartMESVerticalNumbersStylesProps>`
       font-family: ${theme.tvDb.font.roboto};
       font-style: ${theme.tvDb.fontStyles.normal};
       font-weight:${theme.tvDb.fontWeights.normal};
-      font-size: 50pt;
+      font-size: 3em;
       color: ${theme.tvDb.fontColor.gray80};
       text-align: left;
     }

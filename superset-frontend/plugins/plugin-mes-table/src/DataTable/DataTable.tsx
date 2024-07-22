@@ -335,7 +335,7 @@ export default typedMemo(function DataTable<D extends object>({
   let resultCurrentPageSize = pageSize;
   // let resultCurrentPage = pageIndex;
   // let resultOnPageChange: (page: number) => void = gotoPage;
-  
+
   // if (serverPagination) {
   //   const serverPageSize = serverPaginationData?.pageSize ?? initialPageSize;
   //   resultPageCount = Math.ceil(rowCount / serverPageSize);
