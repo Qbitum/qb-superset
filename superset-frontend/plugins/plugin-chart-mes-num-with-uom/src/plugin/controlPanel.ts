@@ -103,66 +103,34 @@ const config: ControlPanelConfig = {
       label: t('Query'),
       expanded: true,
       controlSetRows: [
-        // [
-        //   {
-        //     name: 'cols',
-        //     config: {
-        //       ...sharedControls.groupby,
-        //       label: t('Columns'),
-        //       description: t('Columns to group by'),
-        //     },
-        //   },
-        // ],
         ['metric'],
         ['adhoc_filters'],
       ],
     },
-    {
-      label: t('Display settings'),
-      expanded: true,
-      tabOverride: 'data',
-      controlSetRows: [
-        [
-          {
-            name: 'subheader',
-            config: {
-              type: 'TextControl',
-              label: t('Subheader'),
-              renderTrigger: true,
-              description: t(
-                'Description text that shows up below your Big Number',
-              ),
-            },
-          },
-        ],
-      ],
-    },
+    // {
+    //   label: t('Display settings'),
+    //   expanded: true,
+    //   tabOverride: 'data',
+    //   controlSetRows: [
+    //     [
+    //       {
+    //         name: 'subheader',
+    //         config: {
+    //           type: 'TextControl',
+    //           label: t('Subheader'),
+    //           renderTrigger: true,
+    //           description: t(
+    //             'Description text that shows up below your Big Number',
+    //           ),
+    //         },
+    //       },
+    //     ],
+    //   ],
+    // },
     {
       label: t('Chart Options'),
       expanded: true,
       controlSetRows: [
-        // [
-        //   {
-        //     name: 'subheader_font_size',
-        //     config: {
-        //       type: 'SelectControl',
-        //       label: t('Subheader Font Size'),
-        //       default: 0.4,
-        //       choices: [
-        //         // [value, label]
-        //         [0.1, 'xx-small'],
-        //         [0.2, 'x-small'],
-        //         [0.3, 'small'],
-        //         [0.4, 'medium'],
-        //         [0.5, 'large'],
-        //         [0.6, 'x-large'],
-        //         [0.8, 'xx-large'],
-        //       ],
-        //       renderTrigger: true,
-        //       description: t('The size of your header font'),
-        //     },
-        //   },
-        // ],
         [
           {
             name: 'header_font_size',
@@ -185,19 +153,6 @@ const config: ControlPanelConfig = {
             },
           },
         ],
-
-        // [
-        //   {
-        //     name: 'bold_text',
-        //     config: {
-        //       type: 'CheckboxControl',
-        //       label: t('Bold Text'),
-        //       renderTrigger: true,
-        //       default: true,
-        //       description: t('A checkbox to make the '),
-        //     },
-        //   },
-        // ],
         ['currency_format'],
         [
           {

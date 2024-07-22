@@ -126,19 +126,6 @@ const config: ControlPanelConfig = {
       controlSetRows: [
         [
           {
-            name: 'subheader',
-            config: {
-              type: 'TextControl',
-              label: t('Title'),
-              renderTrigger: true,
-              description: t(
-                'Description text that shows up below your Big Number',
-              ),
-            },
-          },
-        ],
-        [
-          {
             name: 'noOfColumns',
             config: {
               type: 'TextControl',
@@ -149,18 +136,6 @@ const config: ControlPanelConfig = {
             },
           },
         ],
-        // [
-        //   {
-        //     name: 'enteredValue',
-        //     config: {
-        //       type: 'TextControl',
-        //       label: t('Value Array'),
-        //       renderTrigger: true,
-        //       description: t('Enter multiple sub values, one per line'),
-        //       default: [],
-        //     },
-        //   },
-        // ],
         [
           {
             name: 'subtitle',
@@ -180,28 +155,6 @@ const config: ControlPanelConfig = {
       label: t('Chart Options'),
       expanded: true,
       controlSetRows: [
-        // [
-        //   {
-        //     name: 'subheader_font_size',
-        //     config: {
-        //       type: 'SelectControl',
-        //       label: t('Subheader Font Size'),
-        //       default: 0.1,
-        //       choices: [
-        //         // [value, label]
-        //         [0.1, 'xx-small'],
-        //         [0.2, 'x-small'],
-        //         [0.3, 'small'],
-        //         [0.4, 'medium'],
-        //         [0.5, 'large'],
-        //         [0.6, 'x-large'],
-        //         [0.8, 'xx-large'],
-        //       ],
-        //       renderTrigger: true,
-        //       description: t('The size of your header font'),
-        //     },
-        //   },
-        // ],
         [
           {
             name: 'header_font_size',
@@ -224,53 +177,6 @@ const config: ControlPanelConfig = {
             },
           },
         ],
-        // [
-        //   {
-        //     name: 'selected_symbol',
-        //     config: {
-        //       type: 'SelectControl',
-        //       label: t('Symbol'),
-        //       default: '',
-        //       choices: [
-        //         // [value, label]
-        //         ['%', 'percentage'],
-        //       ],
-        //       renderTrigger: true,
-        //       description: t('Select Symbol'),
-        //     },
-        //   },
-        // ],
-
-        // [
-        //   {
-        //     name: 'bold_text',
-        //     config: {
-        //       type: 'CheckboxControl',
-        //       label: t('Bold Text'),
-        //       renderTrigger: true,
-        //       default: true,
-        //       description: t('A checkbox to make the '),
-        //     },
-        //   },
-        // ],
-        // [
-        //   {
-        //     name: 'percentDifferenceFormat',
-        //     config: {
-        //       ...sharedControls.y_axis_format,
-        //       label: t('Percent Difference format'),
-        //     },
-        //   },
-        // ],
-
-        // ['currency_format'],
-
-        // [
-        //   {
-        //     name: 'row_limit',
-        //     config: sharedControls.currency_format
-        //   },
-        // ],
         [
           {
             name: 'font_color',
