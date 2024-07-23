@@ -47,6 +47,7 @@ const config: ControlPanelConfig = {
             },
           },
         ],
+        [],
         [
           {
             name: 'bold_text',
@@ -56,6 +57,24 @@ const config: ControlPanelConfig = {
               renderTrigger: true,
               default: true,
               description: t('A checkbox to make the '),
+            },
+          },
+        ],
+      ],
+    },
+    {
+      label: t('Display content'),
+      expanded: true,
+      tabOverride: 'data',
+      controlSetRows: [
+        [
+          {
+            name: 'content_titles',
+            config: {
+              type: 'TextControl',
+              label: t('Content_Titles'),
+              renderTrigger: true,
+              description: t('Description text '),
             },
           },
         ],

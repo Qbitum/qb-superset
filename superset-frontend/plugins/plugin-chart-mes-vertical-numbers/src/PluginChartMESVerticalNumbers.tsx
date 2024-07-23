@@ -42,7 +42,7 @@ const Styles = styled.div<PluginChartMESVerticalNumbersStylesProps>`
   `}
 `;
 
-export default function PluginChartMESHeader(
+export default function PluginChartMESVerticalNUmbers(
   props: PluginChartMESVerticalNumbersProps,
 ) {
   const { data, height, width, boldText } = props;
@@ -57,6 +57,7 @@ export default function PluginChartMESHeader(
   // Extract values from the data
   const values = data.length > 0 ? Object.values(data[0]) : [];
   const headers = data.length > 0 ? Object.keys(data[0]) : [];
+  console.log('values', values);
 
   return (
     <Styles ref={rootElem} boldText={boldText} height={height} width={width}>
@@ -80,7 +81,7 @@ export default function PluginChartMESHeader(
               {header}
             </div>
             <span className="number-line" style={{ flex: '1' }}>
-              {values[index]}
+              {values[index] === 'null' ? 'No data' : values[index]}
             </span>
           </div>
         ))}
