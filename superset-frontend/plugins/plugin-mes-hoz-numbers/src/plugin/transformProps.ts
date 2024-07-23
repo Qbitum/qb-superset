@@ -118,7 +118,7 @@ export default function transformProps(chartProps: ChartProps) {
   });
   vals.forEach((datum: any, i: number) => {
     if (formattedSubTitle.length > i) {
-      values[i] = Object.assign({}, { title: formattedSubTitle[i], data: datum });
+      values[i] = { ...{}, ...{ title: formattedSubTitle[i], data: datum } };
     }
   });
 
