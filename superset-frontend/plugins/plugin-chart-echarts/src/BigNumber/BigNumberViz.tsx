@@ -181,7 +181,6 @@ class BigNumberVis extends React.PureComponent<BigNumberVizProps> {
         }}
         onContextMenu={onContextMenu}
       >
-        jkk
         {text}
       </div>
     );

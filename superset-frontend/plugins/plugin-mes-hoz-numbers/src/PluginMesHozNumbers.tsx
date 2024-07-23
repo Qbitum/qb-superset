@@ -159,7 +159,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       recurrenceValue = (numberValue as any).substring(0, 3);
     }
     // @ts-ignore
-    const text = recurrenceValue === 0 ? t('No data') : String(recurrenceValue);
+    const text = recurrenceValue === 0 ? t('-') : String(recurrenceValue);
 
     const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
       if (this.props.onContextMenu) {
@@ -290,14 +290,14 @@ export default styled(MesHozNumbers)`
       font-size: 8vw;
       font-weight:${theme.tvDb.fontWeights.bold};
       white-space: nowrap;
-      color: ${theme.tvDb.fontColor.bluePurple};
+      color: ${theme.tvDb.fontColor.gray80};
     }
 
     .subtitle-line {
       color: ${theme.tvDb.fontColor.white};
       line-height: 1em;
       padding-bottom: 0;
-      color: ${theme.tvDb.fontColor.bluePurple};
+      color: ${theme.tvDb.fontColor.gray80};
     }
   `}
 `;
