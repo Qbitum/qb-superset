@@ -26,7 +26,6 @@ import {
   styled,
 } from '@superset-ui/core';
 import { HozValue, PluginMesHozNumbersStylesProps } from './types';
-import { string } from 'prop-types';
 
 // The following Styles component is a <div> element, which has been styled using Emotion
 // For docs, visit https://emotion.sh/docs/styled
@@ -155,11 +154,12 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
 
   renderSubValue(numberValue = 0) {
     const { fontColor } = this.props;
-    if(typeof numberValue === 'string') {
-      numberValue = (numberValue as any).substring(0,3);
+    let recurrenceValue = numberValue;
+    if (typeof numberValue === 'string') {
+      recurrenceValue = (numberValue as any).substring(0, 3);
     }
     // @ts-ignore
-    const text = numberValue === 0 ? t('No data') : String(numberValue);
+    const text = recurrenceValue === 0 ? t('No data') : String(recurrenceValue);
 
     const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
       if (this.props.onContextMenu) {
@@ -220,12 +220,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   render() {
-    const {
-      height,
-      values,
-      subTitleFontSize,
-      subtitle,
-    } = this.props;
+    const { height, values, subTitleFontSize, subtitle } = this.props;
 
     const className = this.getClassName();
 
@@ -246,14 +241,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
         <div className="component-body">
           <div className="block-wrapper">
             {viewModel.map((dataItem, i) => (
-              <div
-                className="num-block"
-                key={i}
-                // style={{ paddingRight: '3em' }}
-              >
-                {this.renderSubValue(
-                  dataItem.data,
-                )}
+              <div className="num-block" key={i}>
+                {this.renderSubValue(dataItem.data)}
                 {this.renderSubTitle(
                   Math.ceil(subTitleFontSize * height),
                   dataItem.title,
@@ -312,69 +301,3 @@ export default styled(MesHozNumbers)`
     }
   `}
 `;
-
-// const Styles = styled.div<PluginChartTvDashboardStylesProps>`
-//   background-color: ${({ theme }) => theme.colors.secondary.light2};
-//   padding: ${({ theme }) => theme.gridUnit * 4}px;
-//   border-radius: ${({ theme }) => theme.gridUnit * 2}px;
-//   height: ${({ height }) => height}px;
-//   width: ${({ width }) => width}px;
-
-//   h3 {
-//     /* You can use your props to control CSS! */
-//     margin-top: 0;
-//     margin-bottom: ${({ theme }) => theme.gridUnit * 3}px;
-//     font-size: ${({ theme, headerFontSize }) =>
-//       theme.typography.sizes[headerFontSize]}px;
-//     font-weight: ${({ theme, boldText }) =>
-//       theme.typography.weights[boldText ? 'bold' : 'normal']};
-//   }
-
-//   pre {
-//     height: ${({ theme, headerFontSize, height }) =>
-//       height - theme.gridUnit * 12 - theme.typography.sizes[headerFontSize]}px;
-//   }
-// `;
-
-/**
- * ******************* WHAT YOU CAN BUILD HERE *******************
- *  In essence, a chart is given a few key ingredients to work with:
- *  * Data: provided via `props.data`
- *  * A DOM element
- *  * FormData (your controls!) provided as props by transformProps.ts
- */
-
-// export default function PluginChartTvDashboard(
-//   props: PluginChartTvDashboardProps,
-// ) {
-//   // height and width are the height and width of the DOM element as it exists in the dashboard.
-//   // There is also a `data` prop, which is, of course, your DATA 🎉
-//   const { data, height, width, fontColor } = props;
-
-//   const rootElem = createRef<HTMLDivElement>();
-
-//   // Often, you just want to access the DOM and do whatever you want.
-//   // Here, you can do that with createRef, and the useEffect hook.
-//   useEffect(() => {
-//     const root = rootElem.current as HTMLElement;
-//     console.log('Plugin element', root);
-//   });
-
-//   console.log('Plugin props', props);
-
-//   return (
-//     <Styles
-//       ref={rootElem}
-//       boldText={props.boldText}
-//       headerFontSize={props.headerFontSize}
-//       height={height}
-//       width={width}
-//       fontColor={fontColor}
-//     >
-//       {/* <h3>{props.headerText}{props.fontColor}</h3> */}
-//       {/* <pre>{props.headerText}</pre> */}
-//       <pre>fhgfh{props.headerText}</pre>
-
-//     </Styles>
-//   );
-// }

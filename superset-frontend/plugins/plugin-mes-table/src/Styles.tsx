@@ -27,7 +27,7 @@ export default styled.div`
       max-width: none;
       margin: 0;
       background: ${theme.tvDb.bg.tvDbBg};
-      border-color: #999999;
+      border-color: ${theme.tvDb.pcb.border};
     }
 
     th,
@@ -36,7 +36,7 @@ export default styled.div`
       color: ${theme.tvDb.fontColor.white};
       background: ${theme.tvDb.bg.tvDbBg};
       text-align: right;
-      border-color: #999999;
+      border-color: ${theme.tvDb.pcb.border};
     }
 
     thead > tr > th {
@@ -45,12 +45,8 @@ export default styled.div`
       // text-align: left;
     }
     th svg {
-      // color: ${theme.tvDb.fontColor.white};
       margin: ${theme.gridUnit / 2}px;
     }
-    // th.is-sorted svg {
-    //   color: ${theme.colors.grayscale.base};
-    // }
     .table > tbody > tr:first-of-type > td,
     .table > tbody > tr:first-of-type > th {
       border-top: 0;

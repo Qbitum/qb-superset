@@ -128,14 +128,12 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
     const { height, numberFontSize } = this.props;
     const className = this.getClassName();
     return (
-      <>
-        <div className={className} style={{ height }}>
-          {this.renderFallbackWarning()}
-          <div className="container">
-            {this.renderNumber(Math.ceil(numberFontSize * height))}
-          </div>
+      <div className={className} style={{ height }}>
+        {this.renderFallbackWarning()}
+        <div className="container">
+          {this.renderNumber(Math.ceil(numberFontSize * height))}
         </div>
-      </>
+      </div>
     );
   }
 }
@@ -145,13 +143,12 @@ export default styled(MESNumber)`
     font-family: ${theme.tvDb.font.roboto};
     font-style: ${theme.tvDb.fontStyles.normal};
     font-weight:${theme.tvDb.fontWeights.normal};
-    padding: 16pt;
+    padding: ${theme.tvDb.gridUnit * 4}px;
     align-items: flex-start;
     position: relative;
     display: flex;
     flex-direction: column;
     background-color: ${theme.tvDb.bg.tvDbBg};
-    margin: 4pt;
 
     .number-line {
       line-height: 1em;

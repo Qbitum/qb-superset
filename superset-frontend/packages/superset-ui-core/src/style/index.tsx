@@ -200,6 +200,9 @@ const defaultTheme = {
       greenbg: '#47BC00',
       transparentbg: 'transparent',
     },
+    pcb: {
+      border: '#999999',
+    },
   },
 };
 
