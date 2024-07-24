@@ -26,7 +26,10 @@ const Styles = styled.div<PluginChartMESHeaderStylesProps>`
   height: auto;
   width: 100%;
   padding: 4pt;
-
+  .db-title {
+    margin: 0;
+    color: ${({ theme }) => theme.tvDb.fontColor.white};
+  }
   h3 {
     margin-top: 0;
     margin-bottom: 0;
@@ -39,6 +42,14 @@ const Styles = styled.div<PluginChartMESHeaderStylesProps>`
     display: flex;
     align-items: center;
     height: 100%;
+  }
+  .logo-wrapper {
+    display: 'flex';
+    height: '30pt';
+    marginleft: '14pt';
+    alignitems: 'self-end';
+    color: ${({ theme }) => theme.tvDb.fontColor.white};
+    flexgrow: '3';
   }
 `;
 
@@ -86,7 +97,6 @@ const TransparentBadgeStyled = styled.div`
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 8px;
   padding: 16px 20px;
-
 `;
 
 export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
@@ -104,104 +114,111 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
 
   return (
     <Styles
-    ref={rootElem}
-    boldText={boldText}
-    headerFontSize={headerFontSize}
-    height={height}
-    width={width}
-  >
-    {/* <h3> */}
-    <h3
-      className="flex"
-      style={{
-        alignContent: 'center',
-        justifyContent: 'space-between',
-        display:'flex',
-      }}
+      ref={rootElem}
+      boldText={boldText}
+      headerFontSize={headerFontSize}
+      height={height}
+      width={width}
     >
-      <div style={{ paddingRight: '3rem', display: 'flex', alignItems: 'center', flexGrow: '1', }}>
-        <h2 style={{ margin: 0, color:'white' }}>KPI</h2>
-      </div>
+      {/* <h3> */}
+      <h3
+        className="flex"
+        style={{
+          alignContent: 'center',
+          justifyContent: 'space-between',
+          display: 'flex',
+        }}
+      >
+        <div
+          style={{
+            paddingRight: '3rem',
+            display: 'flex',
+            alignItems: 'center',
+            flexGrow: '1',
+          }}
+        >
+          <h2 className="db-title">KPI</h2>
+        </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', flexGrow: '6' }}>
-        {values.map(([key, value], index) => {
-          const boxStyle = getBoxStyle(index);
-          if (
-            boxStyle.classNames !== 'greenBadge' &&
-            boxStyle.classNames !== 'transparentBadge'
-          ) {
-            return (
-              <header
-                key={index}
-                style={{
-                  marginRight: '15px',
-                  ...boxStyle,
-                }}
-              >
-                {boxStyle.classNames === 'lightPurpleBadge' ? (
-                  <LightPurpleBadgeStyled>{value}</LightPurpleBadgeStyled>
-                ) : boxStyle.classNames === 'darkPurpleBadge' ? (
-                  <DarkPurpleBadgeStyled>{value}</DarkPurpleBadgeStyled>
-                ) : boxStyle.classNames === 'lightOrangeBadge' ? (
-                  <LightOrangeBadgeStyled>{value}</LightOrangeBadgeStyled>
-                ) : boxStyle.classNames === 'darkGrayBadge' ? (
-                  <DarkGrayBadgeStyled>{value}</DarkGrayBadgeStyled>
-                ) : boxStyle.classNames === 'lightGrayBadge' ? (
-                  <LightGrayBadgeStyled>{value}</LightGrayBadgeStyled>
-                ) : (
-                  value
-                )}
-              </header>
-            );
-          }
-          return null;
-        })}
-      </div>
+        <div style={{ display: 'flex', alignItems: 'center', flexGrow: '6' }}>
+          {values.map(([key, value], index) => {
+            const boxStyle = getBoxStyle(index);
+            if (
+              boxStyle.classNames !== 'greenBadge' &&
+              boxStyle.classNames !== 'transparentBadge'
+            ) {
+              return (
+                <header
+                  key={index}
+                  style={{
+                    marginRight: '15px',
+                    ...boxStyle,
+                  }}
+                >
+                  {boxStyle.classNames === 'lightPurpleBadge' ? (
+                    <LightPurpleBadgeStyled>{value}</LightPurpleBadgeStyled>
+                  ) : boxStyle.classNames === 'darkPurpleBadge' ? (
+                    <DarkPurpleBadgeStyled>{value}</DarkPurpleBadgeStyled>
+                  ) : boxStyle.classNames === 'lightOrangeBadge' ? (
+                    <LightOrangeBadgeStyled>{value}</LightOrangeBadgeStyled>
+                  ) : boxStyle.classNames === 'darkGrayBadge' ? (
+                    <DarkGrayBadgeStyled>{value}</DarkGrayBadgeStyled>
+                  ) : boxStyle.classNames === 'lightGrayBadge' ? (
+                    <LightGrayBadgeStyled>{value}</LightGrayBadgeStyled>
+                  ) : (
+                    value
+                  )}
+                </header>
+              );
+            }
+            return null;
+          })}
+        </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', paddingRight: '3rem'     }}>
-        {values.map(([key, value], index) => {
-          const boxStyle = getBoxStyle(index);
-          if (boxStyle.classNames === 'greenBadge' || boxStyle.classNames === 'transparentBadge') {
-            return (
-              <header
-                key={index}
-                style={{
-                  marginRight: '15px',
-                  ...boxStyle,
-                }}
-              >
-                {boxStyle.classNames === 'greenBadge' ? (
-                  <GreenBadgeStyled>{value}</GreenBadgeStyled>
-                ) : (
-                  <TransparentBadgeStyled>{value}</TransparentBadgeStyled>
-                )}
-              </header>
-            );
-          }
-          return null;
-        })}
         <div
           style={{
             display: 'flex',
-            height: '30pt',
-            marginLeft: '14pt',
-            alignItems: 'self-end',
-            color: 'white',
-            flexGrow: '3',
+            alignItems: 'center',
+            paddingRight: '3rem',
           }}
-        >|
-          <img
-            src={Logo}
-            alt="Makeit Logo"
-            style={{ height: '30pt', marginLeft: '14pt' }}
-          />
+        >
+          {values.map(([key, value], index) => {
+            const boxStyle = getBoxStyle(index);
+            if (
+              boxStyle.classNames === 'greenBadge' ||
+              boxStyle.classNames === 'transparentBadge'
+            ) {
+              return (
+                <header
+                  key={index}
+                  style={{
+                    marginRight: '15px',
+                    ...boxStyle,
+                  }}
+                >
+                  {boxStyle.classNames === 'greenBadge' ? (
+                    <GreenBadgeStyled>{value}</GreenBadgeStyled>
+                  ) : (
+                    <TransparentBadgeStyled>{value}</TransparentBadgeStyled>
+                  )}
+                </header>
+              );
+            }
+            return null;
+          })}
+          <div className="logo-wrapper">
+            |
+            <img
+              src={Logo}
+              alt="Makeit Logo"
+              style={{ height: '30pt', marginLeft: '14pt' }}
+            />
+          </div>
         </div>
-      </div>
-    </h3>
-  </Styles>
+      </h3>
+    </Styles>
   );
 }
-
 
 // import React, { useEffect, useState, createRef } from 'react';
 // import { styled } from '@superset-ui/core';

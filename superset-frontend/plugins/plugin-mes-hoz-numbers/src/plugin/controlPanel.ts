@@ -115,7 +115,7 @@ const config: ControlPanelConfig = {
           },
         ],
         ['groupby'],
-        ['metric'],
+        ['metrics'],
         ['adhoc_filters'],
       ],
     },
