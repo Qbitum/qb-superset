@@ -198,6 +198,7 @@ const defaultTheme = {
       darkGraybg: '#30384C',
       lightGraybg: '#8A98AB',
       greenbg: '#47BC00',
+      redbg: '#fb3375',
       transparentbg: 'transparent',
     },
     pcb: {

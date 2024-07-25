@@ -5,10 +5,10 @@ import {
 } from '@superset-ui/core';
 
 export interface PluginChartMESHeaderStylesProps {
-  height: number;
-  width: number;
+  height?: number;
+  width?: number;
   headerFontSize: keyof typeof supersetTheme.typography.sizes;
-  boldText: boolean;
+  boldText?: boolean;
 }
 
 interface PluginChartMESHeaderCustomizeProps {
