@@ -18,7 +18,7 @@
  */
 import { Behavior, ChartMetadata, ChartPlugin, t } from '@superset-ui/core';
 import transformProps from './transformProps';
-import { thumbnail } from './images/mestable.png';
+import thumbnail from './images/mestable.png';
 import example1 from './images/Table.jpg';
 import controlPanel from './controlPanel';
 import buildQuery from './buildQuery';
