@@ -120,7 +120,9 @@ export default {
                           label: verboseMap[colname] ?? colname,
                         }))
                     : [];
-                return {
+                // console.log(numericColumns,"jhkjhkhk");
+                    
+                return {                 
                   columnOptions: numericColumns,
                   verboseMap,
                 };

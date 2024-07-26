@@ -59,7 +59,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
 
   getClassName() {
     const { className, showTrendLine } = this.props;
-    const names = `component-body ${className}`;
+    const names = `superset-legacy-chart-big-number component-body ${className}`;
     if (showTrendLine) return names;
     return `${names} no-trendline`;
   }
@@ -73,7 +73,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   }
 
   renderValue(maxHeight: number) {
-    const { bigNumber, headerFormatter, width, fontColor, symbolSelect, colorThresholdFormatters } =
+    const { bigNumber, headerFormatter, width, symbolSelect, colorThresholdFormatters } =
       this.props;
 
     // @ts-ignore
@@ -128,7 +128,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
         style={{
           fontSize,
           height: maxHeight,
-          color: fontColor,
+          color: numberColor,
         }}
         onContextMenu={onContextMenu}
       >
