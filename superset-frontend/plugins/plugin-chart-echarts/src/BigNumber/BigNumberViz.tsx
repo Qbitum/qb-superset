@@ -368,7 +368,7 @@ export default styled(BigNumberVis)`
     .subheader-line {
       line-height: 1em;
       padding-bottom: 0;
-      color: black;
+      color: ${theme.tvDb.fontColor.black};
     }
 
     &.is-fallback-value {
