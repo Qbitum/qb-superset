@@ -100,6 +100,7 @@ const TransparentBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.transparentbg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 8px;
+  align-items: center;
 `;
 export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
   const { data, height, width, boldText, headerFontSize } = props;

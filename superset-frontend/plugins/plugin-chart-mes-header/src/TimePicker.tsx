@@ -8,6 +8,7 @@ const TimeBadgeStyled = styled.div`
   padding: 16px 20px;
   min-height: 60px;
   align-items: center;
+  display: flex;
 `;
 function TimePicker() {
   const [time, setTime] = useState(new Date());
