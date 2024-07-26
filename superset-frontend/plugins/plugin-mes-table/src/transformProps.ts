@@ -263,12 +263,12 @@ const transformProps = (
   data = data.map(item => {
     // Create a new object with the desired structure
     const keys = Object.keys(item);
-    const dmd = `${item[keys[1]]}/${item[keys[2]]}`;
-    const hi = `${item[keys[5]]}/${item[keys[6]]}`;
+    const mergedColumn1 = `${item[keys[1]]}/${item[keys[2]]}`;
+    const mergedColumn2 = `${item[keys[5]]}/${item[keys[6]]}`;
     const newItem = {
       ...item,
-      dmd: dmd,
-      hi: hi,
+      column1: mergedColumn1,
+      column2: mergedColumn2,
     };
     // console.log(newItem, "newItem");
 
@@ -282,11 +282,11 @@ const transformProps = (
   const columnColorFormatters =
     getColorFormatters(conditionalFormatting, data) ?? defaultColorFormatters;
 
-  let column = columns.reduce((acc: Array<DataColumnMeta>, item) => {
+  const column = columns.reduce((acc: Array<DataColumnMeta>, item) => {
     if (item.key === columns[1].label || item.key === columns[2].label) {
-      if (!acc.some(el => el.key === 'dmd')) {
+      if (!acc.some(el => el.key === 'column1')) {
         acc.push({
-          key: 'dmd',
+          key: 'column1',
           label: `${columns[1].label}/${columns[2].label}`,
           dataType: 0, // Assuming the data type remains numeric
           isNumeric: true,
@@ -294,9 +294,9 @@ const transformProps = (
         });
       }
     } else if (item.key === columns[5].label || item.key === columns[6].label) {
-      if (!acc.some(el => el.key === 'hi')) {
+      if (!acc.some(el => el.key === 'column2')) {
         acc.push({
-          key: 'hi',
+          key: 'column2',
           label: `${columns[5].label}/${columns[6].label}`,
           dataType: 0, // Assuming the data type remains numeric
           isNumeric: true,
