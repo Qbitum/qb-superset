@@ -73,7 +73,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   }
 
   renderValue(maxHeight: number) {
-    const { bigNumber, headerFormatter, width, fontColor, symbolSelect } =
+    const { bigNumber, headerFormatter, width, fontColor, symbolSelect, colorThresholdFormatters } =
       this.props;
 
     // @ts-ignore
@@ -85,6 +85,24 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
             headerFormatter(bigNumber) + symbolSelect
           : // @ts-ignore
             headerFormatter(bigNumber);
+
+    const hasThresholdColorFormatter =
+    Array.isArray(colorThresholdFormatters) &&
+    colorThresholdFormatters.length > 0;
+
+    let numberColor;
+    if (hasThresholdColorFormatter) {
+      colorThresholdFormatters!.forEach(formatter => {
+        const formatterResult = bigNumber
+          ? formatter.getColorFromValue(bigNumber as number)
+          : false;
+        if (formatterResult) {
+          numberColor = formatterResult;
+        }
+      });
+    } else {
+      numberColor = 'white';
+    }
 
     const container = this.createTemporaryContainer();
     document.body.append(container);
@@ -153,8 +171,7 @@ background-color: ${theme.tvDb.bg.tvDbBg};
   line-height: 1em;
   white-space: nowrap;
   text-edge: cap;
-  font-family: ${theme.tvDb.font.roboto};
-  font-size: 200px;
+  font-family: ${theme.tvDb.font.roboto};  
   font-style: ${theme.tvDb.fontStyles.normal};
   font-weight: ${theme.tvDb.fontWeights.bold};
   color: ${theme.tvDb.fontColor.white};

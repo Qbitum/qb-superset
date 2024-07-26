@@ -114,6 +114,7 @@ export interface TableChartTransformedProps<D extends DataRecord = DataRecord> {
   data: D[];
   totals?: D;
   columns: DataColumnMeta[];
+  column:DataColumnMeta[];
   metrics?: (keyof D)[];
   percentMetrics?: (keyof D)[];
   pageSize?: number;
