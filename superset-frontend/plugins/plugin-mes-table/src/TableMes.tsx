@@ -241,12 +241,12 @@ export default function TableChart<D extends DataRecord = DataRecord>(
     allowRenderHtml = true,
     onContextMenu,
     emitCrossFilters,
-  } = props;  
+  } = props;
 
   // console.log(columnsMeta,"qqqq");
   // console.log(columnsMeta[0],"tttt");
   // console.log(columnsMeta[0].key,"pppp");
-  
+
   const timestampFormatter = useCallback(
     value => getTimeFormatterForGranularity(timeGrain)(value),
     [timeGrain],
@@ -308,7 +308,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
     const groupByValues = Object.values(updatedFilters);
     const labelElements: string[] = [];
     groupBy.forEach(col => {
-      const isTimestamp = col === DTTM_ALIAS;      
+      const isTimestamp = col === DTTM_ALIAS;
       const filterValues = ensureIsArray(updatedFilters?.[col]);
       if (filterValues.length) {
         const valueLabels = filterValues.map(value =>
@@ -728,7 +728,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
   }, [width, height, handleSizeChange, tableSize]);
 
   const { width: widthFromState, height: heightFromState } = tableSize;
-// console.log(columns[2].id,"nju");
+  // console.log(columns[2].id,"nju");
 
   return (
     <Styles>

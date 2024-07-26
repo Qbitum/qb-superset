@@ -121,8 +121,8 @@ export default {
                         }))
                     : [];
                 // console.log(numericColumns,"jhkjhkhk");
-                    
-                return {                 
+
+                return {
                   columnOptions: numericColumns,
                   verboseMap,
                 };

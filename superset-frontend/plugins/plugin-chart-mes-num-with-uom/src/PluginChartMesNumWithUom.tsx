@@ -73,8 +73,13 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
   }
 
   renderValue(maxHeight: number) {
-    const { bigNumber, headerFormatter, width, symbolSelect, colorThresholdFormatters } =
-      this.props;
+    const {
+      bigNumber,
+      headerFormatter,
+      width,
+      symbolSelect,
+      colorThresholdFormatters,
+    } = this.props;
 
     // @ts-ignore
     const text =
@@ -87,8 +92,8 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
             headerFormatter(bigNumber);
 
     const hasThresholdColorFormatter =
-    Array.isArray(colorThresholdFormatters) &&
-    colorThresholdFormatters.length > 0;
+      Array.isArray(colorThresholdFormatters) &&
+      colorThresholdFormatters.length > 0;
 
     let numberColor;
     if (hasThresholdColorFormatter) {

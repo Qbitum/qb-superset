@@ -123,6 +123,6 @@ export default function transformProps(chartProps: ChartProps) {
     fontColor,
     currencyFormat,
     symbolSelect,
-    colorThresholdFormatters
+    colorThresholdFormatters,
   };
 }

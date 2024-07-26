@@ -259,18 +259,17 @@ const transformProps = (
   }
 
   let data = processDataRecords(baseQuery?.data, columns);
-  
-  data = data.map(item => {
 
+  data = data.map(item => {
     // Create a new object with the desired structure
     const keys = Object.keys(item);
     const dmd = `${item[keys[1]]}/${item[keys[2]]}`;
-    const hi = `${item[keys[5]]}/${item[keys[6]]}`
+    const hi = `${item[keys[5]]}/${item[keys[6]]}`;
     const newItem = {
       ...item,
       dmd: dmd,
-      hi:hi
-    };    
+      hi: hi,
+    };
     // console.log(newItem, "newItem");
 
     return newItem;
@@ -281,36 +280,35 @@ const transformProps = (
       ? totalQuery?.data[0]
       : undefined;
   const columnColorFormatters =
-    getColorFormatters(conditionalFormatting, data) ?? defaultColorFormatters;    
+    getColorFormatters(conditionalFormatting, data) ?? defaultColorFormatters;
 
-    let column = columns.reduce((acc:Array<DataColumnMeta>, item) => {
-      
-      if (item.key === columns[1].label || item.key === columns[2].label) {
-        if (!acc.some(el => el.key === 'dmd')) {
-          acc.push({
-            key: 'dmd',
-            label: `${columns[1].label}/${columns[2].label}`,
-            dataType: 0,  // Assuming the data type remains numeric
-            isNumeric: true,
-            isMetric: false
-          });
-        }
-      } else if(item.key === columns[5].label || item.key === columns[6].label){
-        if (!acc.some(el => el.key === 'hi')) {
-          acc.push({
-            key: 'hi',
-            label: `${columns[5].label}/${columns[6].label}`,
-            dataType: 0,  // Assuming the data type remains numeric
-            isNumeric: true,
-            isMetric: false
-          });
-        }
-      }else {
-        acc.push(item);
-      }      
-      return acc;
-    }, []);
-    
+  let column = columns.reduce((acc: Array<DataColumnMeta>, item) => {
+    if (item.key === columns[1].label || item.key === columns[2].label) {
+      if (!acc.some(el => el.key === 'dmd')) {
+        acc.push({
+          key: 'dmd',
+          label: `${columns[1].label}/${columns[2].label}`,
+          dataType: 0, // Assuming the data type remains numeric
+          isNumeric: true,
+          isMetric: false,
+        });
+      }
+    } else if (item.key === columns[5].label || item.key === columns[6].label) {
+      if (!acc.some(el => el.key === 'hi')) {
+        acc.push({
+          key: 'hi',
+          label: `${columns[5].label}/${columns[6].label}`,
+          dataType: 0, // Assuming the data type remains numeric
+          isNumeric: true,
+          isMetric: false,
+        });
+      }
+    } else {
+      acc.push(item);
+    }
+    return acc;
+  }, []);
+
   return {
     height,
     width,

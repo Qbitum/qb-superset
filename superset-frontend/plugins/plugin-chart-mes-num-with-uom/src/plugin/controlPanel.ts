@@ -103,10 +103,7 @@ const config: ControlPanelConfig = {
     {
       label: t('Query'),
       expanded: true,
-      controlSetRows: [
-        ['metric'], 
-        ['adhoc_filters'],
-      ],
+      controlSetRows: [['metric'], ['adhoc_filters']],
     },
     {
       label: t('Chart Options'),
@@ -127,7 +124,7 @@ const config: ControlPanelConfig = {
                 [0.7, 'medium'],
                 [0.8, 'large'],
                 [0.9, 'x-large'],
-                [1.0, 'xx-large']
+                [1.0, 'xx-large'],
               ],
               renderTrigger: true,
               description: t('The size of your header font'),
@@ -208,7 +205,7 @@ const config: ControlPanelConfig = {
                           label: verboseMap[colname] ?? colname,
                         }))
                     : [];
-                    console.log(numericColumns,"numericColumns");
+                console.log(numericColumns, 'numericColumns');
 
                 return {
                   columnOptions: numericColumns,
