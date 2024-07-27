@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { MdOutlineWifiOff, MdWifi } from 'react-icons/md';
 import { styled } from '@superset-ui/core';
+import { nowifiBase64, wifiBase64 } from './images/base64';
 
 const OnlineBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.greenbg};
@@ -42,12 +42,20 @@ function OnlineStatus() {
     <div>
       {isOnline ? (
         <OnlineBadgeStyled>
-          <MdWifi />
+          <img
+            src={wifiBase64}
+            alt="Online"
+            style={{ marginRight: '8px', width: '24px', height: '24px' }}
+          />
           online
         </OnlineBadgeStyled>
       ) : (
         <OfflineBadgeStyled>
-          <MdOutlineWifiOff />
+          <img
+            src={nowifiBase64}
+            alt="Offline"
+            style={{ marginRight: '8px', width: '24px', height: '24px' }}
+          />
           offline
         </OfflineBadgeStyled>
       )}
