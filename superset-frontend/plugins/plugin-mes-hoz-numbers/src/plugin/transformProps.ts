@@ -17,6 +17,10 @@
  * under the License.
  */
 import {
+  ColorFormatters,
+  getColorFormatters,
+} from '@superset-ui/chart-controls';
+import {
   ChartProps,
   formatTime,
   GenericDataType,
@@ -79,6 +83,7 @@ export default function transformProps(chartProps: ChartProps) {
     subTitleFontSize,
     subValue,
     subValueFontSize,
+    conditionalFormatting
   } = formData;
 
   const formattedSubheader = subheader.toUpperCase();
@@ -122,6 +127,12 @@ export default function transformProps(chartProps: ChartProps) {
     }
   });
 
+  const defaultColorFormatters = [] as ColorFormatters;
+
+  const colorThresholdFormatters =
+    getColorFormatters(conditionalFormatting, data, false) ??
+    defaultColorFormatters;
+
   return {
     width,
     height,
@@ -140,5 +151,6 @@ export default function transformProps(chartProps: ChartProps) {
     subValue,
     subValueFontSize,
     noOfColumns,
+    colorThresholdFormatters
   };
 }

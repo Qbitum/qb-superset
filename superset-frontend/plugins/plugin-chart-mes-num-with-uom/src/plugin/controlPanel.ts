@@ -205,7 +205,7 @@ const config: ControlPanelConfig = {
                           label: verboseMap[colname] ?? colname,
                         }))
                     : [];
-                console.log(numericColumns, 'numericColumns');
+                // console.log(numericColumns, 'numericColumns');
 
                 return {
                   columnOptions: numericColumns,

@@ -152,14 +152,45 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     );
   }
 
-  renderSubValue(numberValue = 0) {
-    const { fontColor } = this.props;
+  renderSubValue(numberValue = 0, maxHeight: number) {
+    const { bigNumber, fontColor, width, colorThresholdFormatters
+    } = this.props;
+    
     let recurrenceValue = numberValue;
     if (typeof numberValue === 'string') {
       recurrenceValue = (numberValue as any).substring(0, 3);
     }
     // @ts-ignore
     const text = recurrenceValue === 0 ? t('-') : String(recurrenceValue);
+
+    const hasThresholdColorFormatter =
+      Array.isArray(colorThresholdFormatters) &&
+      colorThresholdFormatters.length > 0;
+
+    let numberColor;
+    if (hasThresholdColorFormatter) {
+      colorThresholdFormatters!.forEach(formatter => {
+        const formatterResult = bigNumber
+          ? formatter.getColorFromValue(bigNumber as number)
+          : false;
+        if (formatterResult) {
+          numberColor = formatterResult;
+        }
+      });
+    } else {
+      numberColor = 'white';
+    }
+
+    const container = this.createTemporaryContainer();
+    document.body.append(container);
+    const fontSize = computeMaxFontSize({
+      text,
+      maxWidth: width - 8, // Decrease 8px for more precise font size
+      maxHeight,
+      className: 'header-line',
+      container,
+    });
+    container.remove();
 
     const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
       if (this.props.onContextMenu) {
@@ -172,7 +203,9 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       <div
         className="subvalue-line"
         style={{
-          color: fontColor,
+          fontSize,
+          height: maxHeight,
+          color: numberColor,
         }}
         onContextMenu={onContextMenu}
       >
@@ -220,7 +253,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   render() {
-    const { height, values, subTitleFontSize, subtitle } = this.props;
+    const { height, values, subTitleFontSize, subtitle, headerFontSize } = this.props;
 
     const className = this.getClassName();
 
@@ -242,7 +275,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
           <div className="block-wrapper">
             {viewModel.map((dataItem, i) => (
               <div className="num-block" key={i}>
-                {this.renderSubValue(dataItem.data)}
+                {this.renderSubValue(dataItem.data, Math.ceil(headerFontSize * height))}
                 {this.renderSubTitle(
                   Math.ceil(subTitleFontSize * height),
                   dataItem.title,
