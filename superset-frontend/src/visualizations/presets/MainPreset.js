@@ -38,6 +38,7 @@ import { PluginChartMesNumWithUom } from '@superset-ui/plugin-chart-mes-num-with
 import { PluginChartMESVerticalNumbers } from '@superset-ui/plugin-chart-mes-vertical-numbers';
 import { PluginChartMESNumber } from '@superset-ui/plugin-chart-mes-number';
 import { PluginChartMESHeader } from '@superset-ui/plugin-chart-mes-header';
+import { PluginChartMESTop3List } from '@superset-ui/plugin-chart-mes-top3-list';
 
 import { PluginMesHozNumbers } from '@superset-ui/plugin-mes-hoz-numbers';
 import TableMesPlugin from '@superset-ui/plugin-mes-table';
@@ -192,7 +193,7 @@ export default class MainPreset extends Preset {
         }),
         new PluginChartMESNumber().configure({ key: 'mes-number' }),
         new PluginChartMESHeader().configure({ key: 'mes-header' }),
-
+        new PluginChartMESTop3List().configure({ key: 'mes-top3-list' }),
         new PluginMesHozNumbers().configure({ key: 'mes-hoz-numbers' }),
         // new PluginMesTable().configure({ key: 'mes-table' }),
         ...experimentalPlugins,
