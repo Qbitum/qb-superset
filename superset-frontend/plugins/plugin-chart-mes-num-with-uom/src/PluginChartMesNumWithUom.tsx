@@ -157,7 +157,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
 }
 
 export default styled(TvDashboard)`
-${({ theme }) => `
+  ${({ theme }) => `
 font-family: ${theme.tvDb.font.roboto};
 font-style: ${theme.tvDb.fontStyles.normal};
 font-weight: ${theme.tvDb.fontWeights.normal};

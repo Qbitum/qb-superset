@@ -238,7 +238,7 @@ const config: ControlPanelConfig = {
               },
             },
           },
-        ],        
+        ],
       ],
     },
   ],

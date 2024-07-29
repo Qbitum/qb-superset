@@ -289,7 +289,7 @@ class Header extends React.PureComponent {
   }
 
   startPeriodicRender(interval) {
-    let intervalMessage;
+    // let intervalMessage;
 
     if (interval) {
       const { dashboardInfo } = this.props;
@@ -299,11 +299,11 @@ class Header extends React.PureComponent {
         option => Number(option[0]) === interval / 1000,
       );
 
-      if (predefinedValue) {
-        intervalMessage = t(predefinedValue[1]);
-      } else {
-        intervalMessage = moment.duration(interval, 'millisecond').humanize();
-      }
+      // if (predefinedValue) {
+      //   intervalMessage = t(predefinedValue[1]);
+      // } else {
+      //   intervalMessage = moment.duration(interval, 'millisecond').humanize();
+      // }
     }
 
     const periodicRender = () => {

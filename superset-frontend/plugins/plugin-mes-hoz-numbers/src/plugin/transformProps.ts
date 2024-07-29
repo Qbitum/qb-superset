@@ -83,7 +83,7 @@ export default function transformProps(chartProps: ChartProps) {
     subTitleFontSize,
     subValue,
     subValueFontSize,
-    conditionalFormatting
+    conditionalFormatting,
   } = formData;
 
   const formattedSubheader = subheader.toUpperCase();
@@ -151,6 +151,6 @@ export default function transformProps(chartProps: ChartProps) {
     subValue,
     subValueFontSize,
     noOfColumns,
-    colorThresholdFormatters
+    colorThresholdFormatters,
   };
 }

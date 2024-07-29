@@ -81,7 +81,7 @@ export default function transformProps(chartProps: ChartProps) {
     yAxisFormat,
     symbolSelect,
   } = formData;
- 
+
   const metricName = getMetricLabel(metric);
   const formattedSubheader = subheader.toUpperCase();
   const { data = [], coltypes = [] } = queriesData[0];
@@ -123,6 +123,6 @@ export default function transformProps(chartProps: ChartProps) {
     fontColor,
     currencyFormat,
     symbolSelect,
-    colorThresholdFormatters
+    colorThresholdFormatters,
   };
 }

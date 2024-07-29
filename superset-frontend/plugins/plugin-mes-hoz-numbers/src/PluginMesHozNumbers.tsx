@@ -153,9 +153,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderSubValue(numberValue = 0, maxHeight: number) {
-    const { bigNumber, width, colorThresholdFormatters
-    } = this.props;
-    
+    const { bigNumber, width, colorThresholdFormatters } = this.props;
+
     let recurrenceValue = numberValue;
     if (typeof numberValue === 'string') {
       recurrenceValue = (numberValue as any).substring(0, 3);
@@ -163,7 +162,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     // @ts-ignore
     const text = recurrenceValue === 0 ? t('-') : String(recurrenceValue);
     const txt = text.substring(0, 2);
-    
+
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
@@ -254,7 +253,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   render() {
-    const { height, values, subTitleFontSize, subtitle, headerFontSize } = this.props;
+    const { height, values, subTitleFontSize, subtitle, headerFontSize } =
+      this.props;
 
     const className = this.getClassName();
 
@@ -276,7 +276,10 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
           <div className="block-wrapper">
             {viewModel.map((dataItem, i) => (
               <div className="num-block" key={i}>
-                {this.renderSubValue(dataItem.data, Math.ceil(headerFontSize * height))}
+                {this.renderSubValue(
+                  dataItem.data,
+                  Math.ceil(headerFontSize * height),
+                )}
                 {this.renderSubTitle(
                   Math.ceil(subTitleFontSize * height),
                   dataItem.title,
