@@ -14,7 +14,7 @@ const OfflineBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.redbg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 16px 16px;
   min-height: 60px;
 `;
 

@@ -72,13 +72,20 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
   }
 
   renderNumber(maxHeight: number) {
-    //
     const { bigNumber, width, colorThresholdFormatters } = this.props;
+
+    let recurrenceValue = bigNumber;
+    if (typeof bigNumber === 'string') {
+      recurrenceValue = (bigNumber as any).substring(0, 3);
+    }
     // @ts-ignore
-    const text = bigNumber === null ? t('No data') : String(bigNumber);
+    const text = recurrenceValue === 0 ? t('-') : String(recurrenceValue);
+    const txt = text.substring(0, 5);
+
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
+
     let numberColor;
     if (hasThresholdColorFormatter) {
       colorThresholdFormatters!.forEach(formatter => {
@@ -97,9 +104,9 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
     document.body.append(container);
     const fontSize = computeMaxFontSize({
       text,
-      maxWidth: width - 8,
+      maxWidth: width - 8, // Decrease 8px for more precise font size
       maxHeight,
-      className: 'number-line',
+      className: 'header-line',
       container,
     });
     container.remove();
@@ -110,9 +117,10 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
         this.props.onContextMenu(e.nativeEvent.clientX, e.nativeEvent.clientY);
       }
     };
+
     return (
       <div
-        className="number-line"
+        className="subvalue-line"
         style={{
           fontSize,
           height: maxHeight,
@@ -120,7 +128,7 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
         }}
         onContextMenu={onContextMenu}
       >
-        {text}
+        {txt}
       </div>
     );
   }

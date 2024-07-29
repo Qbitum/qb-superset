@@ -5,8 +5,9 @@ const TimeBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.transparentbg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 16px 16px;
   min-height: 60px;
+  max-height: 60px;
   align-items: center;
   display: flex;
 `;

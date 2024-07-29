@@ -59,15 +59,15 @@ const LightPurpleBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightPurplebg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 16px 16px;
   min-height: 60px;
 `;
 
 const DarkPurpleBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkPurplebg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
-  border-radius: 8pt;
-  padding: 16pt 16pt;
+  border-radius: 8px;
+  padding: 16px 16px;
   min-height: 60px;
 `;
 
@@ -75,21 +75,21 @@ const LightOrangeBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightOrangebg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 16px 16px;
   min-height: 60px;
 `;
 const DarkGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 16px 16px;
   min-height: 60px;
 `;
 const LightGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightGraybg};
-  color: ${({ theme }) => theme.tvDb.fontColor.white};
+  color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 16px 16px;
   min-height: 60px;
 `;
 const GreenBadgeStyled = styled.div`
@@ -174,7 +174,7 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
                   ) : boxStyle.classNames === 'darkGrayBadge' ? (
                     <DarkGrayBadgeStyled>{value}</DarkGrayBadgeStyled>
                   ) : boxStyle.classNames === 'lightGrayBadge' ? (
-                    <LightGrayBadgeStyled>{value}</LightGrayBadgeStyled>
+                    <LightGrayBadgeStyled>{value}h</LightGrayBadgeStyled>
                   ) : (
                     value
                   )}
