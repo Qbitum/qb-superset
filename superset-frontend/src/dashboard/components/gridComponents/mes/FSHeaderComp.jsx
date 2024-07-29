@@ -309,7 +309,7 @@ class FSHeaderComp extends React.PureComponent {
             )}
             <GridHeader
               className={cx(
-                'grid-row',
+                'grid-row tv-header',
                 rowItems.length === 0 && 'grid-row--empty',
                 hoverMenuHovered && 'grid-row--hovered',
                 backgroundStyle.className,

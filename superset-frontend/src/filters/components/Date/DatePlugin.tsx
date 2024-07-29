@@ -31,10 +31,8 @@ import {
   tn,
 } from '@superset-ui/core';
 import { LabeledValue as AntdLabeledValue } from 'antd/lib/select';
-import { debounce } from 'lodash';
 import { useImmerReducer } from 'use-immer';
 import { Select } from 'src/components';
-import { SLOW_DEBOUNCE } from 'src/constants';
 import { hasOption, propertyComparator } from 'src/components/Select/utils';
 import { FilterBarOrientation } from 'src/dashboard/types';
 import { PluginFilterDateProps, SelectValue } from './types';
@@ -89,7 +87,6 @@ export default function PluginDate(props: PluginFilterDateProps) {
     setHoveredFilter,
     unsetHoveredFilter,
     setFocusedFilter,
-    unsetFocusedFilter,
     setFilterActive,
     appSection,
     showOverflow,
@@ -110,8 +107,7 @@ export default function PluginDate(props: PluginFilterDateProps) {
     [formData.groupby],
   );
   const [col] = groupby;
-  const [initialColtypeMap] = useState(coltypeMap);
-  const [search, setSearch] = useState('');
+  const [search] = useState('');
   const [dataMask, dispatchDataMask] = useImmerReducer(reducer, {
     extraFormData: {},
     filterState,
@@ -170,28 +166,6 @@ export default function PluginDate(props: PluginFilterDateProps) {
   const isDisabled =
     appSection === AppSection.FilterConfigModal && defaultToFirstItem;
 
-  const onSearch = useMemo(
-    () =>
-      debounce((search: string) => {
-        setSearch(search);
-        if (searchAllOptions) {
-          dispatchDataMask({
-            type: 'ownState',
-            ownState: {
-              coltypeMap: initialColtypeMap,
-              search,
-            },
-          });
-        }
-      }, SLOW_DEBOUNCE),
-    [dispatchDataMask, initialColtypeMap, searchAllOptions],
-  );
-
-  const handleBlur = useCallback(() => {
-    unsetFocusedFilter();
-    onSearch('');
-  }, [onSearch, unsetFocusedFilter]);
-
   const handleChange = useCallback(
     (value?: SelectValue | number | string) => {
       const values = value === null ? [null] : ensureIsArray(value);
@@ -207,9 +181,9 @@ export default function PluginDate(props: PluginFilterDateProps) {
 
   const getCurrentDate = () => {
     const date = new Date();
-    const dateFormat = `${date.getFullYear()}-${
-      date.getMonth() + 1
-    }-${date.getDate()}`;
+    const month = date.getMonth() + 1;
+    const monthStr = month <= 9 ? `0${month}` : month;
+    const dateFormat = `${date.getFullYear()}-${monthStr}-${date.getDate()}`;
     return [dateFormat];
   };
 
@@ -317,9 +291,6 @@ export default function PluginDate(props: PluginFilterDateProps) {
           showSearch={showSearch}
           mode={multiSelect ? 'multiple' : 'single'}
           placeholder={placeholderText}
-          onClear={() => onSearch('')}
-          onSearch={onSearch}
-          onBlur={handleBlur}
           onFocus={setFocusedFilter}
           onMouseEnter={setHoveredFilter}
           onMouseLeave={unsetHoveredFilter}

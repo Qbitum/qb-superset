@@ -196,7 +196,11 @@ const SliceHeader: FC<SliceHeaderProps> = ({
   const exploreUrl = `/explore/?dashboard_page_id=${dashboardPageId}&slice_id=${slice.slice_id}`;
 
   return (
-    <ChartHeaderStyles data-test="slice-header" ref={innerRef}>
+    <ChartHeaderStyles
+      data-test="slice-header"
+      ref={innerRef}
+      className="slice-header"
+    >
       <div className="header-title" ref={headerRef}>
         <Tooltip title={headerTooltip}>
           <EditableTitle
