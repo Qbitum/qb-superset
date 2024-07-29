@@ -153,7 +153,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderSubValue(numberValue = 0, maxHeight: number) {
-    const { bigNumber, fontColor, width, colorThresholdFormatters
+    const { bigNumber, width, colorThresholdFormatters
     } = this.props;
     
     let recurrenceValue = numberValue;
@@ -162,7 +162,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     }
     // @ts-ignore
     const text = recurrenceValue === 0 ? t('-') : String(recurrenceValue);
-
+    const txt = text.substring(0, 2);
+    
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
@@ -209,7 +210,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
         }}
         onContextMenu={onContextMenu}
       >
-        {text}
+        {txt}
       </div>
     );
   }

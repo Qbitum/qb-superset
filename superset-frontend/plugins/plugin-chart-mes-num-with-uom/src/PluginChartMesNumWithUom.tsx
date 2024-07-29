@@ -149,7 +149,6 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     return (
       <>
         <div className={className} style={{ height }}>
-          {/* {this.renderTitle(Math.ceil(subheaderFontSize * height))} */}
           {this.renderValue(Math.ceil(headerFontSize * height))}
         </div>
       </>
@@ -158,7 +157,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
 }
 
 export default styled(TvDashboard)`
-  ${({ theme }) => `
+${({ theme }) => `
 font-family: ${theme.tvDb.font.roboto};
 font-style: ${theme.tvDb.fontStyles.normal};
 font-weight: ${theme.tvDb.fontWeights.normal};

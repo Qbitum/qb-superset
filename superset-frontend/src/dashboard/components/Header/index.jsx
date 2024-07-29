@@ -318,12 +318,12 @@ class Header extends React.PureComponent {
         interval,
         chartCount: affectedCharts.length,
       });
-      this.props.addWarningToast(
-        t(
-          `This dashboard is currently auto refreshing; the next auto refresh will be in %s.`,
-          intervalMessage,
-        ),
-      );
+      // this.props.addWarningToast(
+      //   t(
+      //     `This dashboard is currently auto refreshing; the next auto refresh will be in %s.`,
+      //     intervalMessage,
+      //   ),
+      // );
       if (dashboardInfo.common.conf.DASHBOARD_AUTO_REFRESH_MODE === 'fetch') {
         // force-refresh while auto-refresh in dashboard
         return fetchCharts(
