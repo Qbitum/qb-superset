@@ -67,6 +67,17 @@ const config: ControlPanelConfig = {
             },
           },
         ],
+        [
+          {
+            name: 'header',
+            config: {
+              type: 'TextControl',
+              label: t('Header'),
+              renderTrigger: true,
+              description: t('Description text that display header'),
+            },
+          },
+        ],
       ],
     },
     {

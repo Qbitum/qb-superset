@@ -56,40 +56,6 @@ class MesVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     return container;
   }
 
-  // renderTitle(maxHeight: number) {
-  //   const { subHeader, width } = this.props;
-  //   let fontSize = 0;
-
-  //   const text = subHeader;
-
-  //   if (text) {
-  //     const container = this.createTemporaryContainer();
-  //     document.body.append(container);
-  //     fontSize = computeMaxFontSize({
-  //       text,
-  //       maxWidth: width,
-  //       maxHeight,
-  //       className: 'subheader-line',
-  //       container,
-  //     });
-  //     // fontColor;
-  //     container.remove();
-
-  //     return (
-  //       <div
-  //         className="subheader-line"
-  //         style={{
-  //           fontSize,
-  //           height: maxHeight,
-  //         }}
-  //       >
-  //         {text}
-  //       </div>
-  //     );
-  //   }
-  //   return null;
-  // }
-
   renderNoOfColumns(maxHeight: number) {
     const { bigNumber, headerFormatter, width, fontColor } = this.props;
 
@@ -196,6 +162,48 @@ class MesVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     return null;
   }
 
+  // renderHeader(maxHeight: number) {
+  //   const { bigNumber, header, width, bigNumberFallback } = this.props;
+  //   let fontSize = 0;
+  //   // console.log("dddd", subheader);
+
+  //   const NO_DATA_OR_HASNT_LANDED = t(
+  //     'No data after filtering or data is NULL for the latest time record',
+  //   );
+  //   const NO_DATA = t(
+  //     'Try applying different filters or ensuring your datasource has data',
+  //   );
+  //   let text = header;
+  //   if (bigNumber === null) {
+  //     text = bigNumberFallback ? NO_DATA : NO_DATA_OR_HASNT_LANDED;
+  //   }
+  //   if (text) {
+  //     const container = this.createTemporaryContainer();
+  //     document.body.append(container);
+  //     fontSize = computeMaxFontSize({
+  //       text,
+  //       maxWidth: width,
+  //       maxHeight,
+  //       className: 'header-line',
+  //       container,
+  //     });
+  //     container.remove();
+
+  //     return (
+  //       <div
+  //         className="header-line"
+  //         style={{
+  //           fontSize,
+  //           height: maxHeight,
+  //         }}
+  //       >
+  //         {text}
+  //       </div>
+  //     );
+  //   }
+  //   return null;
+  // }
+
   render() {
     const { height, values, subTitleFontSize, subtitle } = this.props;
 
@@ -281,7 +289,7 @@ export default styled(MesVerticalNumbers)`
       color: ${theme.tvDb.fontColor.white};
       text-align: right;
       line-height: 1em;
-       align-content: center;
+      align-content: center;
     }
 
     .contentTitle-line {
@@ -306,6 +314,13 @@ export default styled(MesVerticalNumbers)`
       padding-bottom: 0;
       align-content: center;
 
+    }
+    .header-line {
+    color: ${theme.tvDb.fontColor.white};
+    line-height: 1em;
+    padding-bottom: 0;
+    text-align: left;
+    font-size: 3vw;
     }
   `}
 `;

@@ -17,7 +17,7 @@
  * under the License.
  */
 /* eslint-env browser */
-import moment from 'moment';
+// import moment from 'moment';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -291,20 +291,20 @@ class Header extends React.PureComponent {
   startPeriodicRender(interval) {
     // let intervalMessage;
 
-    if (interval) {
-      const { dashboardInfo } = this.props;
-      const periodicRefreshOptions =
-        dashboardInfo.common?.conf?.DASHBOARD_AUTO_REFRESH_INTERVALS;
-      const predefinedValue = periodicRefreshOptions.find(
-        option => Number(option[0]) === interval / 1000,
-      );
+    // if (interval) {
+    //   const { dashboardInfo } = this.props;
+    //   const periodicRefreshOptions =
+    //     dashboardInfo.common?.conf?.DASHBOARD_AUTO_REFRESH_INTERVALS;
+    //   const predefinedValue = periodicRefreshOptions.find(
+    //     option => Number(option[0]) === interval / 1000,
+    //   );
 
-      // if (predefinedValue) {
-      //   intervalMessage = t(predefinedValue[1]);
-      // } else {
-      //   intervalMessage = moment.duration(interval, 'millisecond').humanize();
-      // }
-    }
+    //   if (predefinedValue) {
+    //     intervalMessage = t(predefinedValue[1]);
+    //   } else {
+    //     intervalMessage = moment.duration(interval, 'millisecond').humanize();
+    //   }
+    // }
 
     const periodicRender = () => {
       const { fetchCharts, logEvent, charts, dashboardInfo } = this.props;

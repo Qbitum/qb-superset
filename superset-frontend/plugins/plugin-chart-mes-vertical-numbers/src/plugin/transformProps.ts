@@ -32,6 +32,7 @@ export default function transformProps(chartProps: ChartProps) {
     subTitleFontSize,
     subValue,
     subValueFontSize,
+    header = '',
   } = formData;
 
   const formattedSubheader = subheader.toUpperCase();
@@ -43,7 +44,13 @@ export default function transformProps(chartProps: ChartProps) {
           .filter((value: string) => value !== '')
       : [];
   const { data = [], coltypes = [] } = queriesData[0];
-
+  const formattedHeader =
+    header !== ''
+      ? header
+          .toUpperCase()
+          .split(',')
+          .filter((value: string) => value !== '')
+      : [];
   const numberFormatter = getValueFormatter(
     metric,
     symbolFormats,
@@ -85,11 +92,11 @@ export default function transformProps(chartProps: ChartProps) {
     subHeader: formattedSubheader,
     subheaderFontSize,
     fontColor,
-    // currencyFormat,
     subtitle: formattedSubTitle,
     subTitleFontSize,
     subValue,
     subValueFontSize,
     noOfColumns,
+    header: formattedHeader,
   };
 }

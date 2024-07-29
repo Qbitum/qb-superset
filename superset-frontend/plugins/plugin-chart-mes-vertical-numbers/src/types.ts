@@ -42,6 +42,7 @@ export type PluginChartMESVerticalNumbersStylesProps = {
   headerFormatter: ValueFormatter | TimeFormatter;
   headerFontSize: number;
   subHeader: string;
+  header: string;
   subheaderFontSize: number;
   startYAxisAtZero?: boolean;
   timeRangeFixed?: boolean;
