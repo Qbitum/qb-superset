@@ -44,6 +44,7 @@ import {
   TABS_TYPE,
   TAB_TYPE,
   DYNAMIC_TYPE,
+  HEADER_TYPE_TV,
 } from './componentTypes';
 
 import { DASHBOARD_ROOT_DEPTH as rootDepth } from './constants';
@@ -70,6 +71,7 @@ const parentMaxDepthLookup = {
     [HEADER_TYPE]: depthOne,
     [ROW_TYPE]: depthOne,
     [TABS_TYPE]: depthOne,
+    [HEADER_TYPE_TV]: depthOne,
   },
 
   [ROW_TYPE]: {
@@ -92,6 +94,7 @@ const parentMaxDepthLookup = {
     [HEADER_TYPE]: depthFive,
     [ROW_TYPE]: depthThree,
     [TABS_TYPE]: depthThree,
+    [HEADER_TYPE_TV]: depthThree,
   },
 
   [COLUMN_TYPE]: {
@@ -109,6 +112,9 @@ const parentMaxDepthLookup = {
   [DIVIDER_TYPE]: {},
   [HEADER_TYPE]: {},
   [MARKDOWN_TYPE]: {},
+  [HEADER_TYPE_TV]: {
+    [CHART_TYPE]: depthFour,
+  },
 };
 
 interface IsValidChildProps {

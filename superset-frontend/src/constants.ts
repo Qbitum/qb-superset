@@ -196,4 +196,5 @@ export enum FilterPlugins {
   Time = 'filter_time',
   TimeColumn = 'filter_timecolumn',
   TimeGrain = 'filter_timegrain',
+  Date = 'filter_date',
 }

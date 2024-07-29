@@ -26,6 +26,7 @@ import {
   TAB_TYPE,
   TABS_TYPE,
   DYNAMIC_TYPE,
+  HEADER_TYPE_TV,
 } from '../../util/componentTypes';
 
 import ChartHolder from './ChartHolder';
@@ -37,6 +38,7 @@ import Row from './Row';
 import Tab from './Tab';
 import TabsConnected from './Tabs';
 import DynamicComponent from './DynamicComponent';
+import FSHeaderComp from './mes/FSHeaderComp';
 
 export { default as ChartHolder } from './ChartHolder';
 export { default as Markdown } from './Markdown';
@@ -47,6 +49,7 @@ export { default as Row } from './Row';
 export { default as Tab } from './Tab';
 export { default as Tabs } from './Tabs';
 export { default as DynamicComponent } from './DynamicComponent';
+export { default as FSHeaderComp } from './mes/FSHeaderComp';
 
 export const componentLookup = {
   [CHART_TYPE]: ChartHolder,
@@ -58,4 +61,5 @@ export const componentLookup = {
   [TAB_TYPE]: Tab,
   [TABS_TYPE]: TabsConnected,
   [DYNAMIC_TYPE]: DynamicComponent,
+  [HEADER_TYPE_TV]: FSHeaderComp,
 };

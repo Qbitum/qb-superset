@@ -243,8 +243,6 @@ class ExtraCache:
         filters = self.get_filters(column, remove_filter)
         for flt in filters:
             val = flt.get("val")
-            print("-----------date-----------")
-            print(val)
             if isinstance(val, list):
                 return_val.extend(val)
             elif val:

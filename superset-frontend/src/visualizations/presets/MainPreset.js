@@ -84,6 +84,7 @@ import {
   TimeFilterPlugin,
   TimeColumnFilterPlugin,
   TimeGrainFilterPlugin,
+  DateFilterPlugin,
 } from 'src/filters/components';
 import { PivotTableChartPlugin as PivotTableChartPluginV2 } from '@superset-ui/plugin-chart-pivot-table';
 import { HandlebarsChartPlugin } from '@superset-ui/plugin-chart-handlebars';
@@ -187,7 +188,7 @@ export default class MainPreset extends Preset {
         new PluginChartHelloQbitum().configure({ key: 'qbitum-hello' }),
         // new PluginChartTvDashboard().configure({ key: 'chart-tv-dashboard' }),
         // MES TV DASBOARDS
-        new PluginChartMesNumWithUom().configure({ key: 'chart-tv-dashboard' }),
+        new PluginChartMesNumWithUom().configure({ key: 'mes-num-withuom' }),
         new PluginChartMESVerticalNumbers().configure({
           key: 'mes-vertical-numbers',
         }),
@@ -195,6 +196,9 @@ export default class MainPreset extends Preset {
         new PluginChartMESHeader().configure({ key: 'mes-header' }),
         new PluginChartMESTop3List().configure({ key: 'mes-top3-list' }),
         new PluginMesHozNumbers().configure({ key: 'mes-hoz-numbers' }),
+        new DateFilterPlugin().configure({
+          key: FilterPlugins.Date,
+        }),
         // new PluginMesTable().configure({ key: 'mes-table' }),
         ...experimentalPlugins,
       ],

@@ -16,9 +16,29 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-export { default as SelectFilterPlugin } from './Select';
-export { default as RangeFilterPlugin } from './Range';
-export { default as TimeFilterPlugin } from './Time';
-export { default as TimeColumnFilterPlugin } from './TimeColumn';
-export { default as TimeGrainFilterPlugin } from './TimeGrain';
-export { default as DateFilterPlugin } from './Date';
+import { Behavior, ChartMetadata, ChartPlugin, t } from '@superset-ui/core';
+import controlPanel from './controlPanel';
+import buildQuery from './buildQuery';
+import transformProps from './transformProps';
+import thumbnail from './images/thumbnail.png';
+
+export default class DateFilterPlugin extends ChartPlugin {
+  constructor() {
+    const metadata = new ChartMetadata({
+      name: t('Date Filter'),
+      description: t('Current date filter plugin'),
+      behaviors: [Behavior.InteractiveChart, Behavior.NativeFilter],
+      enableNoResults: false,
+      tags: [t('Experimental')],
+      thumbnail,
+    });
+
+    super({
+      buildQuery,
+      controlPanel,
+      loadChart: () => import('./DatePlugin'),
+      metadata,
+      transformProps,
+    });
+  }
+}

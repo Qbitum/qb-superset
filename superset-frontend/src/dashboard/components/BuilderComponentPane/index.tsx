@@ -30,6 +30,7 @@ import NewRow from '../gridComponents/new/NewRow';
 import NewTabs from '../gridComponents/new/NewTabs';
 import NewMarkdown from '../gridComponents/new/NewMarkdown';
 import NewDynamicComponent from '../gridComponents/new/NewDynamicComponent';
+import DraggableNewFSHeader from '../gridComponents/mes/FSHeader';
 
 const BUILDER_PANE_WIDTH = 374;
 
@@ -85,6 +86,7 @@ const BuilderComponentPane = ({ topOffset = 0 }) => (
           <NewHeader />
           <NewMarkdown />
           <NewDivider />
+          <DraggableNewFSHeader />
           {dashboardComponents
             .getAll()
             .map(({ key: componentKey, metadata }) => (

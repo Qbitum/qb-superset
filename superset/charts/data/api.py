@@ -236,8 +236,6 @@ class ChartDataRestApi(ChartRestApi):
 
         try:
             query_context = self._create_query_context_from_form(json_body)
-            print("---------------- 1")
-            print(query_context.queries)
             command = ChartDataCommand(query_context)
             command.validate()
         except DatasourceNotFound:

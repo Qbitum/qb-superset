@@ -227,7 +227,6 @@ class QueryContextProcessor:
         # Here, we assume that all the queries will use the same datasource, which is
         # a valid assumption for current setting. In the long term, we may
         # support multiple queries from different data sources.
-        print("===========get_query_result")
         query = ""
         if isinstance(query_context.datasource, Query):
             # todo(hugh): add logic to manage all sip68 models here

@@ -59,6 +59,9 @@ from superset.exceptions import (
     DatasetInvalidPermissionEvaluationException,
     SupersetSecurityException,
 )
+
+
+
 from superset.security.guest_token import (
     GuestToken,
     GuestTokenResources,
@@ -332,7 +335,7 @@ class SupersetSecurityManager(  # pylint: disable=too-many-public-methods
 
     guest_user_cls = GuestUser
     pyjwt_for_guest_token = _jwt_global_obj
-
+    
     def create_login_manager(self, app: Flask) -> LoginManager:
         lm = super().create_login_manager(app)
         lm.request_loader(self.request_loader)
