@@ -19,10 +19,11 @@
 import React, { MouseEvent } from 'react';
 import {
   t,
-  getNumberFormatter,
+  // getNumberFormatter,
   computeMaxFontSize,
   BRAND_COLOR,
   styled,
+  getNumberFormatter,
 } from '@superset-ui/core';
 import { PluginChartMESNumberStylesProps } from './types';
 
@@ -32,7 +33,7 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
   static defaultProps = {
     className: '',
     headerFormatter: defaultNumberFormatter,
-    numberFormatter: defaultNumberFormatter,
+    // numberFormatter: defaultNumberFormatter,
     mainColor: BRAND_COLOR,
     number: '',
   };
@@ -71,10 +72,10 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
   }
 
   renderNumber(maxHeight: number) {
-    const { bigNumber, headerFormatter, width, colorThresholdFormatters } =
-      this.props;
+    //
+    const { bigNumber, width, colorThresholdFormatters } = this.props;
     // @ts-ignore
-    const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
+    const text = bigNumber === null ? t('No data') : String(bigNumber);
     const hasThresholdColorFormatter =
       Array.isArray(colorThresholdFormatters) &&
       colorThresholdFormatters.length > 0;
@@ -96,7 +97,7 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
     document.body.append(container);
     const fontSize = computeMaxFontSize({
       text,
-      maxWidth: width - 8, // Decrease 8px for more precise font size
+      maxWidth: width - 8,
       maxHeight,
       className: 'number-line',
       container,
