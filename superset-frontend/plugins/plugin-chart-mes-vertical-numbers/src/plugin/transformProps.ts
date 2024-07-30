@@ -4,6 +4,10 @@ import {
   GenericDataType,
   getValueFormatter,
 } from '@superset-ui/core';
+import {
+  ColorFormatters,
+  getColorFormatters,
+} from '@superset-ui/chart-controls';
 import { VerticalNumberValue } from '../types';
 
 export default function transformProps(chartProps: ChartProps) {
@@ -33,6 +37,7 @@ export default function transformProps(chartProps: ChartProps) {
     subValue,
     subValueFontSize,
     header = '',
+    conditionalFormatting,
   } = formData;
 
   const formattedSubheader = subheader.toUpperCase();
@@ -80,6 +85,12 @@ export default function transformProps(chartProps: ChartProps) {
     }
   });
 
+  const defaultColorFormatters = [] as ColorFormatters;
+
+  const colorThresholdFormatters =
+    getColorFormatters(conditionalFormatting, data, false) ??
+    defaultColorFormatters;
+
   return {
     width,
     height,
@@ -98,5 +109,6 @@ export default function transformProps(chartProps: ChartProps) {
     subValueFontSize,
     noOfColumns,
     header: formattedHeader,
+    colorThresholdFormatters,
   };
 }

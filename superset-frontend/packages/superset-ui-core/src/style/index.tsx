@@ -173,7 +173,7 @@ const defaultTheme = {
       white: '#FFFFFF',
       gray80: '#8A98AB',
       black: '#000000',
-      // bluePurple: '#E3D2A0',
+      pink: '#FB3375',
     },
     font: {
       roboto: `'Roboto', Helvetica, Arial`,

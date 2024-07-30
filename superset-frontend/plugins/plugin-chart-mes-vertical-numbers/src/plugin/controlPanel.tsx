@@ -118,7 +118,7 @@ const config: ControlPanelConfig = {
                 ['#FFFFFF', 'White'],
                 ['#a9a9a9', 'Gray'],
                 ['#DE3163', 'Bright Pink'],
-                ['#a0b1e3', 'Dark Gray'],
+                ['#a0b1e3', 'Light Purple'],
                 // ['orange', 'Orange'],
               ],
               renderTrigger: true,

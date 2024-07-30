@@ -36,6 +36,7 @@ import { getUrlParam } from 'src/utils/urlUtils';
 import { isCurrentUserBot } from 'src/utils/isBot';
 import { ChartSource } from 'src/types/ChartSource';
 import { ResourceStatus } from 'src/hooks/apiResources/apiResources';
+// import { backgroundImages } from 'polished';
 import ChartRenderer from './ChartRenderer';
 import { ChartErrorMessage } from './ChartErrorMessage';
 import { getChartRequiredFieldsMissingMessage } from '../../utils/getChartRequiredFieldsMissingMessage';
@@ -116,7 +117,6 @@ const Styles = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     height: ${p => p.height}px;
 
     .pivot_table tbody tr {
@@ -284,13 +284,13 @@ class Chart extends React.PureComponent {
       height,
       chartAlert,
       chartStatus,
-      datasource,
+      // datasource,
       errorMessage,
       chartIsStale,
       queriesResponse = [],
       width,
     } = this.props;
-    const databaseName = datasource?.database?.name;
+    // const databaseName = datasource?.database?.name;
 
     const isLoading = chartStatus === 'loading';
     this.renderContainerStartTime = Logger.getTimestamp();
@@ -346,9 +346,11 @@ class Chart extends React.PureComponent {
           height={height}
           width={width}
         >
-          {isLoading
-            ? this.renderSpinner(databaseName)
-            : this.renderChartContainer()}
+          {/* {isLoading
+            ? this.renderSpinner(databaseName)|| this.renderChartContainer()
+            : this.renderChartContainer()} */}
+
+          {this.renderChartContainer()}
         </Styles>
       </ErrorBoundary>
     );

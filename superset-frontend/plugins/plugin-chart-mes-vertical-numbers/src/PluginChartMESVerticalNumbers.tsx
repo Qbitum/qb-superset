@@ -95,11 +95,12 @@ class MesVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
     );
   }
 
-  renderSubValue(numberValue = 0) {
-    const { fontColor } = this.props;
+  renderSubValue(numberValue: any, index: any, viewModel: any) {
     let recurrenceValue = numberValue;
     if (typeof numberValue === 'string') {
       recurrenceValue = (numberValue as any).substring(0, 3);
+    } else {
+      recurrenceValue = String(recurrenceValue).substring(0, 5);
     }
     // @ts-ignore
     const text = recurrenceValue === 0 ? t('-') : String(recurrenceValue);
@@ -110,13 +111,16 @@ class MesVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
         this.props.onContextMenu(e.nativeEvent.clientX, e.nativeEvent.clientY);
       }
     };
+    let valueClass = '';
+    if (index === 1 && recurrenceValue < viewModel[0].data) {
+      valueClass = 'pink-value';
+    } else if (index === 2 && recurrenceValue > 0) {
+      valueClass = 'pink-value';
+    }
 
     return (
       <div
-        className="number-line"
-        style={{
-          color: fontColor,
-        }}
+        className={`number-line ${valueClass}`}
         onContextMenu={onContextMenu}
       >
         {text}
@@ -206,10 +210,7 @@ class MesVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
 
   render() {
     const { height, values, subTitleFontSize, subtitle } = this.props;
-
     const className = this.getClassName();
-
-    // prepare view model
     const viewModel: VerticalNumberValue[] = [];
 
     if (values) {
@@ -235,7 +236,7 @@ class MesVerticalNumbers extends React.PureComponent<PluginChartMESVerticalNumbe
                     )}
                   </div>
                   <div className="number-line">
-                    {this.renderSubValue(dataItem.data)}
+                    {this.renderSubValue(dataItem.data, i, viewModel)}
                   </div>
                 </div>
               </div>
@@ -290,6 +291,9 @@ export default styled(MesVerticalNumbers)`
       text-align: right;
       line-height: 1em;
       align-content: center;
+    }
+    .number-line.pink-value {
+      color: ${theme.tvDb.fontColor.pink};
     }
 
     .contentTitle-line {
