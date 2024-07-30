@@ -60,6 +60,7 @@ const LightPurpleBadgeStyled = styled.div`
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
   padding: 8px;
+  white-space: nowrap;
 `;
 
 const DarkPurpleBadgeStyled = styled.div`
@@ -67,6 +68,7 @@ const DarkPurpleBadgeStyled = styled.div`
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 4px;
   padding: 8px;
+  white-space: nowrap;
 `;
 
 const LightOrangeBadgeStyled = styled.div`
@@ -74,18 +76,21 @@ const LightOrangeBadgeStyled = styled.div`
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
   padding: 8px;
+  white-space: nowrap;
 `;
 const DarkGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 4px;
   padding: 8px;
+  white-space: nowrap;
 `;
 const LightGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
   padding: 8px;
+  white-space: nowrap;
 `;
 const GreenBadgeStyled = styled.div`
   border-radius: 4px;
@@ -169,7 +174,7 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
                   ) : boxStyle.classNames === 'darkGrayBadge' ? (
                     <DarkGrayBadgeStyled>{value}</DarkGrayBadgeStyled>
                   ) : boxStyle.classNames === 'lightGrayBadge' ? (
-                    <LightGrayBadgeStyled>{value}h</LightGrayBadgeStyled>
+                    <LightGrayBadgeStyled>{value}</LightGrayBadgeStyled>
                   ) : (
                     value
                   )}
