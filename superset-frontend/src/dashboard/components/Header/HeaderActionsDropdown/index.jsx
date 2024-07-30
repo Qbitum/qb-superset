@@ -135,7 +135,9 @@ class HeaderActionsDropdown extends React.PureComponent {
           hash: window.location.hash,
           standalone: !getUrlParam(URL_PARAMS.standalone),
         });
-        window.location.replace(url);
+        // remove UI controles as well
+        const bigScreen = `${url}&uiConfig=1`;
+        window.location.replace(bigScreen);
         break;
       }
       case MenuKeys.ManageEmbedded: {

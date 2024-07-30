@@ -15,9 +15,9 @@ FEATURE_FLAGS: dict[str, bool] = {
     "ENABLE_TEMPLATE_PROCESSING": True,
     "HORIZONTAL_FILTER_BAR":True
 }
-
+ 
 JINJA_CONTEXT_ADDONS = {
-    "nowTime": lambda : "'"+time.strftime("%H:%M:%S", time.localtime())+"'"
+    "nowTime": lambda : "'"+time.strftime("%H:%M:%S", time.gmtime())+"'"
 }
 
 

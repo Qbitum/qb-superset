@@ -6,16 +6,15 @@ const OnlineBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.greenbg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 8px;
-  padding: 16px 20px;
-  min-height: 60px;
+  font-size: 12px;
+  padding: 8px;
 `;
 
 const OfflineBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.redbg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 8px;
-  padding: 16px 16px;
-  min-height: 60px;
+  padding: 8px;
 `;
 
 function OnlineStatus() {
@@ -45,18 +44,16 @@ function OnlineStatus() {
           <img
             src={wifiBase64}
             alt="Online"
-            style={{ marginRight: '8px', width: '24px', height: '24px' }}
+            style={{ width: '24px', height: '24px' }}
           />
-          online
         </OnlineBadgeStyled>
       ) : (
         <OfflineBadgeStyled>
           <img
             src={nowifiBase64}
             alt="Offline"
-            style={{ marginRight: '8px', width: '24px', height: '24px' }}
+            style={{ width: '24px', height: '24px' }}
           />
-          offline
         </OfflineBadgeStyled>
       )}
     </div>

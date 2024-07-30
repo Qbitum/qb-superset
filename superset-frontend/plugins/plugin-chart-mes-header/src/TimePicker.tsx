@@ -18,11 +18,13 @@ function TimePicker() {
     setInterval(() => setTime(new Date()), 1000);
   }, []);
 
-  console.log('this is header time', time);
-
   return (
     <TimeBadgeStyled>
-      {time.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+      {time.toLocaleTimeString([], {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: false,
+      })}
     </TimeBadgeStyled>
   );
 }

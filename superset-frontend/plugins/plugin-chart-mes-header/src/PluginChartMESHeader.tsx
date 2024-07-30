@@ -47,59 +47,54 @@ const Styles = styled.div<PluginChartMESHeaderStylesProps>`
   }
   .logo-wrapper {
     display: 'flex';
-    height: '30pt';
     marginleft: '14pt';
     alignitems: 'self-end';
     color: ${({ theme }) => theme.tvDb.fontColor.white};
     flexgrow: '3';
+    border-left: 2px solid;
   }
 `;
 
 const LightPurpleBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightPurplebg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
-  border-radius: 8px;
-  padding: 16px 16px;
-  min-height: 60px;
+  border-radius: 4px;
+  padding: 8px;
 `;
 
 const DarkPurpleBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkPurplebg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
-  border-radius: 8px;
-  padding: 16px 16px;
-  min-height: 60px;
+  border-radius: 4px;
+  padding: 8px;
 `;
 
 const LightOrangeBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightOrangebg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
-  border-radius: 8px;
-  padding: 16px 16px;
-  min-height: 60px;
+  border-radius: 4px;
+  padding: 8px;
 `;
 const DarkGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
-  border-radius: 8px;
-  padding: 16px 16px;
-  min-height: 60px;
+  border-radius: 4px;
+  padding: 8px;
 `;
 const LightGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
-  border-radius: 8px;
-  padding: 16px 16px;
-  min-height: 60px;
+  border-radius: 4px;
+  padding: 8px;
 `;
 const GreenBadgeStyled = styled.div`
-  border-radius: 8px;
+  border-radius: 4px;
 `;
 
 const TransparentBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.transparentbg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
-  border-radius: 8px;
+  border-radius: 4px;
   align-items: center;
 `;
 export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
@@ -134,7 +129,7 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
       >
         <div
           style={{
-            paddingRight: '3rem',
+            marginRight: '1rem',
             display: 'flex',
             alignItems: 'center',
             flexGrow: '1',
@@ -189,18 +184,16 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            paddingRight: '3rem',
           }}
         >
           <GreenBadgeStyled>{OnlineStatus()}</GreenBadgeStyled>
           <TransparentBadgeStyled>{TimePicker()}</TransparentBadgeStyled>
 
           <div className="logo-wrapper">
-            |
             <img
               src={Logo}
               alt="Makeit Logo"
-              style={{ height: '30pt', marginLeft: '14pt' }}
+              style={{ height: '20pt', marginLeft: '14pt' }}
             />
           </div>
         </div>
