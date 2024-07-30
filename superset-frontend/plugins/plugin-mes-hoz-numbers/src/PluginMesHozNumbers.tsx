@@ -335,6 +335,7 @@ export default styled(MesHozNumbers)`
       line-height: 1em;
       padding-bottom: 0;
       color: ${theme.tvDb.fontColor.gray80};
+      font-weight:bold;
     }
   `}
 `;
