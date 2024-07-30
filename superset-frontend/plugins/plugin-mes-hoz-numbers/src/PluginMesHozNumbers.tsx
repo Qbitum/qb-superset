@@ -117,7 +117,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
     const { bigNumber, headerFormatter, width, fontColor } = this.props;
 
     // @ts-ignore
-    const text = bigNumber === null ? t('No data') : headerFormatter(bigNumber);
+    const text = bigNumber === null ? t('-') : headerFormatter(bigNumber);
 
     const container = this.createTemporaryContainer();
     document.body.append(container);

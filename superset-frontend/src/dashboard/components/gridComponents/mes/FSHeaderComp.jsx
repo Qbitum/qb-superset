@@ -79,7 +79,7 @@ const GridHeader = styled.div`
     flex-wrap: nowrap;
     align-items: flex-start;
     width: 100%;
-    height: fit-content;
+    height: 90px;
 
     & > :not(:last-child):not(.hover-menu) {
       ${!editMode && `margin-right: ${theme.gridUnit * 4}px;`}

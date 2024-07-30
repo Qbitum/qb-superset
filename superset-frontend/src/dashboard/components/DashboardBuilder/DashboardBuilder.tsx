@@ -83,6 +83,8 @@ import {
   OPEN_FILTER_BAR_WIDTH,
   EMPTY_CONTAINER_Z_INDEX,
 } from 'src/dashboard/constants';
+import { UserWithPermissionsAndRoles } from 'src/types/bootstrapTypes';
+import { isTVDashboard } from 'src/dashboard/util/permissionUtils';
 import { getRootLevelTabsComponent, shouldFocusTabs } from './utils';
 import DashboardContainer from './DashboardContainer';
 import { useNativeFilters } from './state';
@@ -381,6 +383,11 @@ const DashboardBuilder: FC<DashboardBuilderProps> = () => {
   const uiConfig = useUiConfig();
   const theme = useTheme();
 
+  const user = useSelector<any, UserWithPermissionsAndRoles>(
+    state => state.user,
+  );
+  const isTv = isTVDashboard(user);
+
   const dashboardId = useSelector<RootState, string>(
     ({ dashboardInfo }) => `${dashboardInfo.id}`,
   );
@@ -441,10 +448,12 @@ const DashboardBuilder: FC<DashboardBuilderProps> = () => {
       : undefined;
   const standaloneMode = getUrlParam(URL_PARAMS.standalone);
   const isReport = standaloneMode === DashboardStandaloneMode.Report;
-  const hideDashboardHeader =
+  let hideDashboardHeader =
     uiConfig.hideTitle ||
     standaloneMode === DashboardStandaloneMode.HideNavAndTitle ||
     isReport;
+
+  if (isTv) hideDashboardHeader = false;
 
   const [barTopOffset, setBarTopOffset] = useState(0);
 

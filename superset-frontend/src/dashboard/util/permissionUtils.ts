@@ -28,6 +28,7 @@ import { findPermission } from 'src/utils/findPermission';
 // this should really be a config value,
 // but is hardcoded in backend logic already, so...
 const ADMIN_ROLE_NAME = 'admin';
+const TVDB_ROLE_NAME = 'tvdb';
 
 export const isUserAdmin = (
   user?: UserWithPermissionsAndRoles | UndefinedUser,
@@ -79,3 +80,11 @@ export const canUserSaveAsDashboard = (
   (!isFeatureEnabled(FeatureFlag.DashboardRbac) ||
     isUserAdmin(user) ||
     isUserDashboardOwner(dashboard, user));
+
+export const isTVDashboard = (
+  user: UserWithPermissionsAndRoles | UndefinedUser,
+) =>
+  isUserWithPermissionsAndRoles(user) &&
+  Object.keys(user.roles || {}).some(
+    role => role.toLowerCase() === TVDB_ROLE_NAME,
+  );

@@ -84,7 +84,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     // @ts-ignore
     const text =
       bigNumber === null
-        ? t('No data')
+        ? t('-')
         : symbolSelect !== undefined
           ? // @ts-ignore
             headerFormatter(bigNumber) + symbolSelect
