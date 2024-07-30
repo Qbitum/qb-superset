@@ -304,7 +304,7 @@ export default styled(MesHozNumbers)`
       line-height: 1em;
       padding-bottom: 0;
       color: ${theme.tvDb.fontColor.white};
-      font-size: 2em;
+      font-size: 3em;
     }
     .component-body {
       padding:${theme.tvDb.component.padding};

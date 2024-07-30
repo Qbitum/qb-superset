@@ -165,7 +165,7 @@ export default styled(MESNumber)`
     background-color: ${theme.tvDb.bg.tvDbBg};
 
     .number-line {
-      line-height: 1em;
+      // line-height: 1em;
       white-space: nowrap;
       text-align: center;
       font-family: ${theme.tvDb.font.roboto};
