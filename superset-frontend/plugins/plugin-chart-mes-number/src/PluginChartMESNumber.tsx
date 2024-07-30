@@ -77,7 +77,7 @@ class MESNumber extends React.PureComponent<PluginChartMESNumberStylesProps> {
     let recurrenceValue = bigNumber;
     if (typeof bigNumber === 'string') {
       recurrenceValue = (bigNumber as any).substring(0, 5);
-    }else if (typeof bigNumber === 'number') {
+    } else if (typeof bigNumber === 'number') {
       const bigNumberStr = bigNumber.toString();
       const [integerPart] = bigNumberStr.split('.');
       // Truncate the integer part to the first 5 digits
