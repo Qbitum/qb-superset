@@ -36,7 +36,7 @@ export function tooltipHtml(
     <div>
       ${titleRow}
       <table>
-          ${data.length === 0 ? `<tr><td>${t('No data')}</td></tr>` : ''}
+          ${data.length === 0 ? `<tr><td>${t('-')}</td></tr>` : ''}
           ${data
             .map((row, i) => {
               const rowStyle =

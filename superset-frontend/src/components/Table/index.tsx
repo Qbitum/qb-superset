@@ -219,7 +219,7 @@ const defaultLocale = {
   filterEmptyText: t('No filters'),
   filterCheckall: t('Select all items'),
   filterSearchPlaceholder: t('Search in filters'),
-  emptyText: t('No data'),
+  emptyText: t('-'),
   selectAll: t('Select current page'),
   selectInvert: t('Invert current page'),
   selectNone: t('Clear all data'),

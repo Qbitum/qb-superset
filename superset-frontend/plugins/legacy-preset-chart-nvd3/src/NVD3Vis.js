@@ -74,7 +74,7 @@ import {
 } from './PropTypes';
 
 const NO_DATA_RENDER_DATA = [
-  { text: 'No data', dy: '-.75em', class: 'header' },
+  { text: '-', dy: '-.75em', class: 'header' },
   {
     text: 'Adjust filters or check the Datasource.',
     dy: '.75em',
