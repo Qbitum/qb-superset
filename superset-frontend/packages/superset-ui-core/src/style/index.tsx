@@ -107,7 +107,7 @@ const defaultTheme = {
     },
     alert: {
       base: '#FCC700',
-      dark1: '#FA2583',
+      dark1: '#FB3375',
       dark2: '#7D6300',
       light1: '#FDE380',
       light2: '#FEF9E6',
