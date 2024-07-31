@@ -79,14 +79,34 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     // @ts-ignore
     let formattedNumber: string;
 
+    // if (bigNumber === null) {
+    //   formattedNumber = t('-');
+    // } else if (typeof bigNumber === 'number') {
+    //   const bigNumberStr = bigNumber.toString();
+    //   const [integerPart] = bigNumberStr.split('.');
+    //   formattedNumber = integerPart.substring(0, 3);
+    // } else if (typeof bigNumber === 'string') {
+    //   formattedNumber = parseFloat(bigNumber).toFixed(2);
+    // } else {
+    //   formattedNumber = String(bigNumber);
+    // }
+
     if (bigNumber === null) {
       formattedNumber = t('-');
-    } else if (typeof bigNumber === 'number') {
-      const bigNumberStr = bigNumber.toString();
-      const [integerPart] = bigNumberStr.split('.');
-      formattedNumber = integerPart.substring(0, 3);
-    } else if (typeof bigNumber === 'string') {
-      formattedNumber = parseFloat(bigNumber).toFixed(2);
+    } else if (typeof bigNumber === 'number' || typeof bigNumber === 'string') {
+      const bigNumberFloat = (parseFloat as any)(bigNumber);
+      if (isNaN(bigNumberFloat)) {
+        formattedNumber = String(bigNumber);
+      } else {
+        const bigNumberStr = bigNumberFloat.toString();
+        const [integerPart, decimalPart] = bigNumberStr.split('.');
+
+        if (decimalPart) {
+          formattedNumber = bigNumberFloat.toFixed(2);
+        } else {
+          formattedNumber = integerPart.substring(0, 3);
+        }
+      }
     } else {
       formattedNumber = String(bigNumber);
     }
