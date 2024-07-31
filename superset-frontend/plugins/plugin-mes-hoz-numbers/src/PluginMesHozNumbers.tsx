@@ -244,7 +244,7 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
         <div
           className="subtitle-line"
           style={{
-            fontSize,
+            // fontSize,
             height: maxHeight,
           }}
         >
@@ -327,7 +327,7 @@ export default styled(MesHozNumbers)`
 
     .subvalue-line {
       line-height: 1em;
-      font-size: 8vw;
+      // font-size: 8vw;
       font-weight:${theme.tvDb.fontWeights.bold};
       white-space: nowrap;
       color: ${theme.tvDb.fontColor.gray80};
