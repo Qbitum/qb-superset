@@ -107,7 +107,7 @@ def load_css_templates() -> None:
     css = textwrap.dedent(
         """\
     #import font type for the dashboard 
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap'); 
     /* changing the font as globally as possible */
     #main-menu + div *{
         font-family: 'Roboto', sans-serif !important;
@@ -115,6 +115,14 @@ def load_css_templates() -> None:
 
     .dashboard-content-wrapper{
     
+    }
+    
+    .tv-header .dragdroppable .chart-slice .header-title{
+      display:none;
+    }
+    
+    .standalone .header-controls {
+      display: none;
     }
     /* changing the main dash background */
     .dashboard-content{
@@ -127,9 +135,12 @@ def load_css_templates() -> None:
     background-color: #191919;
     color: white;
     }
-
+    
     .dashboard-header-container{
     border:1px solid #353B4D;
+    }
+    .header-style-option{
+      color:#fff;
     }
     /* editable title input field*/
     .dashboard-header-container input{
@@ -150,8 +161,17 @@ def load_css_templates() -> None:
     margin: 24px;
     }
     
+    .dashboard-content .chart-slice .header-title{
+      color:#fff;
+      text-transform: uppercase;
+    }
+    
+    .dashboard-content .chart-slice .header-title a {
+    color: #fff;
+    }
+    
     .grid-container .grid-row .dashboard-component{
-    background: #1a85a0;
+    background: #242424;
     }
     """
     )
