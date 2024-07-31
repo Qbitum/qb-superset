@@ -95,7 +95,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
       formattedNumber = t('-');
     } else if (typeof bigNumber === 'number' || typeof bigNumber === 'string') {
       const bigNumberFloat = (parseFloat as any)(bigNumber);
-      if (isNaN(bigNumberFloat)) {
+      if (Number.isNaN(bigNumberFloat)) {
         formattedNumber = String(bigNumber);
       } else {
         const bigNumberStr = bigNumberFloat.toString();

@@ -59,38 +59,43 @@ const LightPurpleBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightPurplebg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
-  padding: 8px;
+  padding: 4px;
   white-space: nowrap;
+  font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
 
 const DarkPurpleBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkPurplebg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 4px;
-  padding: 8px;
+  padding: 4px;
   white-space: nowrap;
+  font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
 
 const LightOrangeBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightOrangebg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
-  padding: 8px;
+  padding: 4px;
   white-space: nowrap;
+  font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
 const DarkGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 4px;
-  padding: 8px;
+  padding: 4px;
   white-space: nowrap;
+  font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
 const LightGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
-  padding: 8px;
+  padding: 4px;
   white-space: nowrap;
+  font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
 const GreenBadgeStyled = styled.div`
   border-radius: 4px;
@@ -101,6 +106,7 @@ const TransparentBadgeStyled = styled.div`
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 4px;
   align-items: center;
+  font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
 export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
   const { data, height, width, boldText, headerFontSize } = props;

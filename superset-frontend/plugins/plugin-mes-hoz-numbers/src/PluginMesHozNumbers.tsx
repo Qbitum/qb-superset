@@ -160,8 +160,8 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
       recurrenceValue = (numberValue as any).substring(0, 3);
     }
 
-    console.log(recurrenceValue,"recurrenceValue");
-    
+    console.log(recurrenceValue, 'recurrenceValue');
+
     // @ts-ignore
     const text = recurrenceValue === 0 ? '0' : String(recurrenceValue);
     const txt = text.substring(0, 2);
