@@ -76,6 +76,7 @@ governing permissions and limitations under the License. #}
       id="csrf_token"
       value="{{ csrf_token() if csrf_token else '' }}"
     />
+    <script src="//unpkg.com/@ungap/global-this"></script>
   </head>
 
   <body {% if standalone_mode %}class="standalone" {% endif %}>

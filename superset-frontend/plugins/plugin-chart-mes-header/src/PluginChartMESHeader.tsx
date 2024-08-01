@@ -59,7 +59,7 @@ const LightPurpleBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightPurplebg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
-  padding: 4px;
+  padding: 8px;
   white-space: nowrap;
   font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
@@ -68,7 +68,7 @@ const DarkPurpleBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkPurplebg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 4px;
-  padding: 4px;
+  padding: 8px;
   white-space: nowrap;
   font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
@@ -77,7 +77,7 @@ const LightOrangeBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightOrangebg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
-  padding: 4px;
+  padding: 8px;
   white-space: nowrap;
   font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
@@ -85,7 +85,7 @@ const DarkGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.darkGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.white};
   border-radius: 4px;
-  padding: 4px;
+  padding: 8px;
   white-space: nowrap;
   font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
@@ -93,7 +93,7 @@ const LightGrayBadgeStyled = styled.div`
   background-color: ${({ theme }) => theme.tvDb.headerColors.lightGraybg};
   color: ${({ theme }) => theme.tvDb.fontColor.black};
   border-radius: 4px;
-  padding: 4px;
+  padding: 8px;
   white-space: nowrap;
   font-weight: ${({ theme }) => theme.tvDb.fontWeights.bold};
 `;
@@ -153,8 +153,9 @@ export default function PluginChartMESHeader(props: PluginChartMESHeaderProps) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
             flexGrow: '6',
+            paddingRight: '5rem',
           }}
         >
           {values.map(([key, value], index) => {

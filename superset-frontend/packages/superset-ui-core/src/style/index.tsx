@@ -195,7 +195,7 @@ const defaultTheme = {
       darkPurplebg: '#6C1069',
       lightPurplebg: '#D1D3FA',
       lightOrangebg: '#FFE0BC',
-      darkGraybg: '#30384C',
+      darkGraybg: '#5a80af',
       lightGraybg: '#8A98AB',
       greenbg: '#47BC00',
       redbg: '#fb3375',

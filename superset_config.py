@@ -1,5 +1,8 @@
 import time
 from flask_appbuilder.security.manager import AUTH_OAUTH
+from flask import session
+from flask import Flask
+from requests_cache import timedelta
 
 SECRET_KEY='k9i90xeIKK3feKxmp7g6xvOIqh6q5Cm5PiBi/9eDx03sn4G+okt33Jtv'
 PREVIOUS_SECRET_KEY ="some_random_base64_string"
@@ -20,6 +23,15 @@ JINJA_CONTEXT_ADDONS = {
     "nowTime": lambda : "'"+time.strftime("%H:%M:%S", time.gmtime())+"'"
 }
 
+def make_session_permanent():
+    '''
+    Enable maxAge for the cookie 'session'
+    '''
+    session.permanent = True
+
+PERMANENT_SESSION_LIFETIME = timedelta(hours=24)
+def FLASK_APP_MUTATOR(app: Flask) -> None:
+    app.before_request_funcs.setdefault(None, []).append(make_session_permanent)
 
 # Enable OAuth authentication
 # AUTH_TYPE = AUTH_OAUTH
