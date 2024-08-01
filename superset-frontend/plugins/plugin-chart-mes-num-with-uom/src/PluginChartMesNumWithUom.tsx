@@ -110,7 +110,7 @@ class TvDashboard extends React.PureComponent<PluginChartTvDashboardStylesProps>
     } else {
       formattedNumber = String(bigNumber);
     }
-    
+
     const text =
       symbolSelect !== undefined && formattedNumber !== t('-')
         ? formattedNumber + symbolSelect
