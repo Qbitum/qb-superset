@@ -183,7 +183,8 @@ export default function PluginDate(props: PluginFilterDateProps) {
     const date = new Date();
     const month = date.getMonth() + 1;
     const monthStr = month <= 9 ? `0${month}` : month;
-    const dateFormat = `${date.getFullYear()}-${monthStr}-${date.getDate()}`;
+    const dateStr = date.getDate() <= 9 ? `0${date.getDate()}` : date.getDate();
+    const dateFormat = `${date.getFullYear()}-${monthStr}-${dateStr}`;
     return [dateFormat];
   };
 
