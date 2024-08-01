@@ -218,27 +218,11 @@ class MesHozNumbers extends React.PureComponent<PluginMesHozNumbersStylesProps> 
   }
 
   renderSubTitle(maxHeight: number, title: string) {
-    const { width } = this.props;
-    let fontSize = 0;
-    // console.log(this.props,"this.props");
-
     const text = title;
-    // console.log("vvv", text);
-
     if (text) {
       const container = this.createTemporaryContainer();
       document.body.append(container);
-      fontSize = computeMaxFontSize({
-        text,
-        maxWidth: width - 12, // Decrease 8px for more precise font size
-        maxHeight: maxHeight - 12,
-        className: 'subtitle-line',
-        container,
-      });
-      // fontColor;
       container.remove();
-
-      // console.log("font color", fontColor);
 
       return (
         <div
